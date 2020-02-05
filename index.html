@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js" ></script>
         <style>
             body{
                 margin:0;
                 padding:0;
             }
             .search-box{
-                background: #89b730;
+                background: #6CD196;
                 height: 40px;
                 border-radius: 40px;
                 padding: 10px;
@@ -17,7 +18,7 @@
                 margin: 8px;
             }
             .search-btn{
-                color: #e84118;
+                color: #1591EE;
                 float: right;
                 width: 40px;
                 height: 40px;
@@ -31,21 +32,11 @@
                 color: #e84118;
                 width: 50px;
                 height: 50px;
-                border-radius: 50%;
-                background: #2f3640;
-                display: flex;
-                justify-content: center;
-                align-items: center;
             }
             .icon-img{
                 color: #e84118;
-                width: 135%;
+               
                 height: 50px;
-                //border-radius: 50%;
-                background: #2f3640;
-                display: flex;
-                justify-content: center;
-                align-items: center;
             }
             .search-txt{
                 border:none;
@@ -59,22 +50,27 @@
                 line-height: 40px;
                 width:240px;
             }
-            #results{
-                display: flex;
-                justify-content: space-evenly;
-                margin: 17px;
-            }
+.items {
+  overflow: hidden; /* simple clearfix */
+}
+.items .item {
+  float: left;
+  width: 25%;
+}
+#results{
+    margin:20px;
+}
         </style>
     </head>
     <div class="search-box">
         <input class="search-txt" type="text" name="" placeholder="Type to Search">
         <a class="search-btn" href="#">
-
+            <i class="fas fa-search"></i>
         </a>
     </div>
     <div id="results">
-        <div class="result-wrapper">
-            <div class="icon-btn" href="#">
+        <div class="result-wrapper items">
+            <div class="icon-btn item" href="#">
                 <a href="home.html">
                     <img class="icon-img" href="#" src="kalogo.png">
                 </a>
