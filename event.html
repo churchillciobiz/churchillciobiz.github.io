@@ -109,6 +109,8 @@
 	margin-right: 40px;
 	float: right;
 	z-index: 99999;
+    display:flex;
+    flex-direction: column;
 }
 .fav .users img{
 	position: relative;
@@ -153,7 +155,7 @@
 	height: auto;
     border-radius: 10px;
 	background: #fff;
-	margin: 25px auto;
+	margin: 50px auto;
 	padding: 10px 0;
 	border: 1px solid rgba(0,0,0,0.03);
 	box-shadow: 0 10px 15px -1px rgba(0,0,0,0.1);
@@ -559,6 +561,11 @@
 				from{opacity:0;margin-top:-100px;}
 				to{opacity:1;margin-top:0;}
 			}
+            .damage{
+                font-size: 14px;
+                font-weight: 600;
+                color: rgba(0,0,0,0.5);
+            }
         </style>
 
     </head>
@@ -604,17 +611,16 @@
             <div class="fav">
                 <button class="btn go-to-catalogue" href="syovatacategories.html">
                     <i class="fa fa-plus"></i>
-                    Go to events
+                    Book Me
                 </button>
                 <div class="users">
-                    <img src="small_StockSnap_0Q2LBGC5XR.jpg" alt="img1" class="user-1">
-                    <img src="small_Mercedes petronas shirt.jpg" alt="img1" class="user-2">
-                    <img src="small_StockSnap_K76T94L0KG.jpg" alt="img1" class="user-3">
-                    <span class="fav-count">+11</span>
+                    <div class="damage">Adults 1200/=</div>
+                    <div class="damage">Teens 500/=</div>
+                    <div class="damage">Kids 200/=</div>
                 </div>
             </div>
             <div class="story">
-                <span class="title">Our Story</span>
+                <span class="title">The Low Down</span>
                 <div class="story-icon">
                     <i class="fa fa-play"></i>
                 </div>
@@ -622,7 +628,41 @@
                     This is a story this is a story with the people of the nation we create in the dimensional app we create in the world ..
                 </div>
             </div>
-            
+            <div class="schedule">
+                <span class="title">
+                    The Location
+                </span>
+                <div class="detail">
+                    <span class="date">07
+                        <span>November</span>
+                    </span>
+                    <span class="location">Madina Store
+                        <span class="city">Nairobi, Kenya (Visit us)</span>
+                    </span>
+                    
+                </div>
+                <div class="schedule-info">
+                    <div class="rows">
+                        <span class="show">
+                            <span class="title">
+                                Open
+                            </span>
+                            <span class="info time">
+                                7:30 AM
+                            </span>
+                        </span>
+                        <span class="show">
+                            <span class="title">
+                                Close
+                            </span>
+                            <span class="info time">
+                                8:00 PM
+                            </span>
+                        </span>
+                    </div>
+
+                </div>
+            </div>
         </div>
         <script>
 			function _(x) { return document.getElementById(x) };

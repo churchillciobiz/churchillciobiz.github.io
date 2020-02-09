@@ -1,0 +1,29 @@
+<html>
+    <head>
+
+
+    </head>
+    <body>
+        <input type="text" id="consumer_id">
+        <input type="text" id="longitude">
+        <input type="text" id="latitude">
+        <input type="text" id="event_id">
+        <button id="access-api">Access Api</button>
+        <script>
+            document.getElementById("access-api").addEventListener("click", function(){
+                var id = document.getElementById("consumer_id").value;
+                var long = document.getElementById("longitude").value;
+                var lat = document.getElementById("latitude").value;
+                var eventId =  document.getElementById("event_id").value;               
+                console.log(id, long, lat, eventId);
+                fetch("https://fast-refuge-97330.herokuapp.com/postcustomerevent",
+                {method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json"},
+                body:JSON.stringify({consumer_action_id:id,longitude:long,latitude:lat,event_id:eventId})
+                 }).then((response)=>response.json()).then((responseJsonFromServer)=>{
+                    console.log(responseJsonFromServer);    
+                })
+            });
+            
+        </script>
+    </body>
+</html>
