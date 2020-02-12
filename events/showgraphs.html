@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="chart.css" />
+        <script src="jquery.js"></script>
+	    <script src="chart.js"></script>
+    </head>
+    <body>
+            <p>Update Analysis</p>
+            <canvas id="speedChart"  width="140px" height="50px"></canvas> 
+
+            <p>Update Analysis</p>
+            <canvas id="speedChart2"  width="140px" height="50px"></canvas> 
+
+        <script>
+            var speedCanvas = document.getElementById("speedChart");
+
+Chart.defaults.global.defaultFontFamily = "Lato";
+Chart.defaults.global.defaultFontSize =4;
+
+
+var dataSecond = {
+    label: "Today (Bookings)",
+    data: [20, 15, 60, 60, 65, 30, 70, 33, 20, 11, 40, 11, 11, 22, 5, 15, 10, 10],
+    lineTension: 0.1,
+    fill: false,
+    //borderColor: '#98ca00',
+	borderColor: '#6CD196',
+	backgroundColor: 'transparent',
+    pointBorderColor: 'greenyellow',
+    pointBackgroundColor: '#4CAF50',
+    pointRadius: 2,
+    pointHoverRadius: 15,
+    pointHitRadius: 30,
+    pointBorderWidth: 2,
+	borderWidth:2,
+  };
+
+var speedData = {
+  labels: ["7am", "8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm", "9pm", "10pm", "11pm", "12am"],
+  datasets: [dataSecond]
+};
+
+
+var lineChart = new Chart(speedCanvas, {
+  type: 'line',
+  data: speedData,
+  //options: chartOptions
+  options: {
+	legend: {
+		labels: {
+      fontFamily: 'Helvetica',
+      fontSize: 14,
+		},
+	},
+	scales: {
+		yAxes: [
+			{ticks: {fontFamily: 'Helvetica', fontSize: 15}}
+		], 
+		xAxes: [
+			{ticks: {fontFamily: 'Helvetica', fontSize: 15}}
+		]
+	}
+  }
+});
+
+var speedCanvas = document.getElementById("speedChart2");
+
+Chart.defaults.global.defaultFontFamily = "Lato";
+Chart.defaults.global.defaultFontSize = 4;
+
+var dataFirst = {
+    label: "Men",
+    data: [0, 59, 75, 20, 20, 55, 40, 30, 30, 21, 22, 11, 70, 40, 9, 12, 22, 5, 15, 10],
+    lineTension: 0.1,
+    fill: false,
+    //borderColor: '#6addf7',
+    borderColor: '#6CD196',
+	backgroundColor: 'transparent',
+    pointBorderColor: 'yellowgreen',
+    pointBackgroundColor: '#4CAF50',
+    pointRadius: 2,
+    pointHoverRadius: 15,
+    pointHitRadius: 10,
+    pointBorderWidth: 2,
+    pointStyle: 'rect', 
+	borderWidth:2,
+  };
+
+var dataSecond = {
+    label: "Women",
+    data: [20, 15, 60, 60, 65, 30, 70, 33, 20, 11, 40, 11, 11, 40, 10, 11, 22, 5, 15, 10],
+    lineTension: 0.1,
+    fill: false,
+	borderColor: '#4CAF50',
+	backgroundColor: 'transparent',
+    pointBorderColor: 'greenyellow',
+    pointBackgroundColor: '#6CD196',
+    pointRadius: 2,
+    pointHoverRadius: 15,
+    pointHitRadius: 30,
+    pointBorderWidth: 2,
+	borderWidth:2,
+  };
+
+var speedData = {
+  labels: ["7am", "8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm", "9pm", "10pm", "11pm", "12am"],
+  datasets: [dataFirst, dataSecond]
+};
+
+
+var lineChart = new Chart(speedCanvas, {
+  type: 'line',
+  data: speedData,
+  //options: chartOptions
+  options: {
+	legend: {
+		labels: {
+      fontFamily: 'Helvetica',
+      fontSize: 14,
+		},
+	},
+	scales: {
+		yAxes: [
+			{ticks: {fontFamily: 'Helvetica', fontSize: 15}}
+		], 
+		xAxes: [
+			{ticks: {fontFamily: 'Helvetica', fontSize: 15}}
+		]
+	}
+  }
+});
+        </script>
+    </body>
+</html>

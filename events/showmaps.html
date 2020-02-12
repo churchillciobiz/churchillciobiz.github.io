@@ -1,0 +1,254 @@
+<html>
+	<head>
+		<style>
+        *{box-sizing: border-box;}
+        input, textarea{outline: none;}
+        body{font-family: Lato, sans-serif;background: #f4f6f9;}
+        html,body,div{
+        margin: 0;
+        padding: 0; }
+.heading h1{
+    color: #6CD196;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+    margin-left: 14px;
+}
+.heading p{
+    color: #1b1b1b;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+.cards{
+    overflow: auto;
+    display: flex;
+}
+.cards .card{
+    background: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    overflow: auto;
+    margin-bottom:20px;
+    margin-left: 15px;
+    box-shadow: 0 10px 15px -1px rgba(0,0,0,0.1);
+    height: 520px;
+}
+.cards .card h6{
+    font-size: 0.8rem;
+    position: relative;
+    top: -32px;
+}
+.colmd4{
+    width: 30.33%;
+    padding: 0 15px;
+    display: inline-block;
+}
+#child-frame {
+    width: 110%;
+    border: none;
+    background: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    overflow: auto;
+    margin-bottom: 20px;
+    margin-left: 15px;
+    box-shadow: 0 10px 15px -1px rgba(0,0,0,0.1);
+}
+		</style>
+	</head>
+	<body>
+		<div class="heading">
+            <h1>Events</h1>
+        </div>
+            <div class="cards">
+                <div class="card colmd4">
+                        
+                        <div id="activity-orders" class="dynamic">
+                                <div id="orders" class="dynamic">
+                                        You don't have events yet
+                                    </div>
+                        </div>
+
+                    </div>
+                    <iframe id="child-frame">
+
+                    </iframe>
+                </div>
+        <script>
+
+            function _(x) { return document.getElementById(x) };
+            function hasClass(element, className){
+                return element.className.split(" ").indexOf(className) > -1;
+            }
+            function addClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList;
+                } else {
+                    return element.classList.add(className);
+                }
+            }
+            function removeClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList.remove(className);
+                }else{
+                    return element.classList;
+                }
+            }
+            function setIframeURL(urlLink){
+                document.getElementById('child-frame').src = urlLink;
+            }
+            /*function fetchOrders(token){
+                fetch('http://127.0.0.1:9999/getorders',
+                    {
+                        method: 'POST',
+                        headers:
+                        {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer '+token,
+                        },
+                        body: JSON.stringify(
+                        {
+                            token: token,
+                        })
+                    }).then((resp) =>resp.json()).then((responseJsonFromServer) =>
+                    {
+                        if(responseJsonFromServer.message=="your comments")
+                        {
+                            console.log(responseJsonFromServer.length);
+                            responseJsonFromServer.data.map(function(comment, i){
+                            _("comments").innerHTML +=  `<div class="colmd2">
+                                        <div class="colmd10">
+                                            <span class="position">${comment.comment}</span>
+                                            <span class="time">${comment.whenPosted}</span>
+                                        </div>
+                                    </div>`;
+                                })
+                        }else if(responseJsonFromServer.message=="no orders"){
+                            _("comments").innerHTML += "You dont have comments"
+                        }
+                    }).catch((error) =>
+                    {
+                        console.error(error);
+
+                    });
+            }
+            function fetchComments(token){
+
+                fetch('http://127.0.0.1:8080/getcomments',
+                    {
+                        method: 'POST',
+                        headers:
+                        {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer '+token,
+                        },
+                        body: JSON.stringify(
+                        {
+                            token: token,
+                            branchId: '5d662a9827ce5701c0d16a63'
+                        })
+                    }).then((resp) =>resp.json()).then((responseJsonFromServer) =>
+                    {
+                        if(responseJsonFromServer.message=="your comments")
+                        {
+                            console.log(responseJsonFromServer.length);
+                            responseJsonFromServer.data.map(function(comment, i){
+                            _("comments").innerHTML +=  `<div class="colmd2">
+                                        <div class="colmd10">
+                                            <span class="position">${comment.comment}</span>
+                                            <span class="time">${comment.when_created}</span>
+                                        </div>
+                                    </div>`;
+                                })
+                        }else if(responseJsonFromServer.message=="no comments"){
+                            _("comments").innerHTML += "You dont have comments"
+                        }
+                    }).catch((error) =>
+                    {
+                        console.error(error);
+
+                    });
+            }
+            function fetchNotes(token){
+
+                fetch('http://127.0.0.1:8080/getnotes',
+                    {
+                        method: 'POST',
+                        headers:
+                        {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer '+token,
+                        },
+                        body: JSON.stringify(
+                        {
+                            token: token,
+                        })
+                    }).then((resp) =>resp.json()).then((responseJsonFromServer) =>
+                    {
+                        console.log(responseJsonFromServer)
+                        if(responseJsonFromServer.message=="your notes")
+                        {
+                            console.log(responseJsonFromServer.length);
+                             responseJsonFromServer.data.map(function(note, i){
+                                if(note.note_type=="category"){
+                                    _("notes").innerHTML += `
+                                        <div class="colmd2">
+                                            <div class="colmd10">
+                                                <span class="position">Category, ${note.note_name} created at...</span>
+                                                <span class="time">${note.when_posted}</span>
+                                        </div>
+                                    </div>`
+                                }else if(note.note_type=="item added"){
+                                    _("notes").innerHTML += `
+                                        <div class="colmd2">
+                                            <div class="colmd10">
+                                                <span class="position">Item, ${note.note_name} added to inventory...</span>
+                                                <span class="time">${note.when_posted}</span>
+                                        </div>
+                                    </div>`
+                                }
+                                else if(note.note_type=="branch added"){
+                                    _("notes").innerHTML +=`
+                                        <div class="colmd2">
+                                            <div class="colmd10">
+                                                <span class="position">Branch, ${note.note_name} added at...</span>
+                                                <span class="time">${note.when_posted}</span>
+                                        </div>
+                                    </div>`;
+                                };
+                            })
+                        }else if(responseJsonFromServer.message=="no notes"){
+                            _("notes").innerHTML += "You dont have notes"
+                        }
+                    }).catch((error) =>
+                    {
+                        console.error(error);
+
+                    });
+            }
+            var values= new Array()
+            var keys= new Array()
+
+            function openWindowWithPost(url,name,keys,values){
+                console.log()
+                var newWindow = window.open(url, name);
+                if (!newWindow) return false;
+                return newWindow;
+            }*/
+
+            window.onload = function(){
+                setIframeURL("maps.html"); 
+               // fetchComments(cartJson[0].token);
+               // fetchNotes(cartJson[0].token);
+               /* _("see-comments").addEventListener("click", function(e){
+                    e.preventDefault();
+                   // openWindowWithPost('test.html?id=10','',keys,values)
+                })*/
+
+            }
+        </script>
+	</body>
+</html>

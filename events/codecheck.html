@@ -1,0 +1,409 @@
+<html>
+	<head>
+            <script type="text/javascript" src="jquery.js"></script>
+            <script type="text/javascript" src="qrcode.js"></script>
+		<style>
+			*{
+    box-sizing: border-box;
+}
+input, textarea{
+    outline: none;
+}
+body{
+    font-family: Lato, sans-serif;
+    background: #f4f6f9;
+}
+html,body,div{
+    margin: 0;
+    padding: 0;
+}
+
+.heading h1{
+    color: #6CD196;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+.heading p{
+    color: #1b1b1b;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+.cards{
+    overflow: auto;
+    box-shadow: 0 10px 15px -1px rgba(0,0,0,0.1);
+}
+.cards .card{
+    background: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    overflow: auto;
+    margin-bottom:20px;
+    margin-left: 15px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+.colmd4{
+    width: 45.33%;
+    padding: 0 15px;
+    display: inline-block;
+}
+.colmd3{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0 15px;
+    display: inline-block;
+
+}
+.colmd2{
+    display: flex;
+}
+.colmd10{
+    margin-left: 10px;
+    font-size: 0.8rem;
+    margin-top: 12px;
+}
+.homeTable{
+    width: 95%;
+    margin-top: 2rem;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-radius: 5px;
+    background: #eaedf3;
+    margin-left: 13px;
+}
+.homeTable thead th {
+    text-transform: uppercase;
+    padding: 1.2rem;
+    color: #3b3c42;
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+.homeTable tbody td {
+    text-transform: uppercase;
+    padding: 1.2rem;
+    background-color: #fff;
+    font-size: 0.8rem;
+    font-weight: 400;
+    text-align: center;
+    border-bottom: 0.7px solid #9E9E9E;
+}
+.homeTable tbody td .icon{
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 0.6rem;
+    color: #ffffff;
+    padding: 5px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+}
+.homeTable tbody td .iconText{
+    margin-left: 4px;
+}
+.orange{
+    background: orange;
+}
+.green{
+    background: #92cf48;
+}
+.purple{
+    background: purple;
+}
+.withPointer{
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.withPointer:hover{
+    background: orange;
+}
+
+
+            img{
+                display: block;
+                margin: 0 auto;
+                width: 100%;
+                max-width: 100%;
+                height: 290px;
+            }
+            #fileslbl{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #ccc;
+                color: #1b1b1b;
+                height: 24vh;
+                padding: 14px;
+                transition: 0.7s;
+                animation-duration: 1s;
+                animation-fill-mode: forwards;
+                animation-iteration-count: infinite;
+                border-radius: 4px;
+
+            }
+            #filesfld{
+                display: none;
+            }
+            #progress{
+                background-color: royalblue;
+                color: white;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 24px;
+                padding: 0 7px;
+                width: 0;
+            }
+            @keyframes dropbox{
+                0%{
+                    background-image: repeating-linear-gradient(30deg, #ccc 1%, #6cd196 3%, #6cd196 5%, #6cd196 5%)
+                }
+                50%{
+                    background-image: repeating-linear-gradient(30deg, #6cd196 1%, #6cd196 3%, #ccc 5%, #ccc 5%)
+                }
+                100%{
+                    background-image: repeating-linear-gradient(30deg, #ccc 1%, #ccc 3%, #6cd196 5%,#6cd196 5%)
+                }
+            }
+            button{
+                cursor: pointer;
+            }
+            #subselect{
+                padding:10px;
+            }
+            input{
+                width: 100%;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 14px;
+    border: 1px solid #6cd196;
+    padding: 15px 30px;
+    margin-top: 2px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+            }
+            button {
+    height: 48px;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    font-size: 12px;
+    outline: none;
+    max-height: 40px;
+    max-width: 100px;
+    min-width: 87px;
+    border-radius: 4px;
+}
+            .btn-light-red{
+                background:#282639;
+                box-shadow: 1px 1px 0 rgba(0,0,0,0.2), 0 16px 15px -16px #d24c0f, inset 0 0 25px rgba(0,0,0,0.05)
+            }
+            .btn-light-red:hover{
+                background: #b7862b;
+            }
+            .dynamic-pricing-container{
+                display:flex;
+
+            }
+            .number{
+                width: 30px;
+                height: 30px;
+                line-height: 2;
+                border-radius: 50%;
+                color:#ffffff;
+                background:#6CD196;
+            }
+            .number .actual-number{
+                margin-left:9px;
+                font-size:14px;
+            }
+            #colmd-descriptive-images{
+                display:flex;
+                flex-direction:column;
+            }
+            .colmd5{
+                display:flex;
+            }
+            .fileslbl {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width:30px;
+    padding: 2px;
+    transition: 0.7s;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    line-height: 2;
+    border-radius: 50%;
+    color: #ffffff;
+    background: #282639
+}        
+    .filesfld{
+        display: none;
+        width: 100%;
+        border: none;
+        outline: none;
+        background: none;
+        font-size: 14px;
+        border: 1px solid rgba(0,0,0,0.2);
+        padding: 15px 30px;
+        margin-top: 20px;
+    }
+    .fileslbl img{
+        width:15px;
+        height:14px;
+    }
+    .previews img{
+        width:74px;
+        height:74px;
+    }
+    #location-specifics{
+        display:flex;
+    }
+    #time-specifics{
+        display:flex;
+        flex-direction:column;
+    }
+    .time-defined{
+        display:flex;
+    }
+	</style>
+	</head>
+	<body>
+		<div class="heading">
+            <h1>Verify Code</h1>
+        </div>
+            <div class="cards">
+                <div class="card colmd4" style="height: 2000px;">
+                    <div class="number" id="number-two"><span class="actual-number">1</span></div>
+                    <h6>Pass code here</h6>
+                    <div class="colmd2">
+                        <div class="dishinputs">
+                            <input type="text" name="dishPrice" id="number" placeholder="Code number" class="dish-input" >
+                            
+                            <button id="check-item" class="btn-light-red">Check Code</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <script>
+        const CART={
+                KEY:'dashbjasjdbakhadjsk77',contents:[],init(){let _contents = localStorage.getItem(CART.KEY);if(_contents){CART.contents = JSON.parse(_contents);}else{CART.contents = [];CART.sync();}},async sync(){let _cart = JSON.stringify(CART.contents);await localStorage.setItem(CART.KEY, _cart);},addItem(categoryName,itemFolder){let obj={itemCategory:categoryName,itemFolder:itemFolder};CART.contents.push(obj);CART.sync();console.log(CART.contents);},addEventId(eventId){CART.contents.push(eventId);CART.sync();console.log(CART.contents);},addImage1(img){CART.contents.push(img);CART.sync();console.log(CART.contents);},empty(){CART.contents=[];CART.sync();},cartLength(){
+                    let length = CART.contents.length;
+                    return length;
+                },
+            }
+        	let cartContent = localStorage.getItem("bjasjdbakhadjsk77");
+            let cartContentTwo = localStorage.getItem("dashbjasjdbakhadjsk77");
+            let cartContentTwoJson = JSON.parse(cartContentTwo);
+           	let cartJson =  JSON.parse(cartContent);
+            console.log(cartContentTwoJson[0].newItemCategory);
+
+
+            //console.log(cartContentTwoJson);
+        	//console.log(cartJson);
+            function _(x) { return document.getElementById(x) };
+            function hasClass(element, className){
+                return element.className.split(" ").indexOf(className) > -1;
+            }
+            function addClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList;
+                } else {
+                    return element.classList.add(className);
+                }
+            }
+            function removeClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList.remove(className);
+                }else{
+                    return element.classList;
+                }
+            }
+            
+            // addEventListener support for IE8
+function bindEvent(element, eventName, eventHandler) {
+if (element.addEventListener) {
+element.addEventListener(eventName, eventHandler, false);
+} else if (element.attachEvent) {
+element.attachEvent('on' + eventName, eventHandler);
+}
+}
+// Send a message to the parent
+var sendMessage = function (msg) {
+// Make sure you are sending a string, and to stringify JSON
+window.parent.postMessage(msg, '*');
+};
+
+            //upload image
+            
+            function setIframeURL(urlLink){
+                document.getElementById('iframe').src = urlLink;
+            }
+
+
+
+            // addEventListener support for IE8
+            function bindEvent(element, eventName, eventHandler) {
+                if (element.addEventListener) {
+                element.addEventListener(eventName, eventHandler, false);
+                } else if (element.attachEvent) {
+                element.attachEvent('on' + eventName, eventHandler);
+                }
+            }
+            // Send a message to the parent
+            var sendMessage = function (msg) {
+                // Make sure you are sending a string, and to stringify JSON
+                window.parent.postMessage(msg, '*');
+            };
+            var results = document.getElementById('results'),
+                messageButton = _("add-item");
+                // Listen to messages from parent window
+                bindEvent(window, 'message', function (e) {
+                results.innerHTML = e.data;
+            });
+            window.onload = function() {
+                
+                _("event-continue").addEventListener("click", function(){
+                    sendMessage('' + "new event created");
+                });
+                _("check-item").addEventListener("click", function(){
+                    var date = new Date();
+                    var code = _("eventLocation").value;
+                    CART.addItem(cartContentTwoJson[0].newItemCategory,cartContentTwoJson[0].imageUrl)
+                    Object.assign(cartContentTwoJson[0]);
+                    CART.contents.push(cartContentTwoJson);
+
+                    console.log(cartContentTwoJson);
+                    console.log(cartJson[0].token);
+                    CART.sync();
+                    var url="http://127.0.0.1:8080/checkeventcode";
+                        fetch(url,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json",'Authorization': 'Bearer '+cartJson[0].token,},body:JSON.stringify({eventName:cartContentTwoJson[0].newItemCategory,token:cartJson[0].token,imageUrl:cartContentTwoJson[0].imageUrl, eventDescription:eventDescription, startTime:startTime, endTime:endTime, startDate:startDate, endDate:endDate, eventLocation:eventLocation,eventType:eventType, endTimeAmPm:endtimeampm, startTimeAmPm:starttimeapmp, numberPeople:numberPeople, headline:headline})}).then((response)=>response.json()).then((responseJsonFromServer)=>{console.log(responseJsonFromServer);
+                        if(responseJsonFromServer.message=="a new event has been added"){
+                            console.log(responseJsonFromServer.eventId);
+                            CART.addEventId(responseJsonFromServer.eventId);
+                            console.log(CART.contents);
+                            //setIframeURL("eventimages.html");
+                            alert("A new event added to your store")
+                            fetch("http://127.0.0.1:8080/insertnotes",{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json",'Authorization': 'Bearer '+cartJson[0].token,},body:JSON.stringify({noteType:"category",token:cartJson[0].token,named:responseJsonFromServer.categoryName,imgUrl:responseJsonFromServer.imgUrl})}).then((response)=>response.json()).then((responseJsonFromServer)=>{console.log(responseJsonFromServer);
+                                if(responseJsonFromServer.message=="a new note has been added"){
+                                    var notification = "New Event has been created";
+                                    sendMessage('' + notification);
+                                }else{
+                                    var notification = "could not check code";
+                                    sendMessage('' + notification);
+                                }
+                            })
+                        }else{
+                            _("error-handler").innerHTML="code not recognised, try again";
+                        }
+                    });
+                });
+               
+            }
+        </script>
+	</body>
+</html>

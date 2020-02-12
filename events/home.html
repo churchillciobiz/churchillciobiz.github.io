@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Sawisoft Event Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="home.css" />
+
+    </head>
+    <body>
+        <nav>
+            <label class="logo">Sawisoft</label>
+            <div class="dropdown">
+                <button id="feed-back">Feedback</button>
+                <div class="events">
+                    <button>Event Manager</button>
+                    <ul>
+                        <li><a href="#">Event participants</a></li>
+                        <li ><a id="new-event" href="#">New event</a></li>
+                        <li><a href="#">Edit event</a></li>
+                        <li><a href="#">Add event video</a></li>
+                        <li><a href="#" id="check-code">Check Code</a></li>
+                    </ul>
+                </div>
+                <div class="analytics">
+                    <button>Analytics</button>
+                    <ul>
+                        <li><a href="#" id="booking-from">Map Analysis</a></li>
+                    </ul>
+                </div>
+                <div class="myaccount">
+                    <button>My Account</button>
+                    <ul>
+                        <li><a href="#">Time Spent</a></li>
+                        <li><a href="#">Ad campaign</a></li>
+                        <li><a href="#">Log out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="contentArea">
+        <iframe id="parent-frame">
+
+        </iframe>
+        </div>
+        <div class="loader">
+            <span class="circle"></span>
+            <span class="circle"></span>
+            <span class="circle"></span>
+        </div>
+        <div id="dialogoverlay"></div>
+        <div id="dialogbox">
+            <div>
+                <div id="dialogboxhead"></div>
+                <div id="dialogboxbody"></div>
+                <div id="dialogboxfoot"></div>
+            </div>
+        </div>
+        <script>
+            const CART={
+                KEY:'dashbjasjdbakhadjsk77',contents:[],init(){let _contents = localStorage.getItem(CART.KEY);if(_contents){CART.contents = JSON.parse(_contents);}else{CART.contents = [];CART.sync();}},async sync(){let _cart = JSON.stringify(CART.contents);await localStorage.setItem(CART.KEY, _cart);},addIframeUrl(url){let obj={iframe:url};CART.contents.push(obj);CART.sync();console.log(CART.contents);},addItemCategory(categoryName){let obj={newItemCategory:categoryName};CART.contents.push(obj);CART.sync();console.log(CART.contents);},inventoryItem(categoryName){let obj={inventoryItemCategory:categoryName};CART.contents.push(obj);CART.sync();},empty(){CART.contents=[];CART.sync();},addNewBranch(branchName){let obj={newBranch:branchName};CART.contents.push(obj);CART.sync();console.log(CART.contents);},cartLength(){
+                    let length = CART.contents.length;
+                    console.log(length)
+                    return length;
+                }
+            }
+            function _(x) { return document.getElementById(x) };
+            function hasClass(element, className){
+                return element.className.split(" ").indexOf(className) > -1;
+            }
+            function addClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList;
+                } else {
+                    return element.classList.add(className);
+                }
+            }
+            function removeClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList.remove(className);
+                }else{
+                    return element.classList;
+                }
+            }
+            var activeDropDown = {}
+            var Confirm = new CustomConfirm();
+            window.onload = function(){
+                   
+                    setIframeURL("latestupdates.html"); 
+                    document.getElementById("new-event").addEventListener("click", function(e){e.preventDefault();
+                        if(CART.cartLength()>0){
+                            Confirm.render('cancel-activity', 'Alert');
+                        }else if(CART.cartLength()==0){
+                            Confirm.render("new-event", "New Event");
+                        }
+                    }); 
+                    document.getElementById("booking-from").addEventListener("click", function(e){e.preventDefault();
+                        setIframeURL("showmaps.html"); 
+                    }); 
+                    document.getElementById("feed-back").addEventListener("click", function(e){e.preventDefault();
+                        setIframeURL("latestupdates.html"); 
+                    });
+                    document.getElementById("check-code").addEventListener("click", function(e){e.preventDefault();
+                        setIframeURL("codecheck.html"); 
+                    });
+            }
+            function setIframeURL(urlLink){
+                document.getElementById('parent-frame').src = urlLink;
+            }
+            function CustomConfirm() {
+
+            this.render = function(clickId,dialog,op,id){
+
+                if(clickId=="new-event"){
+                    var continueId = "event-name";
+                    var html = "<div><input type='text' placeholder='Event name' id='event-create'></div>";
+                    var buttons = '<button class="popup-dialog-button dynamic-content" id='+continueId+' onclick="Confirm.yes(\''+continueId+'\')">Continue</button> <button class="popup-dialog-button" onclick="Confirm.no()">Cancel</button>';
+                }else if(clickId=='cancel-activity'){
+                    var continueId = "delete-token"
+                    var html ="<p>Continuing will cancel your previous activity ..."
+                    var buttons = '<button class="popup-dialog-button dynamic-content" id='+continueId+' onclick="Confirm.yes(\''+continueId+'\')">Continue</button> <button class="popup-dialog-button" onclick="Confirm.no()">Cancel</button>';
+                }
+                var winWidth = window.innerWidth;
+                var winHeight = window.innerHeight;
+                var dOverlay = document.getElementById("dialogoverlay");
+                var dBox = document.getElementById("dialogbox");
+                dOverlay.style.display = "block";
+                dOverlay.style.height = winHeight+"px";
+                dBox.style.left = (winWidth/2)-(550 * .5)+"px";
+                dBox.style.top = "100px";
+                dBox.style.display = "block";
+                dBox.classList = "animate";
+                document.getElementById("dialogboxhead").innerHTML = dialog;
+                document.getElementById("dialogboxbody").innerHTML = html;
+                document.getElementById("dialogboxfoot").innerHTML = buttons;
+            }
+            this.no = function(){
+                var dOverlay = document.getElementById("dialogoverlay");
+                var dBox = document.getElementById("dialogbox");
+                removeClass(dBox, "animate");
+                dOverlay.style.display = "none";
+                dBox.style.display = "none";
+
+            }
+            this.yes = function(id){
+                if(id=="event-name"){
+                    CART.addItemCategory(document.getElementById("event-create").value);
+                    setIframeURL("newevent.html")
+                    var dOverlay = document.getElementById("dialogoverlay");
+                    var dBox = document.getElementById("dialogbox");
+                    removeClass(dBox, "animate");
+                    dOverlay.style.display = "none";
+                    dBox.style.display = "none";
+                }else if(id=="delete-token"){
+                    CART.contents = [];
+                    CART.sync();
+                    setIframeURL("latestupdates.html");
+                }
+                var dOverlay = document.getElementById("dialogoverlay");
+                var dBox = document.getElementById("dialogbox");
+                removeClass(dBox, "animate");
+                dOverlay.style.display = "none";
+                dBox.style.display = "none";
+            }
+        }
+
+        window.onclick = function(event){
+		   /* if(!event.target.classList.contains('dropdown-button')){
+			    activeDropDown.element.style.visibility='hidden';
+		    }*/
+	    }       
+                </script>
+    </body>
+</html>

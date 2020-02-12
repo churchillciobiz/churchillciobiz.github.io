@@ -1,0 +1,781 @@
+<html>
+	<head>
+            <script type="text/javascript" src="jquery.js"></script>
+            <script type="text/javascript" src="qrcode.js"></script>
+		<style>
+			*{
+    box-sizing: border-box;
+}
+input, textarea{
+    outline: none;
+}
+body{
+    font-family: Lato, sans-serif;
+    background: #f4f6f9;
+}
+html,body,div{
+    margin: 0;
+    padding: 0;
+}
+
+.heading h1{
+    color: #6CD196;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+.heading p{
+    color: #1b1b1b;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+.cards{
+    overflow: auto;
+    box-shadow: 0 10px 15px -1px rgba(0,0,0,0.1);
+}
+.cards .card{
+    background: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    overflow: auto;
+    margin-bottom:20px;
+    margin-left: 15px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+.colmd4{
+    width: 45.33%;
+    padding: 0 15px;
+    display: inline-block;
+}
+.colmd3{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0 15px;
+    display: inline-block;
+
+}
+.colmd2{
+    display: flex;
+}
+.colmd10{
+    margin-left: 10px;
+    font-size: 0.8rem;
+    margin-top: 12px;
+}
+.homeTable{
+    width: 95%;
+    margin-top: 2rem;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-radius: 5px;
+    background: #eaedf3;
+    margin-left: 13px;
+}
+.homeTable thead th {
+    text-transform: uppercase;
+    padding: 1.2rem;
+    color: #3b3c42;
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+.homeTable tbody td {
+    text-transform: uppercase;
+    padding: 1.2rem;
+    background-color: #fff;
+    font-size: 0.8rem;
+    font-weight: 400;
+    text-align: center;
+    border-bottom: 0.7px solid #9E9E9E;
+}
+.homeTable tbody td .icon{
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 0.6rem;
+    color: #ffffff;
+    padding: 5px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+}
+.homeTable tbody td .iconText{
+    margin-left: 4px;
+}
+.orange{
+    background: orange;
+}
+.green{
+    background: #92cf48;
+}
+.purple{
+    background: purple;
+}
+.withPointer{
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.withPointer:hover{
+    background: orange;
+}
+
+
+            img{
+                display: block;
+                margin: 0 auto;
+                width: 100%;
+                max-width: 100%;
+                height: 290px;
+            }
+            #fileslbl{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #ccc;
+                color: #1b1b1b;
+                height: 24vh;
+                padding: 14px;
+                transition: 0.7s;
+                animation-duration: 1s;
+                animation-fill-mode: forwards;
+                animation-iteration-count: infinite;
+                border-radius: 4px;
+
+            }
+            #filesfld{
+                display: none;
+            }
+            #progress{
+                background-color: royalblue;
+                color: white;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 24px;
+                padding: 0 7px;
+                width: 0;
+            }
+            @keyframes dropbox{
+                0%{
+                    background-image: repeating-linear-gradient(30deg, #ccc 1%, #6cd196 3%, #6cd196 5%, #6cd196 5%)
+                }
+                50%{
+                    background-image: repeating-linear-gradient(30deg, #6cd196 1%, #6cd196 3%, #ccc 5%, #ccc 5%)
+                }
+                100%{
+                    background-image: repeating-linear-gradient(30deg, #ccc 1%, #ccc 3%, #6cd196 5%,#6cd196 5%)
+                }
+            }
+            button{
+                cursor: pointer;
+            }
+            #subselect{
+                padding:10px;
+            }
+            input{
+                width: 100%;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 14px;
+    border: 1px solid #6cd196;
+    padding: 15px 30px;
+    margin-top: 2px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+            }
+            button {
+    height: 48px;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    font-size: 12px;
+    outline: none;
+    max-height: 40px;
+    max-width: 100px;
+    min-width: 87px;
+    border-radius: 4px;
+}
+            .btn-light-red{
+                background:#282639;
+                box-shadow: 1px 1px 0 rgba(0,0,0,0.2), 0 16px 15px -16px #d24c0f, inset 0 0 25px rgba(0,0,0,0.05)
+            }
+            .btn-light-red:hover{
+                background: #b7862b;
+            }
+            .dynamic-pricing-container{
+                display:flex;
+
+            }
+            .number{
+                width: 30px;
+                height: 30px;
+                line-height: 2;
+                border-radius: 50%;
+                color:#ffffff;
+                background:#6CD196;
+            }
+            .number .actual-number{
+                margin-left:9px;
+                font-size:14px;
+            }
+            #colmd-descriptive-images{
+                display:flex;
+                flex-direction:column;
+            }
+            .colmd5{
+                display:flex;
+            }
+            .fileslbl {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width:30px;
+    padding: 2px;
+    transition: 0.7s;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    line-height: 2;
+    border-radius: 50%;
+    color: #ffffff;
+    background: #282639
+}        
+    .filesfld{
+        display: none;
+        width: 100%;
+        border: none;
+        outline: none;
+        background: none;
+        font-size: 14px;
+        border: 1px solid rgba(0,0,0,0.2);
+        padding: 15px 30px;
+        margin-top: 20px;
+    }
+    .fileslbl img{
+        width:15px;
+        height:14px;
+    }
+    .previews img{
+        width:74px;
+        height:74px;
+    }
+    #location-specifics{
+        display:flex;
+    }
+    #time-specifics{
+        display:flex;
+        flex-direction:column;
+    }
+    .time-defined{
+        display:flex;
+    }
+	</style>
+	</head>
+	<body>
+		<div class="heading">
+            <h1>Event Creation Wizard</h1>
+        </div>
+            <div class="cards">
+                <div class="number" id="number-one"><span class="actual-number">1</span></div>
+                <div class="card colmd4" style="height: 2000px;">
+                        <form id="filesfrm" action="https://protected-depths-22616.herokuapp.com/uploadimage" method="POST" onSubmit="return submitFilesForm(this);">
+                            <input type="file"  name="filesfld" id="filesfld" accept="image/" multiple onChange="submitFilesForm(this.form);"/>
+                            <label for="filesfld"
+                                ondragenter="stopDefault(event);dragOver(this, 'Drop the images to upload them');"
+                                ondragover="stopDefault(event);dragOver(this, 'Drop the images to upload them');"
+                                ondragleave="stopDefault(event);dragLeave(this);"
+                                ondrop="stopDefault(event);dragLeave(this);addFilesAndSubmit(event);"
+                                id="fileslbl">Click to choose image or drag and drop them here</label>
+                        </form>
+                        <div id="previewImage"></div>
+                        <div style="text-align: left;"><div id="progress"></div></div>
+                    <span class="userName">Add a headline image for this event</span>
+                </div>
+                <div class="card colmd4" style="height: 2000px;">
+                    <div class="number" id="number-two"><span class="actual-number">2</span></div>
+                    <h6>Describe event</h6>
+                    <div class="colmd2">
+                        
+                        <div class="dishinputs">
+                            <div class="event-type-select">
+                                <select id="event-type">
+                                    <option value="">Select event type</option>
+                                </select>
+                            </div>
+                            <input type="text" name="dishPrice" id="eventLocation" placeholder="Event location" class="dish-input" >
+                            <input type="text" name="dishPrice" id="headline" placeholder="Event headline tag" class="dish-input">
+                            <input type="text" name="dishPrice" id="eventDescription" placeholder="Event description" class="dish-input">
+                            <input type="text" name="dishPrice" id="numberPeople" placeholder="number of people" class="dish-input">
+                            
+                            <div id="time-specifics">
+                                <div class="time-defined"><input type="text" name="dishPrice" id="startTime" placeholder="Event start time" class="dish-input" ><select id="starttimeampm"><option value="AM">AM</option><option value="PM">PM</option></select></div>
+                                <div class="time-defined"><input type="text" name="dishPrice" id="endTime" placeholder="Event end time" class="dish-input" ><select id="endtimeampm"><option value="AM">AM</option><option value="PM">PM</option></select></div>
+                            </div>
+                            
+                            <input type="date" name="dishPrice" id="startDate" placeholder="Event start date" class="dish-input">
+                            <input type="date" name="dishPrice" id="endDate" placeholder="Event end date" class="dish-input">
+                            <button id="add-item" class="btn-light-red">+ Add</button>
+                            <hr>
+                            <div class="number" id="number-two"><span class="actual-number">3</span></div>
+                            <select id="audience-category">
+                                
+                                <option value=0>Audience category options</option>
+                                <option value=1>1</option>
+                                <option value=2>2</option>
+                                <option value=3>3</option>
+                                <option value=4>4</option>
+                                <option value=5>5</option>
+                            </select>
+                            <div id="dynamic-pricing"></div>
+                        </div>
+                    </div>
+                        <hr>
+                        <div id="colmd-descriptive-images">
+                            <div class="number" id="number-four"><span class="actual-number">4</span></div>
+                            <p>Three images max</p>
+                            <div class="colmd5" style="height: 100px;">
+                                <form id="filesfrm1" action="https://protected-depths-22616.herokuapp.com/uploadimage1" method="POST" onSubmit="return submitFilesForm1(this);">
+                                    <input type="file"  name="filesfld1" id="filesfld1" class="filesfld" accept="image/" multiple onChange="submitFilesForm1(this.form);"/>
+                                    <label for="filesfld1"
+                                        ondrop="addFilesAndSubmit1(event);"
+                                        class="fileslbl">+</label>
+                                </form>
+                                <div id="previewImage1" class="previews"></div>
+                                <div style="text-align: left;"><div id="progress1"></div></div>
+                            <div class="user-description"><input type="text" class="image-description" id="description-1"></div>
+                            <button id="1" class="btn-light-red add-description-image">Upload 1</button>
+                            </div>
+                            <div class="colmd5" style="height: 100px;">
+                                <form id="filesfrm2" action="https://protected-depths-22616.herokuapp.com/uploadimage2" method="POST" onSubmit="return submitFilesForm2(this);">
+                                    <input type="file"  name="filesfld2" id="filesfld2" class="filesfld" accept="image/" multiple onChange="submitFilesForm2(this.form);"/>
+                                    <label for="filesfld2"
+                                        ondrop="addFilesAndSubmit2(event);"
+                                        class="fileslbl">+</label>
+                                </form>
+                                <div id="previewImage2" class="previews" ></div>
+                                <div style="text-align: left;"><div id="progress2"></div></div>
+                            <div class="user-description"><input type="text" class="image-description" id="description-2"></div>
+                            <button id="2" class="btn-light-red add-description-image">Upload 2</button>
+                            </div>
+                            <div class="colmd5" style="height: 100px;">
+                                <form id="filesfrm3" action="https://protected-depths-22616.herokuapp.com/uploadimage3" method="POST" onSubmit="return submitFilesForm3(this);">
+                                    <input type="file"  name="filesfld3" id="filesfld3" class="filesfld" accept="image/" multiple onChange="submitFilesForm3(this.form);"/>
+                                    <label for="filesfld3"
+                                        ondrop="addFilesAndSubmit3(event);"
+                                        class="fileslbl">+</label>
+                                </form>
+                                <div id="previewImage3" class="previews"></div>
+                                <div style="text-align: left;"><div id="progress3"></div></div>
+                            <div class="user-description"><input type="text" class="image-description" id="description-3"></div>
+                            <button id="3" class="btn-light-red add-description-image">Upload 3</button>
+                            </div>
+                            <!--<p>item qr code (cannot be edited)</p>
+                            <div id="qrcode" style="width:300px; height:300px;">
+                            </div> -->
+                        </div>
+                        <button id="event-continue" class="btn-light-red">Continue -></button>
+                    </div>
+            </div>
+        <script>
+        const CART={
+                KEY:'dashbjasjdbakhadjsk77',contents:[],init(){let _contents = localStorage.getItem(CART.KEY);if(_contents){CART.contents = JSON.parse(_contents);}else{CART.contents = [];CART.sync();}},async sync(){let _cart = JSON.stringify(CART.contents);await localStorage.setItem(CART.KEY, _cart);},addItem(categoryName,itemFolder){let obj={itemCategory:categoryName,itemFolder:itemFolder};CART.contents.push(obj);CART.sync();console.log(CART.contents);},addEventId(eventId){CART.contents.push(eventId);CART.sync();console.log(CART.contents);},addImage1(img){CART.contents.push(img);CART.sync();console.log(CART.contents);},empty(){CART.contents=[];CART.sync();},cartLength(){
+                    let length = CART.contents.length;
+                    return length;
+                },
+            }
+        	let cartContent = localStorage.getItem("bjasjdbakhadjsk77");
+            let cartContentTwo = localStorage.getItem("dashbjasjdbakhadjsk77");
+            let cartContentTwoJson = JSON.parse(cartContentTwo);
+           	let cartJson =  JSON.parse(cartContent);
+            console.log(cartContentTwoJson[0].newItemCategory);
+
+
+            //console.log(cartContentTwoJson);
+        	//console.log(cartJson);
+            function _(x) { return document.getElementById(x) };
+            function hasClass(element, className){
+                return element.className.split(" ").indexOf(className) > -1;
+            }
+            function addClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList;
+                } else {
+                    return element.classList.add(className);
+                }
+            }
+            function removeClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList.remove(className);
+                }else{
+                    return element.classList;
+                }
+            }
+            
+            // addEventListener support for IE8
+function bindEvent(element, eventName, eventHandler) {
+if (element.addEventListener) {
+element.addEventListener(eventName, eventHandler, false);
+} else if (element.attachEvent) {
+element.attachEvent('on' + eventName, eventHandler);
+}
+}
+// Send a message to the parent
+var sendMessage = function (msg) {
+// Make sure you are sending a string, and to stringify JSON
+window.parent.postMessage(msg, '*');
+};
+
+            //upload image
+            function stopDefault(event){
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            function dragOver(label, text){
+                label.style.animationName = "dropbox";
+                label.innerText = text;
+            }
+            function dragLeave(label){
+                var len = label.style.length;
+                for(var i= 0; i< len; i++){
+                    label.style[label.style[i]] = "";
+                }
+                label.innerText = "Click to choose image or drag and drop them here"
+            }
+            function addFilesAndSubmit(event){
+                var files = event.target.files || event.dataTransfer.files;
+                document.getElementById("filesfld").files  = files;
+                submitFilesForm(document.getElementById("filesfrm"));
+            }
+            function addFilesAndSubmit1(event){
+                var files = event.target.files || event.dataTransfer.files;
+                document.getElementById("filesfld1").files  = files;
+                submitFilesForm1(document.getElementById("filesfrm1"));
+            }
+            function addFilesAndSubmit2(event){
+                var files = event.target.files || event.dataTransfer.files;
+                document.getElementById("filesfld2").files  = files;
+                submitFilesForm2(document.getElementById("filesfrm2"));
+            }
+            function addFilesAndSubmit3(event){
+                var files = event.target.files || event.dataTransfer.files;
+                document.getElementById("filesfld3").files  = files;
+                submitFilesForm3(document.getElementById("filesfrm3"));
+            }
+            function submitFilesForm(form){
+                var label = document.getElementById("fileslbl");
+                dragOver(label, "Uploading images ....");
+                var fd = new FormData();
+                for(var i=0; i<form.filesfld.files.length; i++){
+                    var field = form.filesfld;
+                    fd.append(field.name, field.files[i], field.files[i].name)
+                }
+                var progress = document.getElementById("progress");
+                var x = new XMLHttpRequest();
+                if(x.upload){
+                    x.upload.addEventListener("progress", function(event){
+                        var percent = parseInt(event.loaded / event.total * 100);
+                        progress.innerText = progress.style.width = percent;
+
+                    });
+                }
+
+                x.onreadystatechange = function(){
+                    if(x.readyState == 4){
+                        progress.innerText = progress.style.width = "";
+                        form.filesfld.value = "";
+                        dragLeave(label);
+                        if(x.status == 200){
+                            var images = JSON.parse(x.responseText);
+                            console.log(images);
+                           /* for(var i= 0; i< images.length; i++){
+                                var img = document.createElement("img");
+                                img.src = images[i];
+                                console.log(img.src);
+                                Object.assign(cartContentTwoJson[0], {"imageUrl":img.src});
+                                CART.contents.push(cartContentTwoJson);
+                                CART.sync();
+                                var body = document.getElementsByTagName("body")[0];
+                                _("previewImage").appendChild(img);
+                            }*/
+                            var img = document.createElement("img");
+                            img.src = images;
+                            Object.assign(cartContentTwoJson[0], {"imageUrl":img.src});
+                            CART.contents.push(cartContentTwoJson);
+                            CART.sync();
+                            var body = document.getElementsByTagName("body")[0];
+                            _("previewImage").appendChild(img);
+                        }
+                    }
+                };
+                x.open("post", form.action, true);
+                x.send(fd);
+                return false;
+            }
+            function submitFilesForm1(form){
+                var label = document.getElementById("fileslbl1");
+
+                var fd = new FormData();
+                for(var i=0; i<form.filesfld1.files.length; i++){
+                    var field = form.filesfld1;
+                    fd.append(field.name, field.files[i], field.files[i].name)
+                }
+                var progress = document.getElementById("progress1");
+                var x = new XMLHttpRequest();
+                if(x.upload){
+                    x.upload.addEventListener("progress", function(event){
+                        var percent = parseInt(event.loaded / event.total * 100);
+                        progress.innerText = progress.style.width = percent;
+
+                    });
+                }
+
+                x.onreadystatechange = function(){
+                    if(x.readyState == 4){
+                        progress.innerText = progress.style.width = "";
+                        form.filesfld1.value = "";
+                        if(x.status == 200){
+                            var images = JSON.parse(x.responseText);
+                            console.log(images);
+                            CART.addImage1(images);
+                            var img = document.createElement("img");
+                            img.src = images;
+                           /* Object.assign(cartContentTwoJson[0], {"imageUrlTwo":img.src});
+                            CART.contents.push(cartContentTwoJson);
+                            CART.sync();*/
+                            var body = document.getElementsByTagName("body")[0];
+                            _("previewImage1").appendChild(img);
+                        }
+                    }
+                };
+                x.open("post", form.action, true);
+                x.send(fd);
+                return false;
+            }
+            function submitFilesForm2(form){
+                var label = document.getElementById("fileslbl2");
+
+                var fd = new FormData();
+                for(var i=0; i<form.filesfld2.files.length; i++){
+                    var field = form.filesfld2;
+                    fd.append(field.name, field.files[i], field.files[i].name)
+                }
+                var progress = document.getElementById("progress2");
+                var x = new XMLHttpRequest();
+                if(x.upload){
+                    x.upload.addEventListener("progress", function(event){
+                        var percent = parseInt(event.loaded / event.total * 100);
+                        progress.innerText = progress.style.width = percent;
+
+                    });
+                }
+
+                x.onreadystatechange = function(){
+                    if(x.readyState == 4){
+                        progress.innerText = progress.style.width = "";
+                        form.filesfld2.value = "";
+                        if(x.status == 200){
+                            var images = JSON.parse(x.responseText);
+                            console.log(images);
+                            CART.addImage1(images);
+                            var img = document.createElement("img");
+                            img.src = images;
+                           /* Object.assign(cartContentTwoJson[0], {"imageUrlThree":img.src});
+                            CART.contents.push(cartContentTwoJson);
+                            CART.sync();*/
+                            var body = document.getElementsByTagName("body")[0];
+                            _("previewImage2").appendChild(img);
+                        }
+                    }
+                };
+                x.open("post", form.action, true);
+                x.send(fd);
+                return false;
+            }
+            function submitFilesForm3(form){
+                var label = document.getElementById("fileslbl3");
+
+                var fd = new FormData();
+                for(var i=0; i<form.filesfld3.files.length; i++){
+                    var field = form.filesfld3;
+                    fd.append(field.name, field.files[i], field.files[i].name)
+                }
+                var progress = document.getElementById("progress3");
+                var x = new XMLHttpRequest();
+                if(x.upload){
+                    x.upload.addEventListener("progress", function(event){
+                        var percent = parseInt(event.loaded / event.total * 100);
+                        progress.innerText = progress.style.width = percent;
+
+                    });
+                }
+
+                x.onreadystatechange = function(){
+                    if(x.readyState == 4){
+                        progress.innerText = progress.style.width = "";
+                        form.filesfld3.value = "";
+                        if(x.status == 200){
+                            var images = JSON.parse(x.responseText);
+                            console.log(images);
+                            CART.addImage1(images);
+                            var img = document.createElement("img");
+                            img.src = images;
+                           /* Object.assign(cartContentTwoJson[0], {"imageUrlFour":img.src});
+                            CART.contents.push(cartContentTwoJson);
+                            CART.sync();*/
+                            var body = document.getElementsByTagName("body")[0];
+                            _("previewImage3").appendChild(img);
+                        }
+                    }
+                };
+                x.open("post", form.action, true);
+                x.send(fd);
+                return false;
+            }
+            function setIframeURL(urlLink){
+                document.getElementById('iframe').src = urlLink;
+            }
+
+
+
+            // addEventListener support for IE8
+            function bindEvent(element, eventName, eventHandler) {
+                if (element.addEventListener) {
+                element.addEventListener(eventName, eventHandler, false);
+                } else if (element.attachEvent) {
+                element.attachEvent('on' + eventName, eventHandler);
+                }
+            }
+            // Send a message to the parent
+            var sendMessage = function (msg) {
+                // Make sure you are sending a string, and to stringify JSON
+                window.parent.postMessage(msg, '*');
+            };
+            var results = document.getElementById('results'),
+                messageButton = _("add-item");
+                // Listen to messages from parent window
+                bindEvent(window, 'message', function (e) {
+                results.innerHTML = e.data;
+            });
+
+
+            _("audience-category").addEventListener("change", function(e) {
+                    e.preventDefault();
+                    console.log(_("audience-category").value);
+                    var length = _("audience-category").value; 
+                    for(var i=0; i<length; i++){
+                        _("dynamic-pricing").innerHTML += "<div class='dynamic-pricing-container'> <input type='text' class='audience' id='audience"+i+"' placeholder='eg teens,adults, kids'> <input type='text' class='cost' id='cost"+i+"' placeholder='charge eg 100/='><button id='"+i+"' class='btn-light-red add-item-audience'>Insert</button></div>";
+                    }
+            });
+            function getAllEvents(){
+                fetch('https://protected-depths-22616.herokuapp.com/getalleventscategories',
+                    {
+                        method: 'POST',
+                        headers:
+                        {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer '+cartJson[0].token,
+                        },
+                        body: JSON.stringify(
+                        {
+                          token: cartJson[0].token,
+                        })
+
+                    }).then((resp) =>resp.json()).then((responseJsonFromServer) =>
+                    { console.log(responseJsonFromServer.result)
+                        if(responseJsonFromServer.result.length>0){
+                            responseJsonFromServer.result.map(function(event_types, i){
+                           _("event-type").innerHTML += `
+                                            <option value="${event_types.type_id}">${event_types.type}</option>
+                                            `;
+                            })
+                        }else if(responseJsonFromServer.result.length<1){
+                            console.log("No sub categories");
+                        }
+
+
+                    }).catch((error) =>
+                    {
+                        console.error(error);
+
+                    });
+            }
+            window.onload = function() {
+                getAllEvents();
+                window.addEventListener("click", function(e){
+		            if(hasClass(e.target, "add-description-image")){
+                        var description = _("description-"+e.target.id).value;
+                        console.log(description);
+                        var url="https://protected-depths-22616.herokuapp.com/addeventimgs";
+                        fetch(url,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json",'Authorization': 'Bearer '+cartJson[0].token,},body:JSON.stringify({eventId:CART.contents[3],token:cartJson[0].token,description:description, eventImg: CART.contents[4]})}).then((response)=>response.json()).then((responseJsonFromServer)=>{console.log(responseJsonFromServer);
+                        if(responseJsonFromServer.result=="event-img-added"){
+                            CART.contents.pop();
+
+                            console.log(CART.contents[3]);
+                            console.log(CART.contents)
+                        }else{
+                           console.log("could not add image");
+                        }
+                    });
+
+                    };
+                });
+                window.addEventListener("click", function(e){
+		            if(hasClass(e.target, "add-item-audience")){
+                        var audience = _("audience"+e.target.id).value;
+                        var cost = _("cost"+e.target.id).value;
+                        console.log(audience, cost);
+                        var url="https://protected-depths-22616.herokuapp.com/addeventtarget";
+                        fetch(url,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json",'Authorization': 'Bearer '+cartJson[0].token,},body:JSON.stringify({eventId:CART.contents[3],token:cartJson[0].token,audience:audience,cost:cost})}).then((response)=>response.json()).then((responseJsonFromServer)=>{console.log(responseJsonFromServer);
+                        if(responseJsonFromServer.result=="event-target-added"){
+                            console.log(CART.contents[3]);
+                        }else{
+                           console.log("could not add");
+                        }
+                    });
+
+                    };
+                });
+                _("event-continue").addEventListener("click", function(){
+                    sendMessage('' + "new event created");
+                });
+                _("add-item").addEventListener("click", function(){
+                    var date = new Date();
+                    var eventLocation = _("eventLocation").value;
+                    var eventDescription = _("eventDescription").value;
+                    var numberPeople = _("numberPeople").value;
+                    var headline = _("headline").value;
+                    var eventType = _("event-type").value;
+                    var endtimeampm = _("endtimeampm").value;
+                    var starttimeapmp = _("starttimeampm").value;
+                    var startTime = _("startTime").value;
+                    var endTime = _("endTime").value;
+                    var startDate = _("startDate").value;
+                    var endDate = _("endDate").value;
+                    CART.addItem(cartContentTwoJson[0].newItemCategory,cartContentTwoJson[0].imageUrl)
+                    Object.assign(cartContentTwoJson[0]);
+                    CART.contents.push(cartContentTwoJson);
+
+                    console.log(cartContentTwoJson);
+                    console.log(cartJson[0].token);
+                    CART.sync();
+                    var url="https://protected-depths-22616.herokuapp.com/insertnewevent";
+                        fetch(url,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json",'Authorization': 'Bearer '+cartJson[0].token,},body:JSON.stringify({eventName:cartContentTwoJson[0].newItemCategory,token:cartJson[0].token,imageUrl:cartContentTwoJson[0].imageUrl, eventDescription:eventDescription, startTime:startTime, endTime:endTime, startDate:startDate, endDate:endDate, eventLocation:eventLocation,eventType:eventType, endTimeAmPm:endtimeampm, startTimeAmPm:starttimeapmp, numberPeople:numberPeople, headline:headline})}).then((response)=>response.json()).then((responseJsonFromServer)=>{console.log(responseJsonFromServer.result);            
+                    });
+                });
+               /* _("add-item2").disabled = true;
+                _("add-item3").disabled = true;
+                _("add-item1").addEventListener("click", function(){
+
+                    _("add-item2").disabled = false;
+                })
+                _("add-item2").addEventListener("click", function(){
+
+                    _("add-item3").disabled = false;
+                })*/
+               
+            }
+        </script>
+	</body>
+</html>
