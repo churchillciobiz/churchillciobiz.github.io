@@ -86,7 +86,7 @@
             var Confirm = new CustomConfirm();
             window.onload = function(){
                    
-                    setIframeURL("latestupdates.html"); 
+                    setIframeURL("newevent.html"); 
                     document.getElementById("new-event").addEventListener("click", function(e){e.preventDefault();
                         if(CART.cartLength()>0){
                             Confirm.render('cancel-activity', 'Alert');
@@ -98,7 +98,7 @@
                         setIframeURL("showmaps.html"); 
                     }); 
                     document.getElementById("feed-back").addEventListener("click", function(e){e.preventDefault();
-                        setIframeURL("latestupdates.html"); 
+                        setIframeURL("welcome.html"); 
                     });
                     document.getElementById("check-code").addEventListener("click", function(e){e.preventDefault();
                         setIframeURL("codecheck.html"); 
@@ -154,7 +154,7 @@
                 }else if(id=="delete-token"){
                     CART.contents = [];
                     CART.sync();
-                    setIframeURL("latestupdates.html");
+                    setIframeURL("welcome.html");
                 }
                 var dOverlay = document.getElementById("dialogoverlay");
                 var dBox = document.getElementById("dialogbox");

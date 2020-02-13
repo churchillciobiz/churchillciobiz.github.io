@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            video{
+                width: 640px;
+                height: 360px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <video id="videoplayer" controls></video>
+        </div>
+        <script src="dash.js"></script>
+        <script>
+            (function(){
+                var url = "./ffmpeg/out_dash.mpd";
+                var player = dashjs.MediaPlayer().create();
+                player.initialize(document.querySelector("#videoplayer"), url, true);
+            })();
+        </script>
+    </body>
+</html>
