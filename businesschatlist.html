@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js" ></script>
+        <style>
+            body{
+                margin:0;
+                padding:0;
+            }
+            .search-box{
+                background: #6CD196;
+                height: 40px;
+                border-radius: 40px;
+                padding: 10px;
+                display: flex;
+                justify-content: space-between;
+                align-self: center;
+                margin: 8px;
+            }
+            .search-btn{
+                color: #1591EE;
+                float: right;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: #2f3640;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .icon-btn{
+                color: #e84118;
+                width: 50px;
+                height: 50px;
+            }
+            .icon-img{
+                color: #e84118;
+               
+                height: 50px;
+            }
+            .search-txt{
+                border:none;
+                background: none;
+                outline: none;
+                float: left;
+                padding: 0;
+                color: white;
+                font-size: 16px;
+                transition: 0.4s;
+                line-height: 40px;
+                width:240px;
+            }
+.items {
+  overflow: hidden; /* simple clearfix */
+}
+.items .item {
+  float: left;
+  width: 25%;
+}
+#results{
+    margin:20px;
+}
+        </style>
+    </head>
+    <div class="search-box">
+        <input class="search-txt" type="text" name="" placeholder="Type to Search">
+        <a class="search-btn" href="#">
+            <i class="fas fa-search"></i>
+        </a>
+    </div>
+    <div id="results">
+        <div class="result-wrapper items">
+            <div class="icon-btn item" href="#">
+                <a href="businesschats.html">
+                    <img class="icon-img" href="#" src="kalogo.png">
+                </a>
+            </div>
+        </div>
+    </div>
+</html>
