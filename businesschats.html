@@ -11,14 +11,53 @@
                 margin:0;
                 padding:0;
             }
-            
+            iframe{
+                border:none;
+                width:100%;
+                height:100%;
+            }
+            /* Mobile Styles */
+@media only screen and (max-width: 400px) {
+  body {
+   /* background-color: #F09A9D; /* Red */
+	/*font-size: 14px;
+	font-weight: 200;*/
+  }
+  iframe{
+      display:flex;
+      height:600px;
+  }
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 401px) and (max-width: 960px) {
+  body {
+   /* background-color: #F5CF8E; /* Yellow */
+	/*font-size: 14px;
+	font-weight: 200;*/
+  }
+  iframe{
+      display:flex;
+      height:600px;
+  }
+}
+
+/* Desktop Styles */
+@media only screen and (min-width: 961px) {
+  body {
+   /* background-color: #B2D6FF; /* Blue */*/
+  }
+  iframe{
+      display:flex;
+      height:600px;
+  }
+}
+        
         </style>
     </head>
     <body>
         <iframe
     allow="microphone;"
-    width="350"
-    height="430"
     src="https://console.dialogflow.com/api-client/demo/embedded/d5940162-b623-45df-b4cc-2c229146f931">
 </iframe>
     </body>
