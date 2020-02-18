@@ -573,6 +573,7 @@
 				border-radius: 20px;
 				z-index: 1999999999999999;
 				box-shadow: 0 5px 9px 0 rgba(0,0,0,0.2);
+				display:none;
 			}
 			#popup #popup-top{
 				display: flex;
@@ -586,11 +587,6 @@
 			}
 			#popup #popup-top p{
 				display:flex;
-			}
-			#popup #popup-top .close{
-				border-radius: 50%;
-    			width: 40px;
-				border:1px solid #4f5393;
 			}
 			#popup #popup-top span{
 				max-width: 100%;
@@ -630,6 +626,17 @@
     			border-radius: 5px;
 				background: #fff;
 			}
+			.close
+{
+  display:block;
+  box-sizing:border-box;
+  width:20px;
+  height:20px;
+  border-radius:100%;
+  background: -webkit-linear-gradient(-45deg, transparent 0%, transparent 46%, white 46%,  white 56%,transparent 56%, transparent 100%), -webkit-linear-gradient(45deg, transparent 0%, transparent 46%, white 46%,  white 56%,transparent 56%, transparent 100%);
+  background-color:red;
+  box-shadow:0px 0px 5px 2px rgba(0,0,0,0.5);
+}
         </style>
 
     </head>
@@ -641,7 +648,7 @@
 				</div>
             </div>
             <div class="fav">
-                <button class="btn go-to-catalogue" href="syovatacategories.html" id="open-booking">
+                <button class="btn go-to-catalogue" id="open-booking">
                     Book Me
                 </button>
                 <div class="users">
@@ -699,7 +706,7 @@
 		<div id="popup">
 			<div id="popup-top">
 				<p>Booking</p>
-				<div class="close"><span>x</span></div>
+				<div class="close"></div>
 			</div>
 			<div id="popup-body">
 				<span>Adult</span><input id="1" class='checks' value=1 type='checkbox'>
@@ -890,7 +897,8 @@ const CART = {
 }
 		
 			function getHref(){
-				document.querySelector(".go-to-catalogue").addEventListener("click", function(e) {
+
+				/*document.querySelector(".go-to-catalogue").addEventListener("click", function(e) {
 				if(hasClass(e.target, "go-to-catalogue")){
 					e.preventDefault();
 					var href = e.currentTarget.getAttribute("href")
@@ -899,7 +907,17 @@ const CART = {
 				e.preventDefault();
 				var href = e.currentTarget.getAttribute("href")
 				window.location = href;
+				})*/
+				_("open-booking").addEventListener("click", function(){
+					_("popup").style.display = "block";
 				})
+				document.addEventListener("click", function(e){
+					if(hasClass(e.target, "close")){
+					e.preventDefault();
+					_("popup").style.display = "none";
+				}
+				})
+				
 			}
 			window.onload =  function(e){
 				getHref();
