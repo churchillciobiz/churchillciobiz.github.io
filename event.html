@@ -40,17 +40,6 @@
             width:100%;
             /*box-shadow: -5px 60px 15px 55px rgba(2,7,33,0.4), -5px 60px 35px -55px rgba(0,0,0,0.2);*/
         }
-        .cover:after{
-            position: absolute;
-            content: "";
-            width: 100%;
-            height: 297px;
-            display: inline-block;
-            background: transparent;
-            top: 0;
-            left: 0;
-            box-shadow: inset 0 0 185px rgba(2,7,33,0.4);
-        }
         .cover .fa{
 	position: relative;
 	font-size: 38px;
@@ -85,6 +74,7 @@
 
 .fav{
 	position: relative;
+	top: 20px;
 }
 .btn{
 	position: absolute;
@@ -566,58 +556,100 @@
                 font-weight: 600;
                 color: rgba(0,0,0,0.5);
             }
+			video{
+                width: 100%;
+                height: 100%;
+			}
+			#popup{
+				max-width: 350px;
+				width: 100%;
+				height: auto;
+				background: #fff;
+				padding: 35px 28px;
+				position: absolute;
+				top: 71%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+				border-radius: 20px;
+				z-index: 1999999999999999;
+				box-shadow: 0 5px 9px 0 rgba(0,0,0,0.2);
+			}
+			#popup #popup-top{
+				display: flex;
+    			justify-content: space-between;
+				margin: 5px 0 10px;
+				padding: 0 5%;
+				font-size: 14px;
+				color:#4f5393;
+				font-weight: 600;
+				line-height: 16px;
+			}
+			#popup #popup-top p{
+				display:flex;
+			}
+			#popup #popup-top .close{
+				border-radius: 50%;
+    			width: 40px;
+				border:1px solid #4f5393;
+			}
+			#popup #popup-top span{
+				max-width: 100%;
+    			border-radius: 50%;
+			}
+			#popup #popup-body{
+				display: flex;
+				flex-direction: row;
+				justify-content: space-evenly;
+				font-size: 15px;
+    			color: rgba(0,0,0,0.3);
+				margin-top: 25px;
+    			margin-bottom: 16px;
+			}
+			#total-wrapper{
+				display: flex;
+				flex-direction: row;
+				justify-content: space-evenly;
+				font-size: 20px;
+    			color: #4f5393;
+				margin-top: 20px;
+    			margin-bottom: 17px;
+			}
+			#popup-bottom{
+				display: flex;
+				flex-direction: row;
+				justify-content: space-evenly;
+				font-size: 20px;
+    			color: #4f5393;
+				margin-top: 20px;
+    			margin-bottom: 0px;
+			}
+			#book-dynamic{
+				padding: 5px;
+    			border: none;
+    			border: 1px solid #4f5393;
+    			border-radius: 5px;
+				background: #fff;
+			}
         </style>
 
     </head>
     <body>
         <div class="app">
-            <div class="cover gallery-container">
-                <div class="slide-show-container">
-                  <div class="left-arrow" onclick="plusSlides(-1)"><span class="arrow arrow-left"></span></div>
-        				  <div class="right-arrow" onclick="plusSlides(1)"><span class="arrow arrow-right"></span></div>
-        				  <div class="caption-holder"><span class="caption-text title"></span></div>
-
-
-
-                  <div class="image-holder">
-          					<img src="medium_StockSnap_5TCGRN12WA.jpg">
-                    <span class="caption-text title">
-          						cloudy with the chance of meatballs(2010)
-          						<span class="sub-title">
-          							1hr 30min, 7.4 IMDB, Animation Fantasy/Comedy
-          						</span>
-          					</span>
-          				</div>
-          				<div class="image-holder">
-          					<img src="medium_StockSnap_5TCGRN12WA.jpg">
-                    <span class="caption-text title">
-          						cloudy with the chance of meatballs(2004)
-          						<span class="sub-title">
-          							1hr 30min, 7.4 IMDB, Animation Fantasy/Comedy
-          						</span>
-          					</span>
-          				</div>
-          				<div class="image-holder">
-          					<img src="medium_StockSnap_5TCGRN12WA.jpg">
-                    <span class="caption-text title">
-          						cloudy with the chance of meatballs(2009)
-          						<span class="sub-title">
-          							1hr 30min, 7.4 IMDB, Animation Fantasy/Comedy
-          						</span>
-          					</span>
-          				</div>
-                </div>
+            <div class="cover">
+				<div>
+					<video id="videoplayer" controls></video>
+				</div>
             </div>
             <div class="fav">
-                <button class="btn go-to-catalogue" href="syovatacategories.html">
-                    <i class="fa fa-plus"></i>
+                <button class="btn go-to-catalogue" href="syovatacategories.html" id="open-booking">
                     Book Me
                 </button>
                 <div class="users">
                     <div class="damage">Adults 1200/=</div>
                     <div class="damage">Teens 500/=</div>
                     <div class="damage">Kids 200/=</div>
-                </div>
+				</div>
+				
             </div>
             <div class="story">
                 <span class="title">The Low Down</span>
@@ -663,8 +695,31 @@
 
                 </div>
             </div>
-        </div>
+		</div>
+		<div id="popup">
+			<div id="popup-top">
+				<p>Booking</p>
+				<div class="close"><span>x</span></div>
+			</div>
+			<div id="popup-body">
+				<span>Adult</span><input id="1" class='checks' value=1 type='checkbox'>
+				<span>Teen</span><input id="2" class='checks' value=2 type='checkbox'>
+				<span>Kids</span><input id="3" class='checks' value=3 type='checkbox'>
+			</div>
+			<div id="total-wrapper">
+				<span id="total">0</span>
+			</div>
+			<div id="popup-bottom">
+				<button id="book-dynamic">Add To Cart</button>
+			</div>
+		</div>
+		<script src="dash.js"></script>
         <script>
+			 var url = "video.mpd";
+            var player = dashjs.MediaPlayer().create();
+            player.initialize(document.querySelector("#videoplayer"), url, true);
+
+
 			function _(x) { return document.getElementById(x) };
 function hasClass(element, className){
 	return element.className.split(" ").indexOf(className) > -1;
@@ -833,64 +888,7 @@ const CART = {
 		//No impact on locaStorage
 	},
 }
-			var slideIndex,slides,dots,captionText;
-			function initGallery(){
-				slideIndex=0;
-				slides = document.getElementsByClassName("image-holder");
-				slides[slideIndex].style.opacity = 1;
-
-
-				captionText = document.querySelector(".caption-holder .caption-text");
-				captionText.innerText = slides[slideIndex].querySelector(".caption-text").innerText;
-
-
-				}
-			function plusSlides(n){
-				moveSlides(slideIndex+n);
-			}
-			function moveSlides(n){
-				var i,current,next;
-				var moveSlideAnimClass = {
-					forCurrent:"",
-					forNext:"",
-				}
-				var sliderTextAnimClass;
-				if(n>slideIndex){
-					if(n>=slides.length){n=0}
-					moveSlideAnimClass.forCurrent = "move-left-current-slide";
-					moveSlideAnimClass.forNext = "move-left-next-slide";
-					sliderTextAnimClass = "slider-text-from-top";
-				}else if(n<slideIndex){
-					if(n<0){n=slides.length-1}
-					moveSlideAnimClass.forCurrent = "move-right-current-slide";
-					moveSlideAnimClass.forNext = "move-right-next-slide";
-					sliderTextAnimClass = "slider-text-from-bottom";
-				}
-				if(n!=slideIndex){
-					next = slides[n];
-					current = slides[slideIndex];
-					for(i=0;i<slides.length;i++){
-						slides[i].className = "image-holder";
-						slides[i].style.opacity = 0;
-					}
-					current.classList.add(moveSlideAnimClass.forCurrent);
-					next.classList.add(moveSlideAnimClass.forNext);
-					slideIndex=n;
-				}
-				captionText.style.display="none";
-				captionText.className = "caption-text "+sliderTextAnimClass;
-				captionText.innerText = slides[n].querySelector(".caption-text").innerText;
-				captionText.style.display = "block";
-			}
-			var timer=null;
-			function setTimer(){
-				timer=setInterval(function(){
-					plusSlides(1);
-				},3000);
-			}
-			initGallery();
-			setTimer();
-
+		
 			function getHref(){
 				document.querySelector(".go-to-catalogue").addEventListener("click", function(e) {
 				if(hasClass(e.target, "go-to-catalogue")){

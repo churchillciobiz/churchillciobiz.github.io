@@ -14,27 +14,64 @@
   
   <div class="form">
     <div class="input_field">
-      <input type="text" placeholder="Name" class="input">
+      <input type="text" placeholder="Name" class="input" id="name">
       <i class="fas fa-user"></i>
     </div>
     <div class="input_field">
-      <input type="text" placeholder="Email" class="input">
+      <input type="text" placeholder="Email" class="input" id="email">
       <i class="far fa-envelope"></i>
     </div>
     <div class="input_field">
-      <input type="password" placeholder="Password" class="input">
+      <input type="password" placeholder="Password" class="input" id="vCode">
       <i class="fas fa-lock"></i>
     </div>
     <div class="btn">
-      <a href="#">Register</a>
+      <a href="#" id="sign-up">Register</a>
     </div>
   </div>
   <div style="text-align:center;color:greenyellow;margin-top: 20px;">
-    <a style="color:greenyellow;" href="login.html">
+    <a style="color:greenyellow;" href="login.html" >
       Login
     </a>
 </div>
 </div>	
 	
+<script>
+  function _(x) { return document.getElementById(x) };
+      function hasClass(element, className){
+          return element.className.split(" ").indexOf(className) > -1;
+      }
+      function addClass(element, className){
+          if(hasClass(element, className)){
+              return element.classList;
+          } else {
+              return element.classList.add(className);
+          }
+      }
+      function removeClass(element, className){
+          if(hasClass(element, className)){
+              return element.classList.remove(className);
+          }else{
+              return element.classList;
+          }
+      }
+      //var url = "https://protected-depths-22616.herokuapp.com/logineventsdash";
+      var url = "http://127.0.0.1:5000/registermemeventbers";
+const CART={KEY:'bjasjdbakhadjsk77',contents:[],init(){let _contents = localStorage.getItem(CART.KEY);if(_contents){CART.contents = JSON.parse(_contents);}else{CART.contents = [];CART.sync();}},async sync(){let _cart = JSON.stringify(CART.contents);await localStorage.setItem(CART.KEY, _cart);},addItem(token){let obj={token:token};CART.contents.push(obj);CART.sync();console.log(CART.contents);},empty(){CART.contents=[];CART.sync();}};
+window.onload=function(){function _(x){return document.getElementById(x);};function processPhase1(){var email=_("email").value;var verificationCode=_("vCode").value;var name=_("name").value;console.log(email,verificationCode,name);if(verificationCode.length>0&&email.length>0){fetch(url,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json",},body:JSON.stringify({password:verificationCode,email:email,name:name})}).then((response)=>response.json()).then((responseJsonFromServer)=>{console.log(responseJsonFromServer);
+  if(responseJsonFromServer){
+      console.log(responseJsonFromServer)
+      //add token to cart local storage
+     // CART.addItem(responseJsonFromServer.token);
+      window.location = "login.html";
+
+  }else{
+      _("error-handler").innerHTML="Passcode not recognised, try again";
+  }
+})
+}else{_("error-handler").innerHTML="Please fill all the fields";};}
+_("sign-up").addEventListener("click", function(){processPhase1()});
+      }
+</script>
 </body>
 </html>

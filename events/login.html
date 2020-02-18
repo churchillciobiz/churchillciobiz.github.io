@@ -52,12 +52,14 @@
                     return element.classList;
                 }
             }
+            //var url = "https://protected-depths-22616.herokuapp.com/logineventsdash";
+            var url = "http://127.0.0.1:5000/logineventsdash";
     const CART={KEY:'bjasjdbakhadjsk77',contents:[],init(){let _contents = localStorage.getItem(CART.KEY);if(_contents){CART.contents = JSON.parse(_contents);}else{CART.contents = [];CART.sync();}},async sync(){let _cart = JSON.stringify(CART.contents);await localStorage.setItem(CART.KEY, _cart);},addItem(token){let obj={token:token};CART.contents.push(obj);CART.sync();console.log(CART.contents);},empty(){CART.contents=[];CART.sync();}};
-    window.onload=function(){function _(x){return document.getElementById(x);};function processPhase1(){var email=_("email").value;var verificationCode=_("vCode").value;console.log(email,verificationCode);if(verificationCode.length>0&&email.length>0){var url="https://protected-depths-22616.herokuapp.com/logineventsdash";fetch(url,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json",},body:JSON.stringify({password:verificationCode,email:email})}).then((response)=>response.json()).then((responseJsonFromServer)=>{console.log(responseJsonFromServer);
-        if(responseJsonFromServer){
+    window.onload=function(){function _(x){return document.getElementById(x);};function processPhase1(){var email=_("email").value;var verificationCode=_("vCode").value;console.log(email,verificationCode);if(verificationCode.length>0&&email.length>0){fetch(url,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json",},body:JSON.stringify({password:verificationCode,email:email})}).then((response)=>response.json()).then((responseJsonFromServer)=>{console.log(responseJsonFromServer);
+        if(responseJsonFromServer.message=="success"){
             console.log(responseJsonFromServer)
             //add token to cart local storage
-            CART.addItem(responseJsonFromServer.token);
+            //CART.addItem(responseJsonFromServer.token);
             window.location = "home.html";
 
         }else{

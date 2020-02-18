@@ -668,7 +668,7 @@ window.parent.postMessage(msg, '*');
                     }
             });
             function getAllEvents(){
-                fetch('https://protected-depths-22616.herokuapp.com/getalleventscategories',
+                fetch('http://127.0.0.1:5000/eventtypes',
                     {
                         method: 'POST',
                         headers:
@@ -683,11 +683,11 @@ window.parent.postMessage(msg, '*');
                         })
 
                     }).then((resp) =>resp.json()).then((responseJsonFromServer) =>
-                    { console.log(responseJsonFromServer.result)
-                        if(responseJsonFromServer.result.length>0){
-                            responseJsonFromServer.result.map(function(event_types, i){
+                    { console.log(responseJsonFromServer.event_list)
+                        if(responseJsonFromServer.event_list.length>0){
+                            responseJsonFromServer.event_list.map(function(event_types, i){
                            _("event-type").innerHTML += `
-                                            <option value="${event_types.type_id}">${event_types.type}</option>
+                                            <option value="${event_types._id}">${event_types.event}</option>
                                             `;
                             })
                         }else if(responseJsonFromServer.result.length<1){
@@ -726,10 +726,11 @@ window.parent.postMessage(msg, '*');
                         var audience = _("audience"+e.target.id).value;
                         var cost = _("cost"+e.target.id).value;
                         console.log(audience, cost);
-                        var url="https://protected-depths-22616.herokuapp.com/addeventtarget";
-                        fetch(url,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json",'Authorization': 'Bearer '+cartJson[0].token,},body:JSON.stringify({eventId:CART.contents[3],token:cartJson[0].token,audience:audience,cost:cost})}).then((response)=>response.json()).then((responseJsonFromServer)=>{console.log(responseJsonFromServer);
-                        if(responseJsonFromServer.result=="event-target-added"){
-                            console.log(CART.contents[3]);
+                        console.log(CART.contents[2]);
+                        var url="http://127.0.0.1:5000/addeventtarget";
+                        fetch(url,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json",'Authorization': 'Bearer '+cartJson[0].token,},body:JSON.stringify({eventId:CART.contents[2],token:cartJson[0].token,audience:audience,cost:cost})}).then((response)=>response.json()).then((responseJsonFromServer)=>{console.log(responseJsonFromServer);
+                        if(responseJsonFromServer.message=="target added"){
+                            console.log(CART.contents[2]);
                         }else{
                            console.log("could not add");
                         }
@@ -746,7 +747,7 @@ window.parent.postMessage(msg, '*');
                     var eventDescription = _("eventDescription").value;
                     var numberPeople = _("numberPeople").value;
                     var headline = _("headline").value;
-                    var eventType = _("event-type").value;
+                    var eventTypeId = _("event-type").value;
                     var endtimeampm = _("endtimeampm").value;
                     var starttimeapmp = _("starttimeampm").value;
                     var startTime = _("startTime").value;
@@ -760,8 +761,10 @@ window.parent.postMessage(msg, '*');
                     console.log(cartContentTwoJson);
                     console.log(cartJson[0].token);
                     CART.sync();
-                    var url="https://protected-depths-22616.herokuapp.com/insertnewevent";
-                        fetch(url,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json",'Authorization': 'Bearer '+cartJson[0].token,},body:JSON.stringify({eventName:cartContentTwoJson[0].newItemCategory,token:cartJson[0].token,imageUrl:cartContentTwoJson[0].imageUrl, eventDescription:eventDescription, startTime:startTime, endTime:endTime, startDate:startDate, endDate:endDate, eventLocation:eventLocation,eventType:eventType, endTimeAmPm:endtimeampm, startTimeAmPm:starttimeapmp, numberPeople:numberPeople, headline:headline})}).then((response)=>response.json()).then((responseJsonFromServer)=>{console.log(responseJsonFromServer.result);            
+                    var url="http://127.0.0.1:5000/insertnewevent";
+                        fetch(url,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json"},body:JSON.stringify({eventName:cartContentTwoJson[0].newItemCategory, description:eventDescription, startTime:startTime, endTime:endTime, startDate:startDate, endDate:endDate, location:eventLocation,eventTypeId:eventTypeId, endAmPm:endtimeampm, startAmPm:starttimeapmp, numberPeople:numberPeople, headline:headline})}).then((response)=>response.json()).then((responseJsonFromServer)=>{console.log(responseJsonFromServer.eventId);  
+                            CART.addEventId(responseJsonFromServer.eventId);
+                            console.log(CART.contents);         
                     });
                 });
                /* _("add-item2").disabled = true;
