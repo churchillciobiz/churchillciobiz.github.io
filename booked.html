@@ -1,0 +1,401 @@
+<html>
+    <head>
+        <style>
+            *{
+		box-sizing: border-box;
+		padding: 0;
+			margin: 0;
+			outline: none;
+		}
+		div{
+			padding: 0;
+			margin: 0;
+			outline: none;
+		}
+		body{
+			font-family: Roboto, sans-serif;
+			background: #FFFFFF;
+			overflow: auto;
+			height: 600px;
+		}
+		.container{
+            display: flex;
+            justify-content: space-evenly;
+	    }
+        .app{
+            display: flex;
+            flex-direction: column;
+            background: #f7f9fc;
+        }
+        .cover {
+            position: relative;
+            height: 297px;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-evenly;
+        }
+        .cover img {
+            margin-left: 0px;
+            /*box-shadow: -5px 60px 15px 55px rgba(2,7,33,0.4), -5px 60px 35px -55px rgba(0,0,0,0.2);*/
+        }
+        .cover .fa{
+	position: relative;
+	font-size: 38px;
+	left: 50%;
+	top: 55px;
+	color: #f7f9fc;
+	margin-left: -15px;
+	opacity: 0.9;
+}
+.cover .title{
+	position: absolute;
+	width: 100%;
+	display: inline-block;
+	text-align: center;
+	text-transform: uppercase;
+	bottom: 0;
+	color: #fff;
+	font-size: 15px;
+	font-weight: 600;
+	background: rgba(2,7,33,0.7);
+	padding: 10px 0;
+	letter-spacing: 0.5px;
+	left: 0px;
+}
+.cover .title .sub-title{
+	display: block;
+	font-size: 10px;
+	font-weight: 300;
+	letter-spacing: 1px;
+	padding-top: 5px;
+}
+
+.fav{
+	position: relative;
+    display: flex;
+    justify-content: space-evenly;
+}
+.btn{
+	position: relative;
+	padding: 10px 15px;
+	border: none;
+	border-radius: 35px;
+	margin-top: 10px;
+	margin-left: 15px;
+	background: #ff5349;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 500;
+	box-shadow: 1px 1px 0 rgba(0,0,0,0.2), 0 16px 15px -16px #d24c0f, inset 0 0 25px rgba(0,0,0,0.05);
+}
+.fav .fa{
+	font-size: 14px;
+	padding-right: 5px;
+}
+.fav .users{
+	position: relative;
+	margin-top: 2px;
+	margin-right: 40px;
+	float: right;
+	z-index: 99999;
+}
+.fav .users img{
+	position: relative;
+	width: 29px;
+	border: 2px solid rgba(255,83,73,0.9);
+	border-radius: 100%;
+	margin-left: -15px;
+	height: 30px;
+}
+
+.fav .users span.fav-count{
+	position:absolute;
+	width: 29px;
+	height: 29px;
+	border: 2px solid #fff;
+	background: rgba(255,83,73,0.95);
+	display: inline-block;
+	border-radius: 100%;
+	line-height: 32px;
+	text-align: center;
+	top: 0;
+	margin-left: 55px;
+	color: #fff;
+	font-size: 11px;
+}
+.user-1{
+	z-index: 99;
+}
+.user-2{
+	z-index: 98;
+}
+
+.story{
+	width: 90%;
+	height: auto;
+    border-radius: 10px;
+	background: #fff;
+	margin: 25px auto;
+	padding: 10px 0;
+	border: 1px solid rgba(0,0,0,0.03);
+	box-shadow: 0 10px 15px -1px rgba(0,0,0,0.1);
+}
+.story .title{
+	position: absolute;
+	margin-top: -35px;
+	font-size: 16px;
+	font-weight: 600;
+	color: rgba(0,0,0,0.5);
+}
+.story div{
+	display: inline-block;
+}
+.story .story-icon{
+	width: 20%;
+	text-align: center;
+}
+.story .story-icon .fa{
+	position: relative;
+	font-size: 10px;
+	top: -28px;
+	padding: 5px 12px 5px 14px;
+	color: #ff5349;
+	border:3px solid #ff5349;
+	border-radius: 7px;
+	opacity: 0.7;
+}
+.story .story-icon:after{
+	content: "";
+    width: 0;
+    height: 0;
+    display: inline-block;
+    position: absolute;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 7px solid #ff5349;
+    margin-left: -26px;
+    margin-top: -4px;
+    opacity: 0.7;
+}
+.story .story-text{
+	width: 100%;
+	padding: 0 5%;
+	font-size: 12px;
+	color: rgba(0,0,0,0.3);
+	font-weight: 600;
+	line-height: 16px;
+}
+
+.schedule{
+	position: relative;
+	width: 90%;
+	height: auto;
+	background: #fff;
+	margin: 20px auto;
+	border: 1px solid rgba(0,0,0,0.03);
+	box-shadow: 0 10px 15px -1px rgba(0,0,0,0.1);
+}
+.schedule> .title{
+	position: absolute;
+	font-size: 16px;
+	margin-top: -35px;
+	font-weight: 600;
+	color: rgba(0,0,0,0.5);
+}
+.detail .date{
+	padding: 8px 5px;
+	display: inline-block;
+	background: #4f5393;
+	color: #fff;
+	font-size: 18px;
+	font-weight: 600;
+	text-align: center;
+	box-shadow: inset 0 -25px 75px -25px rgba(0,0,0,0.4);
+}
+.detail .date span{
+	display: block;
+	font-size: 11px;
+	text-transform: uppercase;
+	font-weight: 400;
+	padding-top: 2px;
+}
+.detail .location{
+	position: relative;
+	font-size: 14px;
+	font-weight: 600;
+	display: inline-block;
+	padding: 0 10px;
+	top: 1px;
+	color: rgba(0,0,0,0.6);
+}
+.detail .location span{
+	display: block;
+	font-size: 12px;
+	color: rgba(0,0,0,0.3);
+}
+.detail .btn{
+	margin-top: 12px;
+	right: 10px;
+}
+.map-location{
+	position: relative;
+	height: 105px;
+	display: inline-block;
+	padding: 15px 0 5px 0;
+}
+.map-location img{
+	width: 120px;
+}
+.map-location:before{
+	content: "";
+	display: inline-block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	box-shadow: inset: 0 0 25px 9px #fff;
+}
+.map-location:after{
+	content: "";
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: #ff5349;
+    position: absolute;
+    top: 0;
+    border-radius: 100%;
+    margin-top: 77px;
+    margin-left: 50px;
+    border: 1px solid rgba(255,255,255,0.4);
+    box-shadow: 0 0 0 5px rgba(255,83,73,0.5), 0 0 0 10px rgba(255,83,73,0.2);
+}
+.distance{
+	position: absolute;
+	top: 25px;
+	margin-left: 43px;
+	font-weight: 600;
+	font-size: 11px;
+	padding: 5px 10px;
+	background: #fff;
+	color: rgba(0,0,0,0.5);
+	z-index: 99;
+	box-shadow: 0 0 3px rgba(0,0,0,0.2);
+}
+.distance:after{
+	content: "";
+	display: inline-block;
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	border-top: 7px solid #fff;
+	left: 7px;
+	margin-top: 18px;
+}
+.schedule-info{
+	float: right;
+	margin-top: 15px;
+	width: 62%;
+	margin-right: -7px;
+}
+.schedule-info span{
+	display: inline-block;
+}
+.rows > span{
+	width: 40%;
+	/*padding: 5px 5%;*/
+}
+.schedule-info span.info{
+	display: block;
+}
+.schedule-info span .title{
+	font-size: 11px;
+	font-weight: 600;
+	color: rgba(0,0,0,0.3);
+	padding-bottom: 5px;
+}
+.schedule-info span .name,.schedule-info span .time{
+	font-size: 14px;
+	font-weight: 600;
+	color: rgba(0,0,0,0.7);
+}
+.cover .title span {
+    display: block;
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    padding-top: 5px;
+}
+.schedule-info span .row-line{
+	font-size: 11px;
+	background: #ff5349;
+	padding: 4px 8px;
+	border-radius: 20px;
+	color: #fff;
+	font-weight: 500;
+	letter-spacing: 1px
+}
+.schedule-info span .seat-num span{
+	font-size: 11px;
+	background: #4f5393;
+	padding: 5px;
+	border-radius: 4px;
+	color: #fff;
+	font-weight: 500;
+}
+        </style>
+    </head>
+    <body>
+        <div class="app">
+            <div class="cover">
+                <img src="booked.jpg" alt="banner"/>
+            </div>
+            <div class="fav">
+                <button class="btn go-to-events" href="events.html">
+                    More Events
+                </button>
+				<button class="btn to-android" href="to-android" style="background:#6CD196">
+                    Done
+                </button>
+            </div>
+            <div class="story">
+                <p class="story-text">A Qr code has been generated for you go to mobilet home app, open menu select booking and orders pick the event company logo let the qrcode be scanned for verification</p>
+            </div>
+        </div>
+        <script>
+            	function _(x) { return document.getElementById(x) };
+function hasClass(element, className){
+	return element.className.split(" ").indexOf(className) > -1;
+}
+function addClass(element, className){
+	if(hasClass(element, className)){
+		return element.classList;
+	} else {
+		return element.classList.add(className);
+	}
+}
+function removeClass(element, className){
+	if(hasClass(element, className)){
+		return element.classList.remove(className);
+	}else{
+		return element.classList;
+	}
+}
+            function getHref(){
+				document.querySelector(".go-to-events").addEventListener("click", function(e) {
+				if(hasClass(e.target, "go-to-events")){
+					e.preventDefault();
+					var href = e.currentTarget.getAttribute("href")
+					console.log(href);	
+				}
+				e.preventDefault();
+				var href = e.currentTarget.getAttribute("href")
+				window.location = href;
+				})
+			}
+            window.onload =  function(e){
+				getHref();
+			}
+        </script>
+    </body>
+</html>

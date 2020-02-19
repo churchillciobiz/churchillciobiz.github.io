@@ -567,7 +567,7 @@
 				background: #fff;
 				padding: 35px 28px;
 				position: absolute;
-				top: 71%;
+				top: 30%;
 				left: 50%;
 				transform: translate(-50%,-50%);
 				border-radius: 20px;
@@ -626,6 +626,22 @@
     			border-radius: 5px;
 				background: #fff;
 			}
+			#calculate-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-size: 20px;
+    color: #4f5393;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+			.calculate-me{
+				padding: 5px;
+    			border: none;
+    			border: 1px solid #4f5393;
+    			border-radius: 5px;
+				background: #fff;
+			}
 			.close
 {
   display:block;
@@ -636,6 +652,22 @@
   background: -webkit-linear-gradient(-45deg, transparent 0%, transparent 46%, white 46%,  white 56%,transparent 56%, transparent 100%), -webkit-linear-gradient(45deg, transparent 0%, transparent 46%, white 46%,  white 56%,transparent 56%, transparent 100%);
   background-color:red;
   box-shadow:0px 0px 5px 2px rgba(0,0,0,0.5);
+}
+.detail-inputs{
+	width:13%;
+}
+#calculation-wrapper{
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 13px;
+}
+#calculation-wrapper div{
+	font-size: 13px;
+    color: rgba(25, 20, 20, 0.3);
+    font-weight: 600;
+    line-height: 16px;
+    margin: 0px 0px 5px 0px;
 }
         </style>
 
@@ -705,26 +737,37 @@
 		</div>
 		<div id="popup">
 			<div id="popup-top">
-				<p>Booking</p>
+				<p>Tickets number (blank = 0)</p>
 				<div class="close"></div>
 			</div>
 			<div id="popup-body">
-				<span>Adult</span><input id="1" class='checks' value=1 type='checkbox'>
-				<span>Teen</span><input id="2" class='checks' value=2 type='checkbox'>
-				<span>Kids</span><input id="3" class='checks' value=3 type='checkbox'>
+				<span>Adult</span><input id="adult" class='detail-inputs' data='{"Adult":1200}' type='text'>
+				<span>Teen</span><input id="teen" class='detail-inputs' data='{"Teen":500}' type='text'>
+				<span>Kids</span><input id="kids" class='detail-inputs' data='{Kids:200}' type='text'>
 			</div>
-			<div id="total-wrapper">
-				<span id="total">0</span>
+			<div id="calculate-wrapper">
+				<button class="calculate-me">Calculate</button>
 			</div>
+			<div id="show-calculations">
+				<div id="calculation-wrapper">
+					<div>Adult 1200/= * 2</div>
+					<div>Teens 1200/= * 2</div>
+					<div>Kids 200/= * 3</div>
+				</div>
+				<div id="total-wrapper">
+					<span id="total">0</span>
+				</div>
+			</div>
+			
 			<div id="popup-bottom">
-				<button id="book-dynamic">Add To Cart</button>
+				<button id="book-dynamic">Book Me</button>
 			</div>
 		</div>
 		<script src="dash.js"></script>
         <script>
-			 var url = "video.mpd";
+		/*	 var url = "video.mpd";
             var player = dashjs.MediaPlayer().create();
-            player.initialize(document.querySelector("#videoplayer"), url, true);
+            player.initialize(document.querySelector("#videoplayer"), url, true);*/
 
 
 			function _(x) { return document.getElementById(x) };
@@ -921,6 +964,34 @@ const CART = {
 				
 			}
 			window.onload =  function(e){
+				var sum = [];
+				function tally(array){
+					var count = 0;
+					for(var i=0; i<array.length;i++){
+						count += array[i];
+					}
+					console.log(count)
+					//return count;
+					_("total").innerHTML = count;
+				}
+				document.addEventListener("click", function(e){
+					var objectArray =[];
+					if(hasClass(e.target, "calculate-me")){
+						var details = document.getElementsByClassName("detail-inputs")
+						for(var i=0; i<details.length;i++){
+							console.log();
+							objectArray.push(details[i].getAttribute("data"));
+						}
+					console.log(JSON.objectArray[0]);
+						//console.log(e.target.value)
+						alert();
+						//sum.push(e.target.value)
+						//console.log(sum);
+						//add the elements together
+						//tally(sum)
+						
+					}
+				}, true)
 				getHref();
 			}
 		</script>
