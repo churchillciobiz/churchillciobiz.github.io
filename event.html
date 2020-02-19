@@ -619,7 +619,7 @@
 				margin-top: 20px;
     			margin-bottom: 0px;
 			}
-			#book-dynamic{
+			.book-dynamic{
 				padding: 5px;
     			border: none;
     			border: 1px solid #4f5393;
@@ -760,7 +760,7 @@
 			</div>
 			
 			<div id="popup-bottom">
-				<button id="book-dynamic">Book Me</button>
+				<button class="book-dynamic"  href="booked.html">Book Me</button>
 			</div>
 		</div>
 		<script src="dash.js"></script>
@@ -941,8 +941,8 @@ const CART = {
 		
 			function getHref(){
 
-				/*document.querySelector(".go-to-catalogue").addEventListener("click", function(e) {
-				if(hasClass(e.target, "go-to-catalogue")){
+				document.querySelector(".book-dynamic").addEventListener("click", function(e) {
+				if(hasClass(e.target, "book-dynamic")){
 					e.preventDefault();
 					var href = e.currentTarget.getAttribute("href")
 					console.log(href);	
@@ -950,8 +950,7 @@ const CART = {
 				e.preventDefault();
 				var href = e.currentTarget.getAttribute("href")
 				window.location = href;
-				})*/
-				/*get it*/
+				});
 				_("open-booking").addEventListener("click", function(){
 					_("popup").style.display = "block";
 				})
