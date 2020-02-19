@@ -354,7 +354,7 @@
                 <button class="btn go-to-events" href="events.html">
                     More Events
                 </button>
-				<button class="btn to-android" href="to-android" style="background:#6CD196">
+				<button class="btn to-android" id="to-android" style="background:#6CD196">
                     Done
                 </button>
             </div>
@@ -363,6 +363,15 @@
             </div>
         </div>
         <script>
+		/*function preventBack(){
+			window.history.forward();
+		}
+		setTimeout('preventBack()', 0);
+		window.onunload = funtion(){
+			null;
+		}*/
+
+
             	function _(x) { return document.getElementById(x) };
 function hasClass(element, className){
 	return element.className.split(" ").indexOf(className) > -1;
@@ -381,6 +390,9 @@ function removeClass(element, className){
 		return element.classList;
 	}
 }
+function showAndroidToast(toast){
+	Android.showToast(toast);
+}
             function getHref(){
 				document.querySelector(".go-to-events").addEventListener("click", function(e) {
 				if(hasClass(e.target, "go-to-events")){
@@ -395,6 +407,9 @@ function removeClass(element, className){
 			}
             window.onload =  function(e){
 				getHref();
+				_("to-android").addEventListener("click", function(){
+					showAndroidToast("Hello android");
+				})
 			}
         </script>
     </body>
