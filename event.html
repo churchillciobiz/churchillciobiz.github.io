@@ -737,25 +737,21 @@
 		</div>
 		<div id="popup">
 			<div id="popup-top">
-				<p>Tickets number (blank = 0)</p>
+				<p>Tickets number</p>
 				<div class="close"></div>
 			</div>
 			<div id="popup-body">
-				<span>Adult</span><input id="adult" class='detail-inputs' data='{"Adult":1200}' type='text'>
-				<span>Teen</span><input id="teen" class='detail-inputs' data='{"Teen":500}' type='text'>
-				<span>Kids</span><input id="kids" class='detail-inputs' data='{Kids:200}' type='text'>
+				<span>Adult</span><input id="adult" class='detail-inputs' data='1200' type='text'>
+				<span>Teen</span><input id="teen" class='detail-inputs' data='500' type='text'>
+				<span>Kids</span><input id="kids" class='detail-inputs' data='200' type='text'>
 			</div>
 			<div id="calculate-wrapper">
 				<button class="calculate-me">Calculate</button>
 			</div>
 			<div id="show-calculations">
-				<div id="calculation-wrapper">
-					<div>Adult 1200/= * 2</div>
-					<div>Teens 1200/= * 2</div>
-					<div>Kids 200/= * 3</div>
-				</div>
+				
 				<div id="total-wrapper">
-					<span id="total">0</span>
+					<span id="total"></span>
 				</div>
 			</div>
 			
@@ -765,9 +761,9 @@
 		</div>
 		<script src="dash.js"></script>
         <script>
-			 var url = "video.mpd";
+			/*var url = "video.mpd";
             var player = dashjs.MediaPlayer().create();
-            player.initialize(document.querySelector("#videoplayer"), url, true);
+            player.initialize(document.querySelector("#videoplayer"), url, true);*/
 
 
 			function _(x) { return document.getElementById(x) };
@@ -944,6 +940,7 @@ const CART = {
 				document.querySelector(".book-dynamic").addEventListener("click", function(e) {
 				if(hasClass(e.target, "book-dynamic")){
 					e.preventDefault();
+					
 					var href = e.currentTarget.getAttribute("href")
 					console.log(href);	
 				}
@@ -957,8 +954,13 @@ const CART = {
 				document.addEventListener("click", function(e){
 					if(hasClass(e.target, "close")){
 					e.preventDefault();
-					_("popup").style.display = "none";
-				}
+					
+					var details = document.getElementsByClassName("detail-inputs")
+						for(var i=0; i<details.length;i++){
+							details[i].value == '';
+						}
+						_("popup").style.display = "none";
+					}
 				})
 				
 			}
@@ -975,19 +977,21 @@ const CART = {
 				}
 				document.addEventListener("click", function(e){
 					var objectArray =[];
+					var cumulate;
 					if(hasClass(e.target, "calculate-me")){
 						var details = document.getElementsByClassName("detail-inputs")
 						for(var i=0; i<details.length;i++){
-							console.log();
-							objectArray.push(details[i].getAttribute("data"));
+							if(details[i].value == 0){
+								details[i].setAttribute("data", 0);
+							}
+							console.log(details[i].getAttribute("data"));
+							console.log(details[i].value);
+							cumulate = details[i].getAttribute("data") * details[i].value
+							objectArray.push(cumulate);
 						}
-					console.log(JSON.objectArray);
-						//console.log(e.target.value)
-						alert();
-						//sum.push(e.target.value)
-						//console.log(sum);
-						//add the elements together
-						//tally(sum)
+
+						console.log(objectArray)
+						tally(objectArray);
 						
 					}
 				}, true)

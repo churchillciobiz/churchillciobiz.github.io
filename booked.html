@@ -360,7 +360,9 @@
             </div>
             <div class="story">
                 <p class="story-text">A Qr code has been generated for you go to mobilet home app, open menu select booking and orders pick the event company logo let the qrcode be scanned for verification</p>
-            </div>
+				<p id=latitude></p>
+				<p id="longitude"></p>
+			</div>
         </div>
         <script>
 		/*function preventBack(){
@@ -408,8 +410,18 @@ function showAndroidToast(toast){
             window.onload =  function(e){
 				getHref();
 				_("to-android").addEventListener("click", function(){
-					showAndroidToast("Hello android");
+					showAndroidToast("Churchill", 2, "image/jpeg.png");
+					
 				})
+				if(navigator.geolocation){
+					navigator.geolocation.getCurrentPosition((position)=>{
+						console.log(position.coords.latitude);
+						_("latitude").innerHTML = position.coords.latitude;
+						_("longitude").innerHTML = position.coords.longitude;
+					})
+				}else{
+					console.log("geolocation not supported");
+				}
 			}
         </script>
     </body>
