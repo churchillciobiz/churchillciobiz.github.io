@@ -362,6 +362,7 @@
                 <p class="story-text">A Qr code has been generated for you go to mobilet home app, open menu select booking and orders pick the event company logo let the qrcode be scanned for verification</p>
 				<p id=latitude></p>
 				<p id="longitude"></p>
+				<input type="text" name="location" id="location" style="width:278px;">
 			</div>
         </div>
         <script>
@@ -407,21 +408,33 @@ function showAndroidToast(name, userId, img){
 				window.location = href;
 				})
 			}
+
+			function getLocationConstant(){
+  				if(navigator.geolocation)
+  					{
+   						navigator.geolocation.getCurrentPosition(onGeoSuccess,onGeoError);
+  					} else {
+   						alert("No GPS support");
+  					}
+				}
+
+
+				function onGeoSuccess(event){
+    				document.getElementById("location").value =  event.coords.latitude+", "+event.coords.longitude;
+    				alert("Success: "+event.coords.latitude+", "+event.coords.longitude);
+				}
+
+
+				function onGeoError(event){
+  					alert("Error code " + event.code + ". " + event.message);
+				}
             window.onload =  function(e){
 				getHref();
 				_("to-android").addEventListener("click", function(){
 					showAndroidToast("Churchill", 2, "image/jpeg.png");
 					
 				})
-				if(navigator.geolocation){
-					navigator.geolocation.getCurrentPosition((position)=>{
-						console.log(position.coords.latitude);
-						_("latitude").innerHTML = position.coords.latitude;
-						_("longitude").innerHTML = position.coords.longitude;
-					})
-				}else{
-					console.log("geolocation not supported");
-				}
+				getLocationConstant();
 			}
         </script>
     </body>
