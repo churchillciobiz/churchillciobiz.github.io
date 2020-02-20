@@ -934,15 +934,40 @@ const CART = {
 		//No impact on locaStorage
 	},
 }
-		
+let urldata = getAllUrlParams(window.location.href);
+			localStorage.setItem("eventId", urldata.eventid)
+		console.log(localStorage.getItem("userId"), localStorage.getItem("eventId"), localStorage.getItem("companyId"))
+		var userId = localStorage.getItem("userId");
+		var eventId = localStorage.getItem("eventId");
+		var companyId = localStorage.getItem("companyId");
+
 			function getHref(){
 
 				document.querySelector(".book-dynamic").addEventListener("click", function(e) {
 				if(hasClass(e.target, "book-dynamic")){
 					e.preventDefault();
+					var url = "https://protected-depths-22616.herokuapp.com/logevent";
+					fetch(url,{
+						method:"POST",
+						headers:{"Accept":"application/json","Content-Type":"application/json",},
+						body:JSON.stringify({memberId:userId, eventId:eventId, companyId:companyId, userCode:263748292981325, tickets:[{audience:{type:"Adult", number:1}, audience:{type:"Teens", number:1}}], totalCost:1700})}).then((response)=>response.json()).then((responseJsonFromServer)=>{
+							console.log(responseJsonFromServer);
+  							if(responseJsonFromServer.message=="success"){
+      						console.log(responseJsonFromServer)
+    
+							var href = e.currentTarget.getAttribute("href")
+							console.log(href);	
+
+  							}else{
+     							 _("error-handler").innerHTML="Passcode not recognised, try again";
+ 							 }
+						});
+
+
+
+
+
 					
-					var href = e.currentTarget.getAttribute("href")
-					console.log(href);	
 				}
 				e.preventDefault();
 				var href = e.currentTarget.getAttribute("href")
@@ -964,6 +989,53 @@ const CART = {
 				})
 				
 			}
+
+
+			function getAllUrlParams(url){
+                var queryString = url ? url.split("?")[1] : window.location.search.splice(1);
+                var obj = {}
+                if(queryString){
+                    queryString = queryString.split("#")[0]
+                    var arr = queryString.split("&");
+
+                    for(var i = 0; i<arr.length; i++){
+                        var a = arr[i].split("=");
+                        var paramName = a[0];
+
+                        var paramValue = typeof(a[1]) === 'undefined' ? true: a[1];
+
+                        paramName = paramName.toLowerCase();
+                        if(typeof paramValue === 'string') paramValue = paramValue.toLowerCase()
+
+                        if(paramName.match(/\[(\d+)?\]$/)){
+                            var key = paramName.replace(/\[(\d+)?\]/, '');
+                            if(! obj[key]) obj[key] = [];
+
+                            if(paramName.match(/\[\d+\]$/)){
+                                var index = /\[(\d+)\]/.exec(paramName)[1];
+
+                                obj[key][index]  = paramValue;
+                            } else {
+                                obj[key].push(paramValue);
+                            }
+                        }else {
+                            if(! obj[paramName]) {
+                                obj[paramName] = paramValue;
+                            } else if(obj[paramName] && typeof obj[paramName] == 'string'){
+                                obj[paramName] = [obj[paramName]];
+                                obj[paramName].push(paramValue);
+                            } else {
+                                obj[paramName].push(paramValue);
+                            }
+                        }
+                    }
+                }
+                return obj;
+            }
+            function _(x) { return document.getElementById(x) };
+            console.log(getAllUrlParams(window.location.href));
+            
+
 			window.onload =  function(e){
 				var sum = [];
 				function tally(array){

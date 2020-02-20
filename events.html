@@ -399,7 +399,7 @@
                     </span>
                     <span class="location">Madina Store
                     </span>
-                    <button class="btn go-to-event" href="event.html">
+                    <button class="btn go-to-event" href="event.html?eventid=1">
                         <i class="fa fa-check"></i>
                         View
                     </button>
@@ -440,6 +440,7 @@
             </div>
         </div>
         <script>
+			console.log(localStorage.getItem("userId"), localStorage.getItem("companyId"))
 			function _(x) { return document.getElementById(x) };
             function hasClass(element, className){
                 return element.className.split(" ").indexOf(className) > -1;
