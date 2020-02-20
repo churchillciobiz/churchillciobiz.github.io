@@ -87,12 +87,11 @@
 	position: relative;
 }
 .btn{
-	position: absolute;
 	padding: 10px 15px;
 	border: none;
 	border-radius: 35px;
 	margin-top: 2px;
-	margin-left: 15px;
+	margin-left: 183px;
 	background: #ff5349;
 	color: #fff;
 	font-size: 14px;
@@ -205,7 +204,8 @@
 }
 
 .schedule{
-	position: relative;
+	display:flex;
+	flex-direction:column;
 	width: 90%;
 	height: auto;
 	background: #fff;
@@ -219,6 +219,10 @@
 	margin-top: -35px;
 	font-weight: 600;
 	color: rgba(0,0,0,0.5);
+}
+.detail{
+	display: flex;
+    flex-direction: row;
 }
 .detail .date{
 	padding: 8px 5px;
@@ -253,13 +257,13 @@
 }
 .detail .btn{
 	margin-top: 12px;
-	right: 10px;
+    right: 45p
 }
 .map-location{
 	position: relative;
 	height: 105px;
 	display: inline-block;
-	padding: 15px 0 5px 0;
+	padding: 21px 0 0px 0;
 }
 .map-location img{
 	width: 100px;
@@ -290,9 +294,6 @@
 	margin-top: 18px;
 }
 .schedule-info{
-	float: right;
-	margin-top: 15px;
-	width: 75%;
 	font-size: 12px;
     color: rgba(0,0,0,0.3);
 }

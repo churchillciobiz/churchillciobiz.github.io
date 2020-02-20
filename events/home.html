@@ -2,14 +2,14 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Sawisoft Event Dashboard</title>
+        <title>Dashboard Event Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="home.css" />
 
     </head>
     <body>
         <nav>
-            <label class="logo">Sawisoft</label>
+            <label class="logo">Dashboard</label>
             <div class="dropdown">
                 <button id="feed-back">Feedback</button>
                 <div class="events">
@@ -86,7 +86,7 @@
             var Confirm = new CustomConfirm();
             window.onload = function(){
                    
-                    setIframeURL("newevent.html"); 
+                    setIframeURL("showgraphs.html"); 
                     document.getElementById("new-event").addEventListener("click", function(e){e.preventDefault();
                         if(CART.cartLength()>0){
                             Confirm.render('cancel-activity', 'Alert');

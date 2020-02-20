@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js" ></script>
         <style>
             body{
                 margin:0;
@@ -63,7 +64,7 @@
     </head>
     <body>
     <div class="search-box">
-        <input class="search-txt" type="text" name="" placeholder="Search events and gigs">
+        <input class="search-txt" type="text" name="" placeholder="Search booking and orders">
         <a class="search-btn" href="#">
             <i class="fas fa-search"></i>
         </a>
@@ -71,11 +72,9 @@
     <div id="results">
         <div class="result-wrapper items">
             <div class="icon-btn item" href="#">
-                <a href="home.html?companyid=1">
+                <a href="home.html?bookingid=12310920304" class="go-to-qr">
                     <img class="icon-img" href="#" src="logo.png">
-                    
                 </a>
-                <p>EventCo</p>
             </div>
             <p id="username"></p>
             <p id="userid"></p>
@@ -123,10 +122,26 @@
                 }
                 return obj;
             }
+            function goToQr(href){
+                Android.toQr(href);
+            }
             function _(x) { return document.getElementById(x) };
             console.log(getAllUrlParams(window.location.href));
             let urldata = getAllUrlParams(window.location.href);
             localStorage.setItem("userId", urldata.userid)
+            function getHref(){
+				document.querySelector(".go-to-qr").addEventListener("click", function(e) {
+				if(hasClass(e.target, "go-to-qr")){
+					e.preventDefault();
+					var href = e.currentTarget.getAttribute("href")
+                    console.log(href);	
+                    goToQr(href);
+				}
+				e.preventDefault();
+				var href = e.currentTarget.getAttribute("href")
+				window.location = href;
+				});
+			}
     </script>
     </body>
 </html>
