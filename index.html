@@ -125,8 +125,6 @@
             function _(x) { return document.getElementById(x) };
             console.log(getAllUrlParams(window.location.href));
             let urldata = getAllUrlParams(window.location.href);
-            _("username").innerHTML = urldata.username;
-            _("userid").innerHTML = urldata.userid;
             localStorage.setItem("userId", urldata.userid)
     </script>
     </body>
