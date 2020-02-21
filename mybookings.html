@@ -72,15 +72,33 @@
     <div id="results">
         <div class="result-wrapper items">
             <div class="icon-btn item" href="#">
-                <a href="home.html?bookingid=12310920304" class="go-to-qr">
+                <div data="home.html?bookingid=12310920304" id="1" onClick="reply_click(1)">
                     <img class="icon-img" href="#" src="logo.png">
-                </a>
+                </div>
             </div>
             <p id="username"></p>
             <p id="userid"></p>
         </div>
     </div>
     <script>
+            function _(x) { return document.getElementById(x) };
+            function hasClass(element, className){
+                return element.className.split(" ").indexOf(className) > -1;
+            }
+            function addClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList;
+                } else {
+                    return element.classList.add(className);
+                }
+            }
+            function removeClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList.remove(className);
+                }else{
+                    return element.classList;
+                }
+            }
         function getAllUrlParams(url){
                 var queryString = url ? url.split("?")[1] : window.location.search.splice(1);
                 var obj = {}
@@ -133,7 +151,7 @@
 				document.querySelector(".go-to-qr").addEventListener("click", function(e) {
 				if(hasClass(e.target, "go-to-qr")){
 					e.preventDefault();
-					var href = e.currentTarget.getAttribute("href")
+					var href = e.getAttribute("href")
                     console.log(href);	
                     goToQr(href);
 				}
@@ -142,6 +160,13 @@
 				window.location = href;
 				});
 			}
+            function reply_click(clicked_id)
+    {
+        //alert(clicked_id);
+        var temp = document.getElementById(clicked_id).getAttribute("data");
+        console.log(temp);
+        goToQr(temp);
+    }   
     </script>
     </body>
 </html>
