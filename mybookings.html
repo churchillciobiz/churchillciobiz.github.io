@@ -143,6 +143,9 @@
             function goToQr(href){
                 Android.toQr(href);
             }
+            function showAndroidToast(name, userId, img){
+	Android.showToast(name, userId, img);
+}
             function _(x) { return document.getElementById(x) };
             console.log(getAllUrlParams(window.location.href));
             let urldata = getAllUrlParams(window.location.href);
@@ -165,7 +168,7 @@
         //alert(clicked_id);
         var href = document.getElementById(clicked_id).getAttribute("data");
         console.log(href);
-        goToQr(gref);
+        showAndroidToast("Churchill", 2, "image/jpeg.png");
     }   
     </script>
     </body>
