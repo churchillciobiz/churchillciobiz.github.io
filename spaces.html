@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            *{
+		box-sizing: border-box;
+		padding: 0;
+			margin: 0;
+			outline: none;
+		}
+		div{
+			padding: 0;
+			margin: 0;
+			outline: none;
+		}
+		body{
+			font-family: Roboto, sans-serif;
+			background: #FFFFFF;
+			overflow: auto;
+			height: 860px;
+		}
+		.container{
+            display: flex;
+            justify-content: space-evenly;
+	    }
+        .app{
+            display: flex;
+            flex-direction: column;
+            background: #f7f9fc;
+            box-shadow: 0 35px 55px -20px rgba(0,0,0,0.4);
+        }
+        .cover {
+            position: relative;
+            height: 253px;
+            overflow: hidden;
+        }
+        .cover img {
+            height: 100%;
+            margin-left: 0px;
+            width:100%;
+            /*box-shadow: -5px 60px 15px 55px rgba(2,7,33,0.4), -5px 60px 35px -55px rgba(0,0,0,0.2);*/
+        }
+        .cover .fa{
+	position: relative;
+	font-size: 38px;
+	left: 50%;
+	top: 55px;
+	color: #f7f9fc;
+	margin-left: -15px;
+	opacity: 0.9;
+}
+.cover .title{
+	position: absolute;
+	width: 100%;
+	display: inline-block;
+	text-align: center;
+	text-transform: uppercase;
+	bottom: 0;
+	color: #fff;
+	font-size: 15px;
+	font-weight: 600;
+	background: rgba(2,7,33,0.7);
+	padding: 10px 0;
+	letter-spacing: 0.5px;
+	left: 0px;
+}
+.cover .title .sub-title{
+	display: block;
+	font-size: 10px;
+	font-weight: 300;
+	letter-spacing: 1px;
+	padding-top: 5px;
+}
+
+.fav{
+	position: relative;
+	top: 20px;
+}
+.btn{
+	position: absolute;
+	padding: 10px 15px;
+	border: none;
+	border-radius: 35px;
+	margin-top: 2px;
+	margin-left: 15px;
+	background: #ff5349;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 500;
+	box-shadow: 1px 1px 0 rgba(0,0,0,0.2), 0 16px 15px -16px #d24c0f, inset 0 0 25px rgba(0,0,0,0.05);
+}
+.fav .fa{
+	font-size: 14px;
+	padding-right: 5px;
+}
+.fav .users{
+	position: relative;
+	margin-top: 2px;
+	margin-right: 40px;
+	float: right;
+	z-index: 99999;
+    display:flex;
+    flex-direction: column;
+}
+.fav .users img{
+	position: relative;
+	width: 29px;
+	border: 2px solid rgba(255,83,73,0.9);
+	border-radius: 100%;
+	margin-left: -15px;
+	height: 30px;
+}
+
+.fav .users span.fav-count{
+	position:absolute;
+	width: 29px;
+	height: 29px;
+	border: 2px solid #fff;
+	background: rgba(255,83,73,0.95);
+	display: inline-block;
+	border-radius: 100%;
+	line-height: 32px;
+	text-align: center;
+	top: 0;
+	margin-left: 55px;
+	color: #fff;
+	font-size: 11px;
+}
+.user-1{
+	z-index: 99;
+}
+.user-2{
+	z-index: 98;
+}
+.fav:before, .fav:after{
+	content: "";
+	width: 100%;
+	height: 100%;
+	display: inline-block;
+	clear: both;
+}
+
+.story{
+	width: 90%;
+	height: auto;
+    border-radius: 10px;
+	background: #fff;
+	margin: 50px auto;
+	padding: 10px 0;
+	border: 1px solid rgba(0,0,0,0.03);
+	box-shadow: 0 10px 15px -1px rgba(0,0,0,0.1);
+}
+.story .title{
+	position: absolute;
+	margin-top: -35px;
+	font-size: 16px;
+	font-weight: 600;
+	color: rgba(0,0,0,0.5);
+}
+.story div{
+	display: inline-block;
+    width:100%;
+}
+.story .story-icon{
+	width: 20%;
+	text-align: center;
+}
+.story .story-icon .fa{
+	position: relative;
+	font-size: 10px;
+	top: -28px;
+	padding: 5px 12px 5px 14px;
+	color: #ff5349;
+	border:3px solid #ff5349;
+	border-radius: 7px;
+	opacity: 0.7;
+}
+.story .story-icon:after{
+	content: "";
+    width: 0;
+    height: 0;
+    display: inline-block;
+    position: absolute;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 7px solid #ff5349;
+    margin-left: -26px;
+    margin-top: -4px;
+    opacity: 0.7;
+}
+.story .story-text{
+	width: 100%;
+	padding: 0 5%;
+	font-size: 12px;
+	color: rgba(0,0,0,0.3);
+	font-weight: 600;
+	line-height: 16px;
+}
+
+.schedule{
+	position: relative;
+	width: 90%;
+	height: auto;
+	background: #fff;
+	margin: 20px auto;
+	border: 1px solid rgba(0,0,0,0.03);
+	box-shadow: 0 10px 15px -1px rgba(0,0,0,0.1);
+}
+.schedule> .title{
+	position: absolute;
+	font-size: 16px;
+	margin-top: -35px;
+	font-weight: 600;
+	color: rgba(0,0,0,0.5);
+}
+.detail .date{
+	padding: 8px 5px;
+	display: inline-block;
+	background: #4f5393;
+	color: #fff;
+	font-size: 18px;
+	font-weight: 600;
+	text-align: center;
+	box-shadow: inset 0 -25px 75px -25px rgba(0,0,0,0.4);
+}
+.detail .date span{
+	display: block;
+	font-size: 11px;
+	text-transform: uppercase;
+	font-weight: 400;
+	padding-top: 2px;
+}
+.detail .location{
+	position: relative;
+	font-size: 14px;
+	font-weight: 600;
+	display: inline-block;
+	padding: 0 10px;
+	top: 1px;
+	color: rgba(0,0,0,0.6);
+}
+.detail .location span{
+	display: block;
+	font-size: 12px;
+	color: rgba(0,0,0,0.3);
+}
+.detail .btn{
+	margin-top: 12px;
+	right: 10px;
+}
+.map-location{
+	position: relative;
+	height: 105px;
+	display: inline-block;
+	padding: 15px 0 5px 0;
+}
+.map-location img{
+	width: 120px;
+}
+.map-location:before{
+	content: "";
+	display: inline-block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	box-shadow: inset: 0 0 25px 9px #fff;
+}
+.map-location:after{
+	content: "";
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: #ff5349;
+    position: absolute;
+    top: 0;
+    border-radius: 100%;
+    margin-top: 77px;
+    margin-left: 50px;
+    border: 1px solid rgba(255,255,255,0.4);
+    box-shadow: 0 0 0 5px rgba(255,83,73,0.5), 0 0 0 10px rgba(255,83,73,0.2);
+}
+.distance{
+	position: absolute;
+	top: 25px;
+	margin-left: 43px;
+	font-weight: 600;
+	font-size: 11px;
+	padding: 5px 10px;
+	background: #fff;
+	color: rgba(0,0,0,0.5);
+	z-index: 99;
+	box-shadow: 0 0 3px rgba(0,0,0,0.2);
+}
+.distance:after{
+	content: "";
+	display: inline-block;
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	border-top: 7px solid #fff;
+	left: 7px;
+	margin-top: 18px;
+}
+.schedule-info{
+	float: right;
+	margin-top: 15px;
+	width: 62%;
+	margin-right: -7px;
+}
+.schedule-info span{
+	display: inline-block;
+}
+.rows > span{
+	width: 40%;
+	/*padding: 5px 5%;*/
+}
+.schedule-info span.info{
+	display: block;
+}
+.schedule-info span .title{
+	font-size: 11px;
+	font-weight: 600;
+	color: rgba(0,0,0,0.3);
+	padding-bottom: 5px;
+}
+.schedule-info span .name,.schedule-info span .time{
+	font-size: 14px;
+	font-weight: 600;
+	color: rgba(0,0,0,0.7);
+}
+.cover .title span {
+    display: block;
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    padding-top: 5px;
+}
+.schedule-info span .row-line{
+	font-size: 11px;
+	background: #ff5349;
+	padding: 4px 8px;
+	border-radius: 20px;
+	color: #fff;
+	font-weight: 500;
+	letter-spacing: 1px
+}
+.schedule-info span .seat-num span{
+	font-size: 11px;
+	background: #4f5393;
+	padding: 5px;
+	border-radius: 4px;
+	color: #fff;
+	font-weight: 500;
+}
+
+.gallery-container{
+				width: 100%;
+				user-select:none;
+				box-sizing: border-box;
+				margin:0 auto;
+			}
+			.gallery-container .slide-show-container{
+				width:100%;
+				height:100%;
+				overflow:hidden;
+				background-color:gainsboro;
+				position:relative;
+			}
+			.gallery-container .slide-show-container .image-holder{
+				width:100%;
+				height:100%;
+				position:absolute;
+				opacity:0;
+			}
+      .gallery-container .slide-show-container .image-holder img{
+				width:100%;
+				height:100%;
+
+			}
+			.gallery-container .slide-show-container .image-holder .caption-text{
+				display:none;
+			}
+			.gallery-container .slide-show-container .left-arrow,.gallery-container .slide-show-container .right-arrow{
+				width:50px;
+				background:#00000036;
+				position:absolute;
+				left:0;
+				z-index:1;
+				transition:background 0.5s;
+				height:72px;
+				top:50%;
+				transform:translateY(-50%);
+			}
+			.gallery-container .slide-show-container .right-arrow{
+				left:auto;
+				right:0;
+			}
+			.gallery-container .slide-show-container .right-arrow:hover{
+				background:#000000a8;
+				cursor:pointer;
+			}
+			.gallery-container .slide-show-container .left-arrow:hover{
+				background:#000000a8;
+				cursor:pointer;
+			}
+			.gallery-container .slide-show-container .arrow{
+				display:inline-block;
+				border:3px solid #fff;
+				width:10px;
+				height:10px;
+				border-left:none;
+				border-bottom:none;
+				margin:auto;
+				position:absolute;
+				left:0;
+				right: 0;
+				top:0;
+				bottom:0;
+			}
+			.gallery-container .slide-show-container .arrow.arrow-left{
+				transform:rotateZ(-135deg);
+			}
+			.gallery-container .slide-show-container .arrow.arrow-right{
+				transform:rotateZ(45deg);
+			}
+      .gallery-container .slide-show-container .caption-holder{
+				position:absolute;
+				bottom:0;
+				z-index:1;
+				overflow:hidden;
+            width: 100%;
+            display: inline-block;
+            text-align: center;
+            text-transform: uppercase;
+            bottom: 0;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            background: rgba(2,7,33,0.7);
+            letter-spacing: 0.5px;
+            left: 0px;
+			}
+			.gallery-container .slide-show-container .caption-holder>.caption-text{
+				margin:0;
+
+			}
+			.gallery-container #dots-container{
+				width:100%;
+				height:10%;
+				text-align:center;
+				padding-top:20px;
+				box-sizing: border-box;
+			}
+			.gallery-container #dots-container .dots{
+				display:inline-block;
+				width:15px;
+				height:15px;
+				border-radius:50%;
+				margin-left:10px;
+				background-color:#bbb;
+				cursor:pointer;
+				transition:background-color 0.5s;
+			}
+			.gallery-container #dots-container .dots:hover{
+				background-color:#717171;
+			}
+
+      .gallery-container #dots-container .dots.active{
+				background-color:#717171;
+			}
+			.gallery-container #dots-container .dots:first-child{
+				margin-left:0;
+			}
+			.gallery-container .move-left-current-slide{
+				animation-name:move-left-current;
+				animation-duration: 0.5s;
+				animation-timing-function:linear;
+				animation-fill-mode:forwards;
+			}
+			.gallery-container .move-left-next-slide{
+				animation-name:move-left-next;
+				animation-duration: 0.5s;
+				animation-timing-function:linear;
+				animation-fill-mode:forwards;
+			}
+			@keyframes move-left-current{
+				from{
+					margin-left:0;
+					opacity:1;
+				}to{
+					margin-left:-100%;
+					opacity:1;
+				}
+			}
+			@keyframes move-left-next{
+				from{
+					margin-left:100%;
+					opacity:1;
+				}to{
+					margin-left:0;
+					opacity:1;
+				}
+			}
+
+			.gallery-container .move-right-current-slide{
+				animation-name:move-right-current;
+				animation-duration: 0.5s;
+				animation-timing-function:linear;
+				animation-fill-mode:forwards;
+			}
+			.gallery-container .move-right-next-slide{
+				animation-name:move-right-next;
+				animation-duration: 0.5s;
+				animation-timing-function:linear;
+				animation-fill-mode:forwards;
+			}
+			@keyframes move-right-current{
+				from{
+					margin-left:0;
+					opacity:1;
+				}to{
+					margin-left:100%;
+					opacity:1;
+				}
+			}
+			@keyframes move-right-next{
+				from{
+					margin-left:-100%;
+					opacity:1;
+				}to{
+					margin-left:0;
+					opacity:1;
+				}
+			}
+			.slide-text-from-bottom{
+				animation-name: slide-text-from-bottom;
+				animation-duration: .7s;
+				animation-timing-function: ease-out;
+			}
+			@keyframes .slide-text-from-bottom{
+				from{opacity:0;margin-top:100px;}
+				to{opacity:1;margin-top:0;}
+			}
+			.slide-text-from-top{
+				animation-name: slide-text-from-top;
+				animation-duration: .7s;
+				animation-timing-function: ease-out;
+			}
+			@keyframes .slide-text-from-top{
+				from{opacity:0;margin-top:-100px;}
+				to{opacity:1;margin-top:0;}
+			}
+            .damage{
+                font-size: 14px;
+                font-weight: 600;
+                color: rgba(0,0,0,0.5);
+            }
+			video{
+                width: 100%;
+                height: 100%;
+			}
+			#popup{
+				max-width: 350px;
+				width: 100%;
+				height: auto;
+				background: #fff;
+				padding: 35px 28px;
+				position: absolute;
+				top: 41%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+				border-radius: 20px;
+				z-index: 1999999999999999;
+				box-shadow: 0 5px 9px 0 rgba(0,0,0,0.2);
+				display:none;
+			}
+			#popup #popup-top{
+				display: flex;
+    			justify-content: space-between;
+				margin: 5px 0 10px;
+				padding: 0 5%;
+				font-size: 14px;
+				color:#4f5393;
+				font-weight: 600;
+				line-height: 16px;
+			}
+			#popup #popup-top p{
+				display:flex;
+			}
+			#popup #popup-top span{
+				max-width: 100%;
+    			border-radius: 50%;
+			}
+			#popup #popup-body{
+				display: flex;
+				flex-direction: column;
+				justify-content: space-evenly;
+				font-size: 15px;
+    			color: rgba(0,0,0,0.3);
+				margin-top: 25px;
+    			margin-bottom: 16px;
+			}
+			#total-wrapper{
+				display: flex;
+				flex-direction: row;
+				justify-content: space-evenly;
+				font-size: 20px;
+    			color: #4f5393;
+				margin-top: 20px;
+    			margin-bottom: 17px;
+			}
+			#popup-bottom{
+				display: flex;
+				flex-direction: row;
+				justify-content: space-evenly;
+				font-size: 20px;
+    			color: #4f5393;
+				margin-top: 20px;
+    			margin-bottom: 0px;
+			}
+			.book-dynamic{
+				padding: 5px;
+    			border: none;
+    			border: 1px solid #4f5393;
+    			border-radius: 5px;
+				background: #fff;
+			}
+			#calculate-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-size: 20px;
+    color: #4f5393;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+			.calculate-me{
+				padding: 5px;
+    			border: none;
+    			border: 1px solid #4f5393;
+    			border-radius: 5px;
+				background: #fff;
+			}
+			.close
+{
+  display:block;
+  box-sizing:border-box;
+  width:20px;
+  height:20px;
+  border-radius:100%;
+  background: -webkit-linear-gradient(-45deg, transparent 0%, transparent 46%, white 46%,  white 56%,transparent 56%, transparent 100%), -webkit-linear-gradient(45deg, transparent 0%, transparent 46%, white 46%,  white 56%,transparent 56%, transparent 100%);
+  background-color:red;
+  box-shadow:0px 0px 5px 2px rgba(0,0,0,0.5);
+}
+.detail-inputs{
+	width:13%;
+}
+#calculation-wrapper{
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 13px;
+}
+#calculation-wrapper div{
+	font-size: 13px;
+    color: rgba(25, 20, 20, 0.3);
+    font-weight: 600;
+    line-height: 16px;
+    margin: 0px 0px 5px 0px;
+}
+.top-h1{
+				text-align: center;
+				font-size:17px;
+			}
+
+
+
+            .today{
+				background: red;
+			}
+			.table {
+				width: 100%;
+				margin-top: 2rem;
+				border-collapse: collapse;
+				border-spacing: 0;			
+			}
+			
+			.table thead th {
+				text-transform: uppercase;
+				//padding: 0.8rem; 
+				padding:10px;
+			}
+
+			.table tbody tr td {
+				//color: #999;
+				padding: 12px 13px;
+				text-align: center;
+			}
+			
+			.table tbody tr td:first-child {
+				//text-align: left;
+			}
+			
+			.table tbody tr:nth-child(odd) {
+				//background: #222;
+			}
+
+            .card{
+				transition: all 0.3s linear;
+				cursor: pointer;
+				padding: 5px;
+				text-align: center;
+				margin: 0 auto;
+			}
+			.box{
+				height: 110px;
+				background-color: blue;
+				text-align: center;
+				overflow-x:scroll;
+				overflow-y: hidden;
+				white-space:nowrap;
+			}
+			.card-a{
+				background-color:red;
+				height:100%;
+				width: 150px;
+			}
+			.card-b{
+				background-color:blue;
+				height:100%;
+				width: 150px;
+			}
+			.card-c{
+				background-color:green;
+				height:100%;
+				width: 150px;
+			}
+			.card-d{
+				background-color:yellow;
+				height:100%;
+				width: 150px;
+			}
+			.card-e{
+				background-color:purple;
+				height:100%;
+				width: 150px;
+			}
+			.card-f{
+				background-color:pink;
+				height:100%;
+				width: 150px;
+			}
+			#checkbox{
+				display:flex;
+				flex-direction: column;
+				margin-top:10px;
+			}
+			p{
+				margin: 5px 0 10px;
+    padding: 0 5%;
+    font-size: 14px;
+    color: #4f5393;
+    font-weight: 600;
+    line-height: 16px;
+			}
+        </style>
+
+    </head>
+    <body>
+        <div class="app">
+            <div class="cover">
+				<div>
+					<video id="videoplayer" controls></video>
+				</div>
+            </div>
+            <div class="fav">
+                <button class="btn go-to-catalogue" id="open-booking">
+                    Book Month
+                </button>
+                <div class="users">
+                    <div class="damage">Kshs 1200/ hr</div>
+				</div>
+				
+            </div>
+            <div class="story">
+                <div class="story-text">
+                    <h1 class="top-h1">Book Day</h1>
+			<div class="card">
+				<h3 class="card-header" id="monthAndYear">Month and year</h3>
+				<table class="table table-bordered table-responsive-sm" id="calendar">
+					<thead>
+						<tr>
+							<th>Sun</th>
+							<th>Mon</th>
+							<th>Tue</th>
+							<th>Wed</th>
+							<th>Thu</th>
+							<th>Fri</th>
+							<th>Sat</th>
+						</tr>
+					</thead>
+					<tbody id="calendar-body">
+						
+					</tbody>
+				</table>
+				<div class="form-inline">
+					<button class="btn btn-outline-primary" id="previousMonth" style="left:160px;">Prev</button>
+					<button class="btn btn-outline-primary" id="nextMonth" style="left:249px;">Next</button>
+				</div>
+				
+				
+			</div>
+                </div>
+            </div>
+		</div>
+		<div id="popup">
+			<div id="popup-top">
+				<p>Pick a location</p>
+				<div class="close"></div>
+			</div>
+			<div id="popup-body">
+				<div class="box">
+					<div class="card-a">
+
+					</div>
+					<div class="card-b">
+
+					</div>
+					<div class="card-c">
+
+					</div>
+					<div class="card-d">
+
+					</div>
+					<div class="card-e">
+
+					</div>
+					<div class="card-f">
+
+					</div>
+					<div class="card-g">
+
+					</div>
+				</div>
+                <select id="months-days">
+					<option value=" ">Pick a month</option>
+                    <option value="30">January</option>
+                    <option value="29">February</option>
+                    <option value="31">March</option>
+                    <option value="30">April</option>
+                    <option value="30">May</option>
+                    <option value="31">June</option>
+                    <option value="30">July</option>
+                    <option value="30">August</option>
+                    <option value="31">September</option>
+                    <option value="30">October</option>
+                    <option value="31">November</option>
+                    <option value="30">December</option>
+				</select>
+				
+				<div id="checkbox">
+					<p>Pick addition facilities</p>
+					Projector<input id="projector" class='checks' value=800 type='checkbox'>
+					Wifi<input id="wifi" class='checks' value=500 type='checkbox'>
+					Conference space<input id="conference" class='checks' value=1200 type='checkbox'>
+				</div>
+			<div id="calculate-wrapper">
+				<button class="calculate-me">Calculate</button>
+			</div>
+			<div id="show-calculations">
+				
+				<div id="total-wrapper">
+					<span id="total"></span>
+				</div>
+			</div>
+			
+			<div id="popup-bottom">
+				<button class="book-dynamic"  href="booked.html">Book Me</button>
+			</div>
+		</div>
+		<script src="dash.js"></script>
+        <script>
+			/*var url = "video.mpd";
+            var player = dashjs.MediaPlayer().create();
+            player.initialize(document.querySelector("#videoplayer"), url, true);*/
+
+
+			function _(x) { return document.getElementById(x) };
+function hasClass(element, className){
+	return element.className.split(" ").indexOf(className) > -1;
+}
+function addClass(element, className){
+	if(hasClass(element, className)){
+		return element.classList;
+	} else {
+		return element.classList.add(className);
+	}
+}
+function removeClass(element, className){
+	if(hasClass(element, className)){
+		return element.classList.remove(className);
+	}else{
+		return element.classList;
+	}
+}
+
+const CART = {
+	KEY: 'bjasjdbakhadjsk7',
+	contents: [],
+	init() {
+		//check localStorage and initialize the contents of CART.contentslet 
+		let _contents = localStorage.getItem(CART.KEY); 
+		if(_contents) {
+			CART.contents = JSON.parse(_contents);
+		}else {
+			CART.contents = [];
+			CART.sync();
+		}
+	},
+	async sync() {
+		let _cart = JSON.stringify(CART.contents);
+		await localStorage.setItem(CART.KEY, _cart);
+	},
+	find(id) {
+		//find an item in the cart by its id
+		let match = CART.contents.filter(item => {
+			if(item.id == id) 
+				return true;
+		});
+		if(match && match[0])
+			return match[0];
+	},
+	add(id) {
+		//add a new item to the cart
+		//check that tis not in the cart already
+		if(CART.find(id)) {
+			CART.increase(id, 1);
+		} else {
+			let arr = PAGEPRODUCTS.filter(product=> {
+				if(product.id == id) {
+					return true;
+				}
+			});
+			if(arr && arr[0]) {
+				let obj = {
+					id: arr[0].id,
+					title: arr[0].title,
+					qty: 1,
+					itemPrice: arr[0].price
+				};
+				CART.contents.push(obj);
+				//update localStorage
+				CART.sync();
+			}else {
+				//product id does not exist in products data
+				console.error("invalid product");
+			}
+		}
+	},
+	addItem(id) {
+		if(CART.find(id)) {
+			return 0;//CART.increase(id, 1);
+			console.log(PAGEPRODUCTS);
+		}else{
+			let arr = PAGEPRODUCTS.filter(product=> {
+				if(product.id == id) {
+					return true;
+				}
+		});
+			console.log(arr);
+		if(arr && arr[0]) {
+			let obj = {
+				id: arr[0].id,
+				product: arr[0].product,
+				price: arr[0].price,
+				rating: arr[0].rating,
+				quantity: 1,
+				description: arr[0].description,
+				img: arr[0].img,
+			};
+			CART.contents.push(obj);
+			//update localStorage
+			
+			CART.sync();
+			console.log(CART.contents);
+		}else {
+			//product id does not exist in products data
+			console.error("invalid product");
+		}
+	}
+	},
+	increase(id, qty=1) {
+		//increase the quantity of an item in the cart
+		CART.contents = CART.contents.map(item => {
+			if(item.id === id)
+				item.qty = item.qty + qty;
+			return item;
+		});
+		//update localStorage
+		CART.sync();
+	},
+	reduce(id, qty=1){
+		//reduce the quantity of an item in the cart
+		CART.contents = CART.contents.map(item => {
+			if(item.id === id)
+				item.qty = item.qty - qty;
+			return item;
+		});
+		CART.contents.forEach(async item => {
+			if(item.id === id && item.qty == 0)
+				CART.remove(id);
+		});
+		//update localStorage
+		CART.sync();
+	},
+	filter(array, test){
+			var passed = [];
+			for(var i = 0; i< array.length; i++){
+				if(test(array[i])){
+					passed.push(array[i]);
+				}
+			}
+			return passed;
+		
+	},
+	remove(id) {
+		//remove an item entirely from CART.contents based on its id 
+		CART.contents = CART.filter(CART.contents, (items)=> {
+			return items.id != id;
+		})
+		_(id).innerHTML = "Add to Cart";
+		//update localStorage
+		console.log(CART.contents);
+		CART.sync();
+	},
+	empty() {
+		//empty whole cart
+		CART.contents = [];
+		//update localStorage
+		CART.sync();
+	},
+	sort(field="title") {
+		let sorted = CART.contents.sort( (a, b)=> {
+			if(a[field] > b[field]) {
+				return 1;
+			}else if(a[field] < a[field]) {
+				return -1;
+			} else {
+				return 0;
+			}
+		});
+		return sorted;
+		//No impact on locaStorage
+	},
+}
+let urldata = getAllUrlParams(window.location.href);
+			localStorage.setItem("eventId", urldata.eventid)
+		console.log(localStorage.getItem("userId"), localStorage.getItem("eventId"), localStorage.getItem("companyId"))
+		var userId = localStorage.getItem("userId");
+		var eventId = localStorage.getItem("eventId");
+		var companyId = localStorage.getItem("companyId");
+
+			function getHref(){
+
+				document.querySelector(".book-dynamic").addEventListener("click", function(e) {
+				if(hasClass(e.target, "book-dynamic")){
+					e.preventDefault();
+					var url = "https://enigmatic-hamlet-83578.herokuapp.com/logevent";
+					fetch(url,{
+						method:"POST",
+						headers:{"Accept":"application/json","Content-Type":"application/json",},
+						body:JSON.stringify({memberId:userId, eventId:eventId, companyId:companyId, userCode:263748292981325, tickets:[{audience:{type:"Adult", number:1}, audience:{type:"Teens", number:1}}], totalCost:1700})}).then((response)=>response.json()).then((responseJsonFromServer)=>{
+							console.log(responseJsonFromServer);
+  							if(responseJsonFromServer.message=="success"){
+      						console.log(responseJsonFromServer)
+    
+							var href = e.currentTarget.getAttribute("href")
+							console.log(href);	
+
+  							}else{
+     							 _("error-handler").innerHTML="Passcode not recognised, try again";
+ 							 }
+						});
+
+
+
+
+
+					
+				}
+				e.preventDefault();
+				var href = e.currentTarget.getAttribute("href")
+				window.location = href;
+				});
+				
+				document.addEventListener("click", function(e){
+					if(hasClass(e.target, "close")){
+					e.preventDefault();
+					
+					var details = document.getElementsByClassName("detail-inputs")
+						for(var i=0; i<details.length;i++){
+							details[i].value == '';
+						}
+						_("popup").style.display = "none";
+					}
+				})
+				
+			}
+
+
+			function getAllUrlParams(url){
+                var queryString = url ? url.split("?")[1] : window.location.search.splice(1);
+                var obj = {}
+                if(queryString){
+                    queryString = queryString.split("#")[0]
+                    var arr = queryString.split("&");
+
+                    for(var i = 0; i<arr.length; i++){
+                        var a = arr[i].split("=");
+                        var paramName = a[0];
+
+                        var paramValue = typeof(a[1]) === 'undefined' ? true: a[1];
+
+                        paramName = paramName.toLowerCase();
+                        if(typeof paramValue === 'string') paramValue = paramValue.toLowerCase()
+
+                        if(paramName.match(/\[(\d+)?\]$/)){
+                            var key = paramName.replace(/\[(\d+)?\]/, '');
+                            if(! obj[key]) obj[key] = [];
+
+                            if(paramName.match(/\[\d+\]$/)){
+                                var index = /\[(\d+)\]/.exec(paramName)[1];
+
+                                obj[key][index]  = paramValue;
+                            } else {
+                                obj[key].push(paramValue);
+                            }
+                        }else {
+                            if(! obj[paramName]) {
+                                obj[paramName] = paramValue;
+                            } else if(obj[paramName] && typeof obj[paramName] == 'string'){
+                                obj[paramName] = [obj[paramName]];
+                                obj[paramName].push(paramValue);
+                            } else {
+                                obj[paramName].push(paramValue);
+                            }
+                        }
+                    }
+                }
+                return obj;
+            }
+            function _(x) { return document.getElementById(x) };
+            console.log(getAllUrlParams(window.location.href));
+            
+
+			
+        </script>
+        <script src="showcalendar.js"></script>
+    </body>
+</html>

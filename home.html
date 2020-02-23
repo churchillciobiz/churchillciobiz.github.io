@@ -87,7 +87,7 @@
 }
 .btn{
 	position: absolute;
-	padding: 10px 15px;
+	padding: 8px 15px;
 	border: none;
 	border-radius: 35px;
 	margin-top: 2px;
@@ -650,7 +650,10 @@
             </div>
             <div class="fav">
                 <button class="btn go-to-chat" href="events.html">
-                    To events
+                    Events
+				</button>
+				<button class="btn go-to-space" href="space.html" style="left:80px;">
+                    Spaces
 				</button>
 				<button class="btn go-to-events" href="businesschats.html" id="to-chat" style="top:-244px;right:20px;">
                     Chat
@@ -906,6 +909,16 @@ const CART = {
 
 			function getHref(){
 				document.querySelector(".go-to-events").addEventListener("click", function(e) {
+				if(hasClass(e.target, "go-to")){
+					e.preventDefault();
+					var href = e.currentTarget.getAttribute("href")
+					console.log(href);	
+				}
+				e.preventDefault();
+				var href = e.currentTarget.getAttribute("href")
+				window.location = href;
+				})
+				document.querySelector(".go-to-space").addEventListener("click", function(e) {
 				if(hasClass(e.target, "go-to")){
 					e.preventDefault();
 					var href = e.currentTarget.getAttribute("href")
