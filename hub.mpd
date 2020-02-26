@@ -7,13 +7,7 @@
 
  <Period duration="PT0H1M46.627S">
   <AdaptationSet segmentAlignment="true" maxWidth="1922" maxHeight="1080" maxFrameRate="25" par="7386246:4151520" lang="und" startWithSAP="1" subsegmentAlignment="true" subsegmentStartsWithSAP="1">
-   <Representation id="1" mimeType="video/mp4" codecs="avc1.64002A" width="1922" height="1080" frameRate="25" sar="3843:3844" bandwidth="4537293">
-    <BaseURL>hub-1080_dashinit.mp4</BaseURL>
-    <SegmentBase indexRangeExact="true" indexRange="920-2283">
-     <Initialization range="0-919"/>
-    </SegmentBase>
-   </Representation>
-   <Representation id="2" mimeType="video/mp4" codecs="avc1.64001E" width="850" height="478" frameRate="25" sar="102053:102000" bandwidth="908564">
+   <Representation id="1" mimeType="video/mp4" codecs="avc1.64001E" width="850" height="478" frameRate="25" sar="102053:102000" bandwidth="908564">
     <BaseURL>hub-480_dashinit.mp4</BaseURL>
     <SegmentBase indexRangeExact="true" indexRange="919-2282">
      <Initialization range="0-918"/>
@@ -21,7 +15,7 @@
    </Representation>
   </AdaptationSet>
   <AdaptationSet segmentAlignment="true" lang="und" startWithSAP="1" subsegmentAlignment="true" subsegmentStartsWithSAP="1">
-   <Representation id="3" mimeType="audio/mp4" codecs="mp4a.40.2" audioSamplingRate="44100" bandwidth="125588">
+   <Representation id="2" mimeType="audio/mp4" codecs="mp4a.40.2" audioSamplingRate="44100" bandwidth="125588">
     <AudioChannelConfiguration schemeIdUri="urn:mpeg:dash:23003:3:audio_channel_configuration:2011" value="2"/>
     <BaseURL>hub-audio_dashinit.mp4</BaseURL>
     <SegmentBase indexRangeExact="true" indexRange="855-2170">
