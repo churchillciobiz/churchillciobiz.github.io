@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div style="display:flex;justify-content: center;flex-direction:column;">
+            <p id=latitude></p>
+			<p id="longitude"></p>
+			<input type="text" name="location" id="location" style="width:278px;">
+        </div>
+        <script>
+            function getLocationConstant(){
+  				if(navigator.geolocation)
+  					{
+   						navigator.geolocation.getCurrentPosition(onGeoSuccess,onGeoError);
+  					} else {
+   						alert("No GPS support");
+  					}
+				}
+
+
+				function onGeoSuccess(event){
+    				document.getElementById("location").value =  event.coords.latitude+", "+event.coords.longitude;
+                    document.getElementById("latitude").innerHTML = event.coords.latitude;
+                    document.getElementById("longitude").innerHTML = event.coords.latitude;
+    				alert("Success: "+event.coords.latitude+", "+event.coords.longitude);
+				}
+
+
+				function onGeoError(event){
+  					alert("Error code " + event.code + ". " + event.message);
+				}
+                window.onload = function(e){
+				    getLocationConstant();
+                }
+        </script>
+    </body>
+</html>
