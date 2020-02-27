@@ -148,7 +148,7 @@
 }
 
 .story{
-	width: 86%;
+	width: 100%;
 	height: auto;
     border-radius: 10px;
 	background: #fff;
@@ -673,17 +673,17 @@ select{
             <div class="fav">
                 <select id="select1" name="select1" onchange="populate1(this.id, 'select2')">
                     <option value="">Select Shop</option>
-                    <option value="westlands">westlands</option>
-                    <option value="parklands">parklands</option>
+                    <option value="westlands">Westlands</option>
+                    <option value="parklands">Parklands</option>
                 </select>
                 <select id="select2" name="select2" onchange="populate2(this.id, 'select3')">
                    
                 </select>
                 <select  id="select3" name="select3" onchange="getValue(this.id)">
                 </select>
-                <button class="btn " href="businesschats.html" id="to-chat" style="top:-244px;right:95px;">
-                    Cart
-				</button>
+                <div href="businesschats.html" id="cart-number" style="top:-243px;right:95px;position:absolute;padding:10px;">
+                   <a href="cart.html"> 1 </a>
+				</div>
 				<button class="btn go-to-events" href="businesschats.html" id="to-chat" style="top:-244px;right:20px;">
                     Chat
 				</button>
@@ -774,7 +774,7 @@ function removeClass(element, className){
 	}
 }
 function setIframeURL(urlLinkone, parameter){
-                document.getElementById('frame').src = urlLinkone+"?itemType="+parameter
+                document.getElementById('frame').contentWindow.location.replace(urlLinkone+"?itemType="+parameter)
             }
 const CART = {
 	KEY: 'bjasjdbakhadjsk7',
