@@ -623,23 +623,10 @@ select{
 #sub-category{
     width: 160px;
 }
-.item-image{
-    width:130px;
-    height:130px;
-    margin-bottom: 40px;
-}
-.item-image img{
-    width:100%;
-}
-.item-image .action-buttons button{
-    padding: 7px 9px;
+#frame{
+    width: 100%;
     border: none;
-    border-radius: 35px;
-    background: #b1ff49;
-    color: #fff;
-    font-size: 12px;
-    font-weight: 500;
-    box-shadow: 1px 1px 0 rgba(0,0,0,0.2), 0 16px 15px -16px #5ad20f, inset 0 0 25px rgba(0,0,0,0.05);
+    height: 540px;
 }
         </style>
 
@@ -684,19 +671,15 @@ select{
                 </div>
             </div>
             <div class="fav">
-                <select>
-                    <option>Pick a Category</option>
-                    <option>Shirts</option>
-                    <option>Jackets</option>
-                    <option>Shoes</option>
-                    <option>Dresses</option>
+                <select id="select1" name="select1" onchange="populate1(this.id, 'select2')">
+                    <option value="">Select Shop</option>
+                    <option value="westlands">westlands</option>
+                    <option value="parklands">parklands</option>
                 </select>
-                <select id="sub-category">
-                    <option>Pick a Sub Category</option>
-                    <option>Digi avenue</option>
-                    <option>Malick</option>
-                    <option>Nike</option>
-                    <option>Polo</option>
+                <select id="select2" name="select2" onchange="populate2(this.id, 'select3')">
+                   
+                </select>
+                <select  id="select3" name="select3" onchange="getValue(this.id)">
                 </select>
                 <button class="btn " href="businesschats.html" id="to-chat" style="top:-244px;right:95px;">
                     Cart
@@ -716,68 +699,60 @@ select{
                 <div class="story-text">
                     This is a story this is a story with the people of the nation we create in the dimensional app we create in the world ..
                 </div>
-                <div id="frame" style="margin-top:30px;">
-                    <div class="item-image">
-                        <img src="small_Mercedes petronas shirt.jpg" alt="alt">
-                        <div class="action-buttons">
-                            <button>Add to Cart</button>
-                            <button>View</button>
-                        </div>
-                    </div>
-                    <div class="item-image">
-                        <img src="small_Mercedes petronas shirt.jpg" alt="alt">
-                        <div class="action-buttons">
-                            <button>Add to Cart</button>
-                            <button>View</button>
-                        </div>
-                    </div>
-                    <div class="item-image">
-                        <img src="small_Mercedes petronas shirt.jpg" alt="alt">
-                        <div class="action-buttons">
-                            <button>Add to Cart</button>
-                            <button>View</button>
-                        </div>
-                    </div>
-                    <div class="item-image">
-                        <img src="small_Mercedes petronas shirt.jpg" alt="alt">
-                        <div class="action-buttons">
-                            <button>Add to Cart</button>
-                            <button>View</button>
-                        </div>
-                    </div>
-                    <div class="item-image">
-                        <img src="small_Mercedes petronas shirt.jpg" alt="alt">
-                        <div class="action-buttons">
-                            <button>Add to Cart</button>
-                            <button>View</button>
-                        </div>
-                    </div>
-                    <div class="item-image">
-                        <img src="small_Mercedes petronas shirt.jpg" alt="alt">
-                        <div class="action-buttons">
-                            <button>Add to Cart</button>
-                            <button>View</button>
-                        </div>
-                    </div>
-                    <div class="item-image">
-                        <img src="small_Mercedes petronas shirt.jpg" alt="alt">
-                        <div class="action-buttons">
-                            <button>Add to Cart</button>
-                            <button>View</button>
-                        </div>
-                    </div>
-                    <div class="item-image">
-                        <img src="small_Mercedes petronas shirt.jpg" alt="alt">
-                        <div class="action-buttons">
-                            <button>Add to Cart</button>
-                            <button>View</button>
-                        </div>
-                    </div>
-                </div>
+                <iframe id="frame" style="margin-top:30px;">
+                    
+                </iframe>
             </div>
             
         </div>
         <script>
+            function populate1(s1, s2){
+                var s1 = document.getElementById(s1);
+                var s2 = document.getElementById(s2);
+                s2.innerHTML = "";
+                if(s1.value == "westlands"){
+                    var optionArray = ["|", "shirts|Shirts", "shoes|Shoes", "dresses|Dresses", "slacks|Slacks"];
+                }else if(s1.value == "parklands"){
+                    var optionArray = ["|", "perfumes|Perfumes", "jewelry|Jewelry"]
+                }
+                for(var option in optionArray){
+                    var pair = optionArray[option].split("|");
+                    var newOption = document.createElement("option");
+                    newOption.value = pair[0];
+                    newOption.innerHTML = pair[1];
+                    s2.options.add(newOption);
+                }
+            }
+            function populate2(s1, s2){
+                var s1 = document.getElementById(s1);
+                var s2 = document.getElementById(s2);
+                s2.innerHTML = "";
+                if(s1.value == "shirts"){
+                    var optionArray = ["|", "polo|Polo", "ralf lawren|Ralf Lowren"];
+                }else if(s1.value == "shoes"){
+                    var optionArray = ["|", "nikes|Nikes", "adidas|Adidas"]
+                }else if(s1.value == "dresses"){
+                    var optionArray = ["|", "macy|Macy", "christina|Christina"]
+                }else if(s1.value == "slacks"){
+                    var optionArray = ["|", "levis|Levis", "jeantastic|Jeantastic"]
+                }else if(s1.value == "perfumes"){
+                    var optionArray = ["|", "channel|Channel", "diesel|Diesel"]
+                }else if(s1.value == "jewelry"){
+                    var optionArray = ["|", "diamondlord|Diamonds", "ruby|Ruby"]
+                }
+                for(var option in optionArray){
+                    var pair = optionArray[option].split("|");
+                    var newOption = document.createElement("option");
+                    newOption.value = pair[0];
+                    newOption.innerHTML = pair[1];
+                    s2.options.add(newOption);
+                }
+            }
+			function getValue(s3){
+				var s3 = document.getElementById(s3);
+				console.log(s3.value);
+				setIframeURL("storeshowcaseframe.html", s3.value)
+			}
 			console.log(localStorage.getItem("userId"));
 			
 			function _(x) { return document.getElementById(x) };
@@ -798,7 +773,9 @@ function removeClass(element, className){
 		return element.classList;
 	}
 }
-
+function setIframeURL(urlLinkone, parameter){
+                document.getElementById('frame').src = urlLinkone+"?itemType="+parameter
+            }
 const CART = {
 	KEY: 'bjasjdbakhadjsk7',
 	contents: [],
@@ -1017,26 +994,6 @@ const CART = {
 				var href = e.currentTarget.getAttribute("href")
 				window.location = href;
 				})
-				document.querySelector(".go-to-space").addEventListener("click", function(e) {
-				if(hasClass(e.target, "go-to")){
-					e.preventDefault();
-					var href = e.currentTarget.getAttribute("href")
-					console.log(href);	
-				}
-				e.preventDefault();
-				var href = e.currentTarget.getAttribute("href")
-				window.location = href;
-				})
-				document.querySelector(".go-to-chat").addEventListener("click", function(e) {
-				if(hasClass(e.target, "go-to")){
-					e.preventDefault();
-					var href = e.currentTarget.getAttribute("href")
-					console.log(href);	
-				}
-				e.preventDefault();
-				var href = e.currentTarget.getAttribute("href")
-				window.location = href;
-				})
 			}
 			function getAllUrlParams(url){
                 var queryString = url ? url.split("?")[1] : window.location.search.splice(1);
@@ -1086,6 +1043,8 @@ const CART = {
 
 			window.onload =  function(e){
 				getHref();
+				//default ifame url
+				setIframeURL("defaultframe.html", 0)
 			}
 		</script>
     </body>
