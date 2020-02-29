@@ -163,6 +163,7 @@
 	font-size: 16px;
 	font-weight: 600;
 	color: rgba(0,0,0,0.5);
+	left:20px;
 }
 .story div{
 	display: inline-block;
@@ -628,6 +629,20 @@ select{
     border: none;
     height: 540px;
 }
+#cart-number{
+	display: block;
+    box-sizing: border-box;
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.5);
+	background: #b1ff49;
+	color:#FFFFFF;
+}
+#cart-number a{
+	text-decoration: none;
+	color:#fff;
+}
         </style>
 
     </head>
@@ -682,7 +697,7 @@ select{
                 <select  id="select3" name="select3" onchange="getValue(this.id)">
                 </select>
                 <div href="businesschats.html" id="cart-number" style="top:-243px;right:95px;position:absolute;padding:10px;">
-                   <a href="cart.html"> 1 </a>
+                   <a href="storeshowcasecart.html"> 1 </a>
 				</div>
 				<button class="btn go-to-events" href="businesschats.html" id="to-chat" style="top:-244px;right:20px;">
                     Chat
@@ -776,6 +791,20 @@ function removeClass(element, className){
 function setIframeURL(urlLinkone, parameter){
                 document.getElementById('frame').contentWindow.location.replace(urlLinkone+"?itemType="+parameter)
             }
+			function bindEvent(element, eventName, eventHandler) {
+if (element.addEventListener) {
+element.addEventListener(eventName, eventHandler, false);
+} else if (element.attachEvent) {
+element.attachEvent('on' + eventName, eventHandler);
+}
+}
+//listen to message from child window
+bindEvent(window, 'message', function(e){
+	console.log(e.data)
+	if(e.data.msg=="for screen view"){
+		window.location = e.data.link+"?itemid="+e.data.item;
+	}
+});
 const CART = {
 	KEY: 'bjasjdbakhadjsk7',
 	contents: [],

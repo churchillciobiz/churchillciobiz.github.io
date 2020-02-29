@@ -30,6 +30,48 @@
     justify-content: space-between;
     margin: 20px;
 }
+
+
+#dialogoverlay{
+    display: none;
+    opacity: .8;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #717171;
+    width: 100%;
+    z-index: 9999999999;
+}
+#dialogbox{
+    display: none;
+    position: fixed;
+    border-radius: 7px;
+    z-index: 9999999999;
+    transform: translate3d(0%, -100%, 0);
+    transition: all 0.5s ease-out;
+    border-radius: 5px;
+    overflow: auto;
+}
+#dialogbox.animate{
+    transform: translate3d(0, 0, 0);
+}
+
+            #dialogbox>div{  background: #fff; margin: 8px;}
+            #dialogbox>div>#dialogboxhead{background: #92cf48;font-size:19px;padding: 10px;color: #ffffff}
+            #dialogbox>div>#dialogboxbody{background:  #5ad20f;padding: 20px; color:  #ffffff;}
+            #dialogbox>div>#dialogboxfoot{background: #92cf48;padding:10px;text-align:right;}
+
+#dialogbox div input{
+    width: 100%;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 14px;
+    color: #fff;
+    border-bottom: 1px solid #92cf48;
+    padding: 15px 30px;
+}
+
         </style>
         
    </head>
@@ -37,8 +79,58 @@
         <div id="showcase">
             
             
-        </div>
+		</div>
+		<div id="dialogoverlay"></div>
+	        <div id="dialogbox">
+	            <div>
+	                <div id="dialogboxhead"></div>
+	                <div id="dialogboxbody"></div>
+	                <div id="dialogboxfoot"></div>
+	            </div>
+	        </div>
         <script>
+			function CustomConfirm() {  
+                this.render = function(clickId,dialog,id){
+                    if(clickId=="remove-cart-item"){
+                        var continueId = id;
+                        var html = "<p>Remove this item from your cart</p>";
+                        var buttons = '<button class="popup-dialog-button dynamic-content" id='+continueId+' onclick="Confirm.yes(\''+continueId+'\')">Continue</button> <button class="popup-dialog-button" onclick="Confirm.no()">Cancel</button>';
+                    }
+                    var winWidth = window.innerWidth;
+                    var winHeight = window.innerHeight;
+                    var dOverlay = document.getElementById("dialogoverlay");
+                    var dBox = document.getElementById("dialogbox");
+                    dOverlay.style.display = "block";
+                    dOverlay.style.height = winHeight+"px";
+                    dBox.style.left = (winWidth/2)-(280 * .5)+"px";
+                    dBox.style.top = "100px";
+                    dBox.style.display = "block";
+                    dBox.classList = "animate";
+                    document.getElementById("dialogboxhead").innerHTML = dialog;
+                    document.getElementById("dialogboxbody").innerHTML = html;
+                    document.getElementById("dialogboxfoot").innerHTML = buttons;
+                }
+                this.no = function(){
+                    var dOverlay = document.getElementById("dialogoverlay");
+                    var dBox = document.getElementById("dialogbox");
+                    dOverlay.style.display = "none";
+                    dBox.style.display = "none";
+
+                }
+                this.yes = function(id){
+
+                		console.log(id);
+                		CART.remove(id)
+		                //_("items-number").innerHTML = CART.contents.length;
+                        var dOverlay = document.getElementById("dialogoverlay");
+                        var dBox = document.getElementById("dialogbox");
+                        dOverlay.style.display = "none";
+                        dBox.style.display = "none";
+                }
+        	}
+            var Confirm = new CustomConfirm();
+
+
             function _(x) { return document.getElementById(x) };
 			function hasClass(element, className){
 				return element.className.split(" ").indexOf(className) > -1;
@@ -153,10 +245,10 @@ var data = '';
                     {"itemId": "524428f621d601e","itemName": "Dino","itemPrice":2400,"imageUrl":"small_Mercedes petronas shirt.jpg"},
 					{"itemId": "5d4428f621d601f","itemName": "Misfit","itemPrice":600,"imageUrl":"small_Mercedes petronas shirt.jpg"}
 					]
-		}else if(urldata.itemtype=="nike"){
+		}else if(urldata.itemtype=="nikes"){
 			data = [
-					{"itemId": "524428f621d601j","itemName": "Miltons","itemPrice":2400,"imageUrl":"https://image.ebdcdn.com/image/upload/c_fill,e_sharpen:70,f_auto,h_300,q_auto:good,w_600/v1/product/frame/white/pl5086_3.jpg"},
-					{"itemId": "5d4428f621d601k","itemName": "Aviators","itemPrice":3400,"imageUrl":"https://s7d5.scene7.com/is/image/Glasses/713132376980_shad_qt?$g-thumbnail-plp$"}
+					{"itemId": "524428f621d601j","itemName": "Air forces","itemPrice":2400,"imageUrl":"nike.jpg"},
+					{"itemId": "5d4428f621d601k","itemName": "And 1","itemPrice":3400,"imageUrl":"nike.jpg"}
 					]
 
 		}
@@ -169,7 +261,7 @@ var data = '';
 			console.log(cartLength);
 			
 						PAGEPRODUCTS = data;
-					   _("showcase").innerHTML = PAGEPRODUCTS.map(function(item){
+					   _("showcase").innerHTML += PAGEPRODUCTS.map(function(item){
 							
 								for(var i=0; i<cartLength; i++){
 									if(item.itemId == cartJson[i].itemId) {
@@ -178,7 +270,7 @@ var data = '';
 													<div class="action-buttons">
 														<div class="price">${cartJson[i].itemName}</div>
 														<div class="price">Kshs ${cartJson[i].itemPrice}</div>
-														<button class="view-item">View</button>
+														<button class="view-item" data-id=${cartJson[i].itemId} href='viewitem.html' >View</button>
 														<button class="add-to-cart check-status" data-id=${cartJson[i].itemId} id=${cartJson[i].itemId}>In Cart</button>
 													</div>
 												</div>`;
@@ -191,8 +283,8 @@ var data = '';
 												<div class="action-buttons">
 													<div class="name">${item.itemName}</div>
 													<div class="price">Kshs ${item.itemPrice}</div>
-													<button class="view-item">View</button>
-													<button class="add-to-cart check-status" data-id=${item.itemId} id=${item.itemId}>Add to Cart</button>
+													<button class="view-item" href='viewitem.html' data-id=${item.itemId}>View</button>
+													<button class="add-to-cart check-status" data-id=${item.itemId} id=${item.itemId}>Add</button>
 												</div>
 											</div>`;
 									
@@ -240,8 +332,28 @@ var data = '';
                 }
                 return obj;
             }
+
+			// Send a message to the parent
+var sendMessage = function (url, id) {
+// Make sure you are sending a string, and to stringify JSON
+window.parent.postMessage({link: url, item:id, msg:"for screen view" }, '*');
+};
             
-            
+            function getHref(){
+	document.querySelector(".view-item").addEventListener("click", function(e) {
+		if(hasClass(e.target, "view-item")){
+			e.preventDefault();
+			var href = e.currentTarget.getAttribute("href")
+			console.log(href);	
+		}
+		e.preventDefault();
+		var href = e.currentTarget.getAttribute("href")
+		console.log(e.target.getAttribute("data-id"))
+		//window.location = href+"?branchid="+urldata.branchid+"&totalprice="+CARTCHECKOUT.totalPrice();
+		//window.location = href+"?itemid="+e.target.getAttribute("data-id");
+		sendMessage(href, e.target.getAttribute("data-id"));
+	})
+}
             window.onload = function(){
 			var allButtons = document.getElementsByClassName("button");
         	var incarts = localStorage.getItem(CART.KEY);
@@ -266,7 +378,7 @@ var data = '';
     		CART.init();
     		//_("items-number").innerHTML = CART.contents.length;
     		showPageProducts(incarts);  
-    		//getHref();
+    		getHref();
 		}
         </script>
    </body> 
