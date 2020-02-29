@@ -167,13 +167,13 @@
 }
 .story .story-icon .fa{
 	position: relative;
-	font-size: 10px;
-	top: -28px;
-	padding: 5px 12px 5px 14px;
-	color: #ff5349;
-	border:3px solid #ff5349;
-	border-radius: 7px;
-	opacity: 0.7;
+    font-size: 10px;
+    top: -28px;
+    padding: 5px 12px 5px 14px;
+    color: #5ad20f;
+    border: 3px solid #5ad20f;
+    border-radius: 7px;
+    opacity: 0.7;
 }
 .story .story-icon:after{
 	content: "";
@@ -183,7 +183,7 @@
     position: absolute;
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
-    border-top: 7px solid #ff5349;
+    border-top: 7px solid #5ad20f;;
     margin-left: -26px;
     margin-top: -4px;
     opacity: 0.7;
@@ -236,8 +236,8 @@
 	font-weight: 600;
 	display: inline-block;
 	padding: 0 10px;
-	top: -51px;
 	color: rgba(0,0,0,0.6);
+	margin-top:20px;
 }
 .detail .location span{
 	display: block;
@@ -632,6 +632,38 @@
   background-color:red;
   box-shadow:0px 0px 5px 2px rgba(0,0,0,0.5);
 }
+.increment
+{
+	display: block;
+    box-sizing: border-box;
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    background: -webkit-linear-gradient(-89deg, transparent 0%, transparent 42%, #5ad20f 46%, white 53%,transparent 59%, transparent 100%), -webkit-linear-gradient(1deg, transparent 0%, transparent 24%, white 46%, #5ad20f 56%,transparent 56%, transparent 100%);
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.5);
+}
+.decrement
+{
+	display: block;
+    box-sizing: border-box;
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    background: -webkit-linear-gradient(-89deg, transparent 0%, transparent 40%, #5ad20f 50%, white 56%,transparent 56%, transparent 100%), -webkit-linear-gradient(1deg, transparent 0%, transparent 46%, #5ad20f 46%, white 0%,transparent 0%, transparent 100%);
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.5);
+}
+.remove{
+	display: block;
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background: -webkit-linear-gradient(-45deg, transparent 0%, transparent 46%, #5ad20f  46%, white 56%,transparent 56%, transparent 100%), -webkit-linear-gradient(45deg, transparent 0%, transparent 46%, #5ad20f  46%, white 56%,transparent 56%, transparent 100%);
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.5);
+}
+
+
+
 .detail-inputs{
 	width:13%;
 }
@@ -656,6 +688,14 @@
     border-radius: 100%;
     background: -webkit-linear-gradient(-45deg, transparent 0%, transparent 46%, white 46%, white 56%,transparent 56%, transparent 100%), -webkit-linear-gradient(45deg, transparent 0%, transparent 46%, white 46%, white 56%,transparent 56%, transparent 100%);
     box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.5);
+}
+.flexed-rowed{
+	display: flex;
+    justify-content: space-evenly;
+	font-size: 12px;
+    color: rgba(0,0,0,0.3);
+    font-weight: 600;
+    line-height: 16px;
 }
         </style>
 
@@ -940,26 +980,26 @@ window.onload = function(e){
 			console.log(i)
 		return `<div class="schedule">
 					<div class="detail">
-						<span class="location">Item: ${item.itemName}    
-                        	<span class="city">Price: Kshs ${item.itemPrice} </span>
-                    	</span>
-						<div class="map-location">
-							<img src="${item.imageUrl}" alt="cover">
+						<div class='flexed-rowed'>
+							<span class="location">Item: ${item.itemName}    
+								<span class="city">Price: Kshs ${item.itemPrice} </span>
+							</span>
+							<div class="map-location">
+								<img src="${item.imageUrl}" alt="cover">
+							</div>
 						</div>
 							<div class="schedule-info">
                     <div class="rows" style="display:flex;">
                         <span class="show">
-                            <span class="title rounded increment" data-id="${item.itemId}" id="${item.itemId}" >
-                               <span>+</span>
+                            <span class="title increment" data-id="${item.itemId}" id="${item.itemId}" >
                             </span>
                             <span class="title" >
                                 ${CARTCHECKOUT.contents[i].quantity}
                             </span>
-                            <span class="title rounded decrement" data-id="${item.itemId}" id="${item.itemId}">
-                               <span>-</span>
+                            <span class="title decrement" data-id="${item.itemId}" id="${item.itemId}">
                             </span>
-                            <span class="titlec rounded delete-from-checkout" data-id="${item.itemId}" id="${item.itemId}">
-                                R
+                            <span class="titlec remove delete-from-checkout" data-id="${item.itemId}" id="${item.itemId}">
+                                
                             </span>
                         </span>
                     </div>

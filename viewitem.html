@@ -663,12 +663,12 @@
                     Add to Cart
                 </button>
                 <div class="users">
-                    <div class="damage">Kshs 1200/=</div>
+                    <div class="damage" id="damage"></div>
 				</div>
 				
             </div>
             <div class="story">
-                <div class="map-location">
+                <div class="map-location" id="image">
                     <img src="small_Mercedes petronas shirt.jpg" alt="cover">
                 </div>
                 <div class="story-text">
@@ -881,7 +881,16 @@ let urldata = getAllUrlParams(window.location.href);
 		var userId = localStorage.getItem("userId");
 		var eventId = localStorage.getItem("eventId");
 		var companyId = localStorage.getItem("companyId");
-
+			var data = '';
+			data = [
+					{"itemId": "524428f621d601b","itemName": "Miltonsladiso","itemPrice":4400,"imageUrl":"small_Mercedes petronas shirt.jpg"},
+					{"itemId": "5d4428f621d601c","itemName": "Aviators","itemPrice":1400,"imageUrl":"small_Mercedes petronas shirt.jpg"},
+                    {"itemId": "524428f621d601e","itemName": "Dino","itemPrice":2400,"imageUrl":"small_Mercedes petronas shirt.jpg"},
+					{"itemId": "5d4428f621d601f","itemName": "Misfit","itemPrice":600,"imageUrl":"small_Mercedes petronas shirt.jpg"},
+					{"itemId": "524428f621d601j","itemName": "Air forces","itemPrice":2400,"imageUrl":"nike.jpg"},
+					{"itemId": "5d4428f621d601k","itemName": "And 1","itemPrice":3400,"imageUrl":"nike.jpg"}
+					];
+			
 			function getHref(){
 
 				document.querySelector(".book-dynamic").addEventListener("click", function(e) {
@@ -975,8 +984,17 @@ let urldata = getAllUrlParams(window.location.href);
             }
             function _(x) { return document.getElementById(x) };
             console.log(getAllUrlParams(window.location.href));
-            
-
+            urldataz = getAllUrlParams(window.location.href);
+			console.log(urldataz)
+			var resultArray = [];
+			for(var i=0; i<data.length;i++){
+				if(urldataz.itemid==data[i].itemId){
+					resultArray.push(data[i]);
+				}
+			}
+			console.log(resultArray);
+			document.getElementById("damage").innerHTML = "Kshs "+resultArray[0].itemPrice;
+			document.getElementById("image").innerHTML = `<img src='${resultArray[0].imageUrl}' alt="cover">`;
 			window.onload =  function(e){
 				var sum = [];
 				function tally(array){

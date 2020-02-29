@@ -87,16 +87,16 @@
 }
 .btn{
 	position: absolute;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 35px;
-    margin-top: 2px;
-    margin-left: 15px;
-    background: #b1ff49;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 500;
-    box-shadow: 1px 1px 0 rgba(0,0,0,0.2), 0 16px 15px -16px #5ad20f, inset 0 0 25px rgba(0,0,0,0.05);
+	padding: 8px 15px;
+	border: none;
+	border-radius: 35px;
+	margin-top: 2px;
+	margin-left: 15px;
+	background: #ff5349;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 500;
+	box-shadow: 1px 1px 0 rgba(0,0,0,0.2), 0 16px 15px -16px #d24c0f, inset 0 0 25px rgba(0,0,0,0.05);
 }
 .fav .fa{
 	font-size: 14px;
@@ -148,7 +148,7 @@
 }
 
 .story{
-	width: 100%;
+	width: 90%;
 	height: auto;
     border-radius: 10px;
 	background: #fff;
@@ -163,7 +163,6 @@
 	font-size: 16px;
 	font-weight: 600;
 	color: rgba(0,0,0,0.5);
-	left:20px;
 }
 .story div{
 	display: inline-block;
@@ -177,8 +176,8 @@
 	font-size: 10px;
 	top: -28px;
 	padding: 5px 12px 5px 14px;
-	color: #5ad20f;
-	border:3px solid #5ad20f;
+	color: #ff5349;
+	border:3px solid #ff5349;
 	border-radius: 7px;
 	opacity: 0.7;
 }
@@ -190,7 +189,7 @@
     position: absolute;
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
-    border-top: 7px solid #5ad20f;
+    border-top: 7px solid #ff5349;
     margin-left: -26px;
     margin-top: -4px;
     opacity: 0.7;
@@ -607,42 +606,6 @@
    /* background-color: #B2D6FF; /* Blue */*/
   }
 }
-select{
-    margin-top: 15px;
-    margin-left: 10px;
-    width: 128px;
-    padding: 5px;
-    border: 1px solid #4f5393;
-    border-radius: 5px;
-    background: #fff;
-
-    font-size: 12px;
-    color: rgba(0,0,0,0.3);
-    font-weight: 600;
-    line-height: 16px;
-}
-#sub-category{
-    width: 160px;
-}
-#frame{
-    width: 100%;
-    border: none;
-    height: 540px;
-}
-#cart-number{
-	display: block;
-    box-sizing: border-box;
-    width: 35px;
-    height: 35px;
-    border-radius: 100%;
-    box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.5);
-	background: #b1ff49;
-	color:#FFFFFF;
-}
-#cart-number a{
-	text-decoration: none;
-	color:#fff;
-}
         </style>
 
     </head>
@@ -657,20 +620,20 @@ select{
 
 
                   <div class="image-holder">
-          					<img src="medium_StockSnap_K76T94L0KG.jpg">
+          					<img src="juliani.jpg">
                     <span class="caption-text title">
-          						We are fully stocked
+          						Juliani will be performing
           						<span class="sub-title">
-          							Lots and lots of fashionable clothing
+          							punchline lyrics and awesome music at the event
           						</span>
           					</span>
           				</div>
           				<div class="image-holder">
-          					<img src="medium_StockSnap_0Q2LBGC5XR.jpg">
+          					<img src="heart.jpg">
                     <span class="caption-text title">
-          						Unique designs
+          						Rib crackers
           						<span class="sub-title">
-          							We have the largets stock of unique items for all
+          							Comedy at its best with with Heartstring kenya
           						</span>
           					</span>
           				</div>
@@ -686,20 +649,10 @@ select{
                 </div>
             </div>
             <div class="fav">
-                <select id="select1" name="select1" onchange="populate1(this.id, 'select2')">
-                    <option value="">Select Shop</option>
-                    <option value="westlands">Westlands</option>
-                    <option value="parklands">Parklands</option>
-                </select>
-                <select id="select2" name="select2" onchange="populate2(this.id, 'select3')">
-                   
-                </select>
-                <select  id="select3" name="select3" onchange="getValue(this.id)">
-                </select>
-                <div href="businesschats.html" id="cart-number" style="padding:10px;">
-					<a href="storeshowcasecart.html"> C </a>
-				 </div>
-				<button class="btn go-to-events" href="businesschats.html" id="to-chat" style="top:-244px;right:20px;">
+                <button class="btn go-to-events" href="movielisting.html">
+                    Movie list
+				</button>
+				<button class="btn go-to-chat" href="businesschats.html" id="to-chat" style="top:-244px;right:20px;">
                     Chat
 				</button>
 				<span id="logo">
@@ -707,67 +660,14 @@ select{
 				</span>
             </div>
             <div class="story">
-                <span class="title">Our Story</span>
-                <div class="story-icon">
-                    <i class="fa fa-play"></i>
-                </div>
+                
                 <div class="story-text">
                     This is a story this is a story with the people of the nation we create in the dimensional app we create in the world ..
                 </div>
-                <iframe id="frame" style="margin-top:30px;">
-                    
-                </iframe>
             </div>
             
         </div>
         <script>
-            function populate1(s1, s2){
-                var s1 = document.getElementById(s1);
-                var s2 = document.getElementById(s2);
-                s2.innerHTML = "";
-                if(s1.value == "westlands"){
-                    var optionArray = ["|", "shirts|Shirts", "shoes|Shoes", "dresses|Dresses", "slacks|Slacks"];
-                }else if(s1.value == "parklands"){
-                    var optionArray = ["|", "perfumes|Perfumes", "jewelry|Jewelry"]
-                }
-                for(var option in optionArray){
-                    var pair = optionArray[option].split("|");
-                    var newOption = document.createElement("option");
-                    newOption.value = pair[0];
-                    newOption.innerHTML = pair[1];
-                    s2.options.add(newOption);
-                }
-            }
-            function populate2(s1, s2){
-                var s1 = document.getElementById(s1);
-                var s2 = document.getElementById(s2);
-                s2.innerHTML = "";
-                if(s1.value == "shirts"){
-                    var optionArray = ["|", "polo|Polo", "ralf lawren|Ralf Lowren"];
-                }else if(s1.value == "shoes"){
-                    var optionArray = ["|", "nikes|Nikes", "adidas|Adidas"]
-                }else if(s1.value == "dresses"){
-                    var optionArray = ["|", "macy|Macy", "christina|Christina"]
-                }else if(s1.value == "slacks"){
-                    var optionArray = ["|", "levis|Levis", "jeantastic|Jeantastic"]
-                }else if(s1.value == "perfumes"){
-                    var optionArray = ["|", "channel|Channel", "diesel|Diesel"]
-                }else if(s1.value == "jewelry"){
-                    var optionArray = ["|", "diamondlord|Diamonds", "ruby|Ruby"]
-                }
-                for(var option in optionArray){
-                    var pair = optionArray[option].split("|");
-                    var newOption = document.createElement("option");
-                    newOption.value = pair[0];
-                    newOption.innerHTML = pair[1];
-                    s2.options.add(newOption);
-                }
-            }
-			function getValue(s3){
-				var s3 = document.getElementById(s3);
-				console.log(s3.value);
-				setIframeURL("storeshowcaseframe.html", s3.value)
-			}
 			console.log(localStorage.getItem("userId"));
 			
 			function _(x) { return document.getElementById(x) };
@@ -788,23 +688,7 @@ function removeClass(element, className){
 		return element.classList;
 	}
 }
-function setIframeURL(urlLinkone, parameter){
-                document.getElementById('frame').contentWindow.location.replace(urlLinkone+"?itemType="+parameter)
-            }
-			function bindEvent(element, eventName, eventHandler) {
-if (element.addEventListener) {
-element.addEventListener(eventName, eventHandler, false);
-} else if (element.attachEvent) {
-element.attachEvent('on' + eventName, eventHandler);
-}
-}
-//listen to message from child window
-bindEvent(window, 'message', function(e){
-	console.log(e.data)
-	if(e.data.msg=="for screen view"){
-		window.location = e.data.link+"?itemid="+e.data.item;
-	}
-});
+
 const CART = {
 	KEY: 'bjasjdbakhadjsk7',
 	contents: [],
@@ -1023,6 +907,16 @@ const CART = {
 				var href = e.currentTarget.getAttribute("href")
 				window.location = href;
 				})
+				document.querySelector(".go-to-chat").addEventListener("click", function(e) {
+				if(hasClass(e.target, "go-to")){
+					e.preventDefault();
+					var href = e.currentTarget.getAttribute("href")
+					console.log(href);	
+				}
+				e.preventDefault();
+				var href = e.currentTarget.getAttribute("href")
+				window.location = href;
+				})
 			}
 			function getAllUrlParams(url){
                 var queryString = url ? url.split("?")[1] : window.location.search.splice(1);
@@ -1072,8 +966,6 @@ const CART = {
 
 			window.onload =  function(e){
 				getHref();
-				//default ifame url
-				setIframeURL("defaultframe.html", 0)
 			}
 		</script>
     </body>

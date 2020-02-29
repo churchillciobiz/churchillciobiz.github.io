@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js" ></script>
+        <style>
+            body{
+                margin:0;
+                padding:0;
+            }
+            .search-box{
+                background: #6CD196;
+                height: 40px;
+                border-radius: 40px;
+                padding: 10px;
+                display: flex;
+                justify-content: space-between;
+                align-self: center;
+                margin: 8px;
+            }
+            .search-btn{
+                color: #1591EE;
+                float: right;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: #2f3640;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .icon-btn{
+                color: #e84118;
+                width: 50px;
+                height: 50px;
+            }
+            .icon-img{
+                color: #e84118;
+               
+                height: 50px;
+            }
+            .search-txt{
+                border:none;
+                background: none;
+                outline: none;
+                float: left;
+                padding: 0;
+                color: white;
+                font-size: 16px;
+                transition: 0.4s;
+                line-height: 40px;
+                width:240px;
+            }
+.items {
+  overflow: hidden; /* simple clearfix */
+}
+.items .item {
+  float: left;
+  width: 25%;
+}
+#results{
+    margin:20px;
+}
+        </style>
+    </head>
+    <body>
+    <div class="search-box">
+        <input class="search-txt" type="text" name="" placeholder="Search theatre houses">
+        <a class="search-btn" href="#">
+            <i class="fas fa-search"></i>
+        </a>
+    </div>
+    <div id="results">
+        <div class="result-wrapper items">
+            <div class="icon-btn item" href="#">
+                <a href="movie.html?companyid=1">
+                    <img class="icon-img" href="#" src="logo.png">
+                    
+                </a>
+                <p>EventCo</p>
+            </div>
+            <p id="username"></p>
+            <p id="userid"></p>
+        </div>
+    </div>
+    <script>
+        function getAllUrlParams(url){
+                var queryString = url ? url.split("?")[1] : window.location.search.splice(1);
+                var obj = {}
+                if(queryString){
+                    queryString = queryString.split("#")[0]
+                    var arr = queryString.split("&");
+
+                    for(var i = 0; i<arr.length; i++){
+                        var a = arr[i].split("=");
+                        var paramName = a[0];
+
+                        var paramValue = typeof(a[1]) === 'undefined' ? true: a[1];
+
+                        paramName = paramName.toLowerCase();
+                        if(typeof paramValue === 'string') paramValue = paramValue.toLowerCase()
+
+                        if(paramName.match(/\[(\d+)?\]$/)){
+                            var key = paramName.replace(/\[(\d+)?\]/, '');
+                            if(! obj[key]) obj[key] = [];
+
+                            if(paramName.match(/\[\d+\]$/)){
+                                var index = /\[(\d+)\]/.exec(paramName)[1];
+
+                                obj[key][index]  = paramValue;
+                            } else {
+                                obj[key].push(paramValue);
+                            }
+                        }else {
+                            if(! obj[paramName]) {
+                                obj[paramName] = paramValue;
+                            } else if(obj[paramName] && typeof obj[paramName] == 'string'){
+                                obj[paramName] = [obj[paramName]];
+                                obj[paramName].push(paramValue);
+                            } else {
+                                obj[paramName].push(paramValue);
+                            }
+                        }
+                    }
+                }
+                return obj;
+            }
+            function _(x) { return document.getElementById(x) };
+            console.log(getAllUrlParams(window.location.href));
+            let urldata = getAllUrlParams(window.location.href);
+            localStorage.setItem("userId", urldata.userid)
+    </script>
+    </body>
+</html>
