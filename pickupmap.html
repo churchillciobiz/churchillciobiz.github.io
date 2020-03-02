@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <title>Events tracking</title> 
-  	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+  	<link rel="stylesheet" href="leaflet.css" />
 	<!--[if lte IE 8]>
     	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.ie.css" />
 	<![endif]-->
@@ -29,13 +29,13 @@
 <body>
 	<h1 id="title"></h1>
 	<div id="map"></div>
-	<script src="https://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script> 
+	<script src="leaflet.js"></script> 
 	<script>
 		var map = L.map('map').setView([-1.28639, 36.81722], 12);
 		var markerLayerGroup = L.layerGroup().addTo(map);
-		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			maxZoom: 18,
-			attribution: 'Map data &copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
 		}).addTo(map);
 
 		function getPins(e){			
@@ -54,11 +54,9 @@
 			for (var i = 0; i < data.length; i++){
 				places = data[i];
 				markerArray[i] = L.marker([places.pos[1], places.pos[0]]).bindPopup(places.Name);			
-			}
-			
+			}	
 			markerLayerGroup = L.layerGroup(markerArray).addTo(map);	
 		}
-
 		map.on('dragend', getPins);	
 		map.on('zoomend', getPins);
 		map.whenReady(getPins)
@@ -66,4 +64,6 @@
 	</script>
 </body>
 </html>
+
+
 
