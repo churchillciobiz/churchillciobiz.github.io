@@ -37,7 +37,7 @@
 			maxZoom: 18,
 			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http ://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
 		}).addTo(map);
-
+		var popup = L.popup();
 		function getPins(e){			
 			bounds = map.getBounds();
 			url = "https://enigmatic-hamlet-83578.herokuapp.com/mapjsonwithin?lat1=" + bounds.getNorthEast().lat + "&lon1=" + bounds.getNorthEast().lng + "&lat2=" + bounds.getSouthWest().lat + "&lon2=" + bounds.getSouthWest().lng;
@@ -57,6 +57,10 @@
 			}	
 			markerLayerGroup = L.layerGroup(markerArray).addTo(map);	
 		}
+		function onMapClicked(e){
+			popup.setLatLng(e.latlng).setContent("You clicked the map at "+e.latlng.toString()).openOn(map)
+		}
+		map.on('click', onMapClicked);
 		map.on('dragend', getPins);	
 		map.on('zoomend', getPins);
 		map.whenReady(getPins)
