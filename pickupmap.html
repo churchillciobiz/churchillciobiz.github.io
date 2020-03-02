@@ -23,47 +23,304 @@
 		}
 		#map { z-index: 1;}
 		#title { z-index: 2; position: absolute; left: 10px; }
+		#popup{
+				max-width: 350px;
+				width: 100%;
+				height: auto;
+				background: #fff;
+				padding: 35px 28px;
+				position: absolute;
+				top: 48%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+				border-radius: 20px;
+				z-index: 1999999999999999;
+				box-shadow: 0 5px 9px 0 rgba(0,0,0,0.2);
+				display:none;
+			}
+			#popup #popup-top{
+				display: flex;
+    			justify-content: space-between;
+				margin: 5px 0 10px;
+				padding: 0 5%;
+				font-size: 14px;
+				color:#4f5393;
+				font-weight: 600;
+				line-height: 16px;
+			}
+			#popup #popup-top p{
+				display:flex;
+			}
+			#popup #popup-top span{
+				max-width: 100%;
+    			border-radius: 50%;
+			}
+			#popup #popup-body{
+				display: flex;
+				flex-direction: column;
+				justify-content: space-evenly;
+				font-size: 15px;
+    			color: rgba(0,0,0,0.3);
+				margin-top: 25px;
+    			margin-bottom: 16px;
+			}
+			#total-wrapper{
+				display: flex;
+				flex-direction: row;
+				justify-content: space-evenly;
+				font-size: 20px;
+    			color: #4f5393;
+				margin-top: 20px;
+    			margin-bottom: 17px;
+			}
+			#popup-bottom{
+				display: flex;
+				flex-direction: row;
+				justify-content: space-evenly;
+				font-size: 20px;
+    			color: #4f5393;
+				margin-top: 20px;
+    			margin-bottom: 0px;
+			}
+			.book-dynamic{
+				padding: 5px;
+    			border: none;
+    			border: 1px solid #4f5393;
+    			border-radius: 5px;
+				background: #fff;
+			}
+			#calculate-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-size: 20px;
+    color: #4f5393;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+			.calculate-me{
+				padding: 5px;
+    			border: none;
+    			border: 1px solid #4f5393;
+    			border-radius: 5px;
+				background: #fff;
+			}
+			.calculate-me-two{
+				padding: 5px;
+    			border: none;
+    			border: 1px solid #4f5393;
+    			border-radius: 5px;
+				background: #fff;
+			}
+			.close
+{
+  display:block;
+  box-sizing:border-box;
+  width:20px;
+  height:20px;
+  border-radius:100%;
+  background: -webkit-linear-gradient(-45deg, transparent 0%, transparent 46%, white 46%,  white 56%,transparent 56%, transparent 100%), -webkit-linear-gradient(45deg, transparent 0%, transparent 46%, white 46%,  white 56%,transparent 56%, transparent 100%);
+  background-color:red;
+  box-shadow:0px 0px 5px 2px rgba(0,0,0,0.5);
+}
+
+
+#popup-confirm{
+				max-width: 350px;
+				width: 100%;
+				height: auto;
+				background: #fff;
+				padding: 35px 28px;
+				position: absolute;
+				top: 48%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+				border-radius: 20px;
+				z-index: 1999999999999999;
+				box-shadow: 0 5px 9px 0 rgba(0,0,0,0.2);
+				display:none;
+			}
+			#popup-confirm #popup-top{
+				display: flex;
+    			justify-content: space-between;
+				margin: 5px 0 10px;
+				padding: 0 5%;
+				font-size: 14px;
+				color:#4f5393;
+				font-weight: 600;
+				line-height: 16px;
+			}
+			#popup-confirm #popup-top p{
+				display:flex;
+			}
+			#popup-confirm #popup-top span{
+				max-width: 100%;
+    			border-radius: 50%;
+			}
+			#popup-confirm #popup-body{
+				display: flex;
+				flex-direction: column;
+				justify-content: space-evenly;
+				font-size: 15px;
+    			color: rgba(0,0,0,0.3);
+				margin-top: 25px;
+    			margin-bottom: 16px;
+			}
+			#total-wrapper{
+				display: flex;
+				flex-direction: row;
+				justify-content: space-evenly;
+				font-size: 20px;
+    			color: #4f5393;
+				margin-top: 20px;
+    			margin-bottom: 17px;
+			}
+			#popup-bottom{
+				display: flex;
+				flex-direction: row;
+				justify-content: space-evenly;
+				font-size: 20px;
+    			color: #4f5393;
+				margin-top: 20px;
+    			margin-bottom: 0px;
+			}
+			.book-dynamic{
+				padding: 5px;
+    			border: none;
+    			border: 1px solid #4f5393;
+    			border-radius: 5px;
+				background: #fff;
+			}
+			#calculate-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-size: 20px;
+    color: #4f5393;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+			.calculate-me{
+				padding: 5px;
+    			border: none;
+    			border: 1px solid #4f5393;
+    			border-radius: 5px;
+				background: #fff;
+			}
+			.calculate-me-two{
+				padding: 5px;
+    			border: none;
+    			border: 1px solid #4f5393;
+    			border-radius: 5px;
+				background: #fff;
+			}
+			.close
+{
+  display:block;
+  box-sizing:border-box;
+  width:20px;
+  height:20px;
+  border-radius:100%;
+  background: -webkit-linear-gradient(-45deg, transparent 0%, transparent 46%, white 46%,  white 56%,transparent 56%, transparent 100%), -webkit-linear-gradient(45deg, transparent 0%, transparent 46%, white 46%,  white 56%,transparent 56%, transparent 100%);
+  background-color:red;
+  box-shadow:0px 0px 5px 2px rgba(0,0,0,0.5);
+}
 	</style>	
 	
 </head>
 <body>
 	<h1 id="title"></h1>
 	<div id="map"></div>
+	<div id="popup-confirm">
+		<div id="popup-top">
+		</div>
+		<div id="popup-body">
+			<div class="box">
+				Note
+			</div>
+			<div id="checkbox" style="display:flex;flex-direction:column;">
+				Pick this location;
+			</div>
+		
+		<div id="popup-bottom">
+			<button class="book-dynamic okay-location" id="okay">Okay</button>
+			<button class="book-dynamic cancel" id="cancel">Cancel</button>
+		</div>
+	</div>
+	</div>
+	<div id="popup">
+		<div id="popup-top">
+			<p></p>
+			<div class="close"></div>
+		</div>
+		<div id="popup-body">
+			<div class="box">
+				Note
+			</div>
+			<div id="checkbox" style="display:flex;flex-direction:column;">
+				Pick your item in within 4 days, In your Mobilet app, home menu got to 'bookings and orders' click our app from the list that appears there, select the specific order q qr code is created,  let the attendant at the pickup point scan this code, and take your item home 
+			</div>
+		<div id="show-calculations">
+			
+			<div id="total-wrapper">
+				<span id="total"></span>
+			</div>
+		</div>
+		
+		<div id="popup-bottom">
+			<button class="book-dynamic done" id="okay">Okay</button>
+		</div>
+	</div>
+	</div>
 	<script src="leaflet.js"></script> 
 	<script>
+		function _(x) { return document.getElementById(x) };
+function hasClass(element, className){
+	return element.className.split(" ").indexOf(className) > -1;
+}
+function addClass(element, className){
+	if(hasClass(element, className)){
+		return element.classList;
+	} else {
+		return element.classList.add(className);
+	}
+}
+function removeClass(element, className){
+	if(hasClass(element, className)){
+		return element.classList.remove(className);
+	}else{
+		return element.classList;
+	}
+}
+		var theMarker = {};
 		var map = L.map('map').setView([-1.28639, 36.81722], 12);
 		var markerLayerGroup = L.layerGroup().addTo(map);
 		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			maxZoom: 18,
 			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http ://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
 		}).addTo(map);
-		var popup = L.popup();
-		function getPins(e){			
-			bounds = map.getBounds();
-			url = "https://enigmatic-hamlet-83578.herokuapp.com/mapjsonwithin?lat1=" + bounds.getNorthEast().lat + "&lon1=" + bounds.getNorthEast().lng + "&lat2=" + bounds.getSouthWest().lat + "&lon2=" + bounds.getSouthWest().lng;
-			$.get(url, pinTheMap, "json")
-		}
-
-		function pinTheMap(data){
-			console.log(data);
-			//clear the current pins
-			map.removeLayer(markerLayerGroup);
-			
-			//add the new pins
-			var markerArray = new Array(data.length)
-			for (var i = 0; i < data.length; i++){
-				places = data[i];
-				markerArray[i] = L.marker([places.pos[1], places.pos[0]]).bindPopup(places.Name);			
-			}	
-			markerLayerGroup = L.layerGroup(markerArray).addTo(map);	
-		}
 		function onMapClicked(e){
-			popup.setLatLng(e.latlng).setContent("You clicked the map at "+e.latlng.toString()).openOn(map)
+			_("popup-confirm").style.display = "block";
+			document.addEventListener("click", function(event){
+				if(hasClass(event.target, "okay-location")){
+					lat = e.latlng.lat;
+					lng = e.latlng.lng;
+					console.log(lat, lng);
+					if(theMarker != undefined){
+						map.removeLayer(theMarker);
+					}
+
+					theMarker = L.marker([lat, lng]).addTo(map);
+					_("popup-confirm").style.display = "none";
+					_("popup").style.display = "block";
+				}else if(hasClass(event.target, "cancel")){
+					_("popup-confirm").style.display = "none";
+				}else if(hasClass(event.target, "done")){
+					_("popup").style.display = "none";
+				}
+			}, true);
 		}
 		map.on('click', onMapClicked);
-		map.on('dragend', getPins);	
-		map.on('zoomend', getPins);
-		map.whenReady(getPins)
 		
 	</script>
 </body>
