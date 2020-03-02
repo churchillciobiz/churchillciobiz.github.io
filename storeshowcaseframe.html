@@ -223,7 +223,7 @@
 		CART.contents = CART.filter(CART.contents, (items)=> {
 			return items.itemId != id;
 		})
-		_(id).innerHTML = "Add to Cart";
+		_(id).innerHTML = "Add";
 		//update localStorage
 		console.log(CART.contents);
 		CART.sync();
@@ -237,7 +237,7 @@
 }
 console.log(getAllUrlParams(window.location.href));
             let urldata = getAllUrlParams(window.location.href);
-var data = '';
+		var data = '';
 		if(urldata.itemtype=="polo"){
 			data = [
 					{"itemId": "524428f621d601b","itemName": "Miltonsladiso","itemPrice":4400,"imageUrl":"small_Mercedes petronas shirt.jpg"},

@@ -411,7 +411,7 @@
             <div class="cover">
                 <img src="calendar-banner.jpg" alt="banner"/>
             </div>
-            <select id="select1" name="select1" onchange="populate1(this.id, 'select2')">
+            <select id="select1" name="select1" onchange="getValue(this.id)">
                 <option value="">Select Theatre</option>
                 <option value="westlands">Westlands</option>
                 <option value="parklands">Parklands</option>
@@ -422,6 +422,14 @@
             </iframe>
         </div>
         <script>
+			function getValue(s1){
+				var s1 = document.getElementById(s1);
+				console.log(s1.value);
+				setIframeURL("movielist.html", s1.value)
+			}
+			function setIframeURL(urlLinkone, parameter){
+                document.getElementById('frame').contentWindow.location.replace(urlLinkone+"?itemType="+parameter)
+            }
 			console.log(localStorage.getItem("userId"), localStorage.getItem("companyId"))
 			function _(x) { return document.getElementById(x) };
             function hasClass(element, className){
@@ -441,7 +449,7 @@
                     return element.classList;
                 }
             }
-			function getHref(){
+			/*function getHref(){
 				document.querySelector(".go-to-event").addEventListener("click", function(e) {
 				if(hasClass(e.target, "go-to-event")){
 					e.preventDefault();
@@ -452,9 +460,9 @@
 				var href = e.currentTarget.getAttribute("href")
 				window.location = href;
 				});
-			}
+			}*/
 			window.onload =  function(e){
-				getHref();
+				/*getHref();*/
 			}
 		</script>
     </body>
