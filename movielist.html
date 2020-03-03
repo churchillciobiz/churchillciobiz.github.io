@@ -1,6 +1,390 @@
 <html>
     <head>
+        <style>
+            *{
+		box-sizing: border-box;
+		padding: 0;
+			margin: 0;
+			outline: none;
+		}
+		div{
+			padding: 0;
+			margin: 0;
+			outline: none;
+		}
+		body{
+			font-family: Roboto, sans-serif;
+			background: #FFFFFF;
+			overflow: auto;
+			height: 860px;
+		}
+		.container{
+            display: flex;
+            justify-content: space-evenly;
+	    }
+        .app{
+            display: flex;
+            flex-direction: column;
+            background: #f7f9fc;
+            box-shadow: 0 35px 55px -20px rgba(0,0,0,0.4);
+        }
+        .cover {
+            position: relative;
+            height: 100px;
+            overflow: hidden;
+        }
+        .cover img {
+            height: 100%;
+            margin-left: 0px;
+            width:100%;
+            /*box-shadow: -5px 60px 15px 55px rgba(2,7,33,0.4), -5px 60px 35px -55px rgba(0,0,0,0.2);*/
+        }
+        .cover:after{
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: 297px;
+            display: inline-block;
+            background: transparent;
+            top: 0;
+            left: 0;
+            box-shadow: inset 0 0 185px rgba(2,7,33,0.4);
+        }
+        .cover .fa{
+	position: relative;
+	font-size: 38px;
+	left: 50%;
+	top: 55px;
+	color: #f7f9fc;
+	margin-left: -15px;
+	opacity: 0.9;
+}
+.cover .title{
+	position: absolute;
+	width: 100%;
+	display: inline-block;
+	text-align: center;
+	text-transform: uppercase;
+	bottom: 0;
+	color: #fff;
+	font-size: 15px;
+	font-weight: 600;
+	background: rgba(2,7,33,0.7);
+	padding: 10px 0;
+	letter-spacing: 0.5px;
+	left: 0px;
+}
+.cover .title .sub-title{
+	display: block;
+	font-size: 10px;
+	font-weight: 300;
+	letter-spacing: 1px;
+	padding-top: 5px;
+}
 
+.fav{
+	position: relative;
+}
+.btn{
+	padding: 8px 16px;
+	border: none;
+	border-radius: 35px;
+	margin-top: 2px;
+	margin-left: 183px;
+	background: #ff5349;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 500;
+	box-shadow: 1px 1px 0 rgba(0,0,0,0.2), 0 16px 15px -16px #d24c0f, inset 0 0 25px rgba(0,0,0,0.05);
+}
+.fav .fa{
+	font-size: 14px;
+	padding-right: 5px;
+}
+.fav .users{
+	position: relative;
+	margin-top: 2px;
+	margin-right: 40px;
+	float: right;
+	z-index: 99999;
+}
+.fav .users img{
+	position: relative;
+	width: 29px;
+	border: 2px solid rgba(255,83,73,0.9);
+	border-radius: 100%;
+	margin-left: -15px;
+	height: 30px;
+}
+
+.fav .users span.fav-count{
+	position:absolute;
+	width: 29px;
+	height: 29px;
+	border: 2px solid #fff;
+	background: rgba(255,83,73,0.95);
+	display: inline-block;
+	border-radius: 100%;
+	line-height: 32px;
+	text-align: center;
+	top: 0;
+	margin-left: 55px;
+	color: #fff;
+	font-size: 11px;
+}
+.user-1{
+	z-index: 99;
+}
+.user-2{
+	z-index: 98;
+}
+.fav:before, .fav:after{
+	content: "";
+	width: 100%;
+	height: 100%;
+	display: inline-block;
+	clear: both;
+}
+
+.story{
+	width: 90%;
+	height: auto;
+    border-radius: 10px;
+	background: #fff;
+	margin: 25px auto;
+	padding: 10px 0;
+	border: 1px solid rgba(0,0,0,0.03);
+	box-shadow: 0 10px 15px -1px rgba(0,0,0,0.1);
+}
+.story .title{
+	position: absolute;
+	margin-top: -35px;
+	font-size: 16px;
+	font-weight: 600;
+	color: rgba(0,0,0,0.5);
+}
+.story div{
+	display: inline-block;
+}
+.story .story-icon{
+	width: 20%;
+	text-align: center;
+}
+.story .story-icon .fa{
+	position: relative;
+	font-size: 10px;
+	top: -28px;
+	padding: 5px 12px 5px 14px;
+	color: #ff5349;
+	border:3px solid #ff5349;
+	border-radius: 7px;
+	opacity: 0.7;
+}
+.story .story-icon:after{
+	content: "";
+    width: 0;
+    height: 0;
+    display: inline-block;
+    position: absolute;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 7px solid #ff5349;
+    margin-left: -26px;
+    margin-top: -4px;
+    opacity: 0.7;
+}
+.story .story-text{
+	width: 70%;
+	padding: 0 5%;
+	font-size: 12px;
+	color: rgba(0,0,0,0.3);
+	font-weight: 600;
+	line-height: 16px;
+}
+
+.schedule{
+	display:flex;
+	flex-direction:column;
+	width: 90%;
+	height: auto;
+	background: #fff;
+	margin: 20px auto;
+	border: 1px solid rgba(0,0,0,0.03);
+	box-shadow: 0 10px 15px -1px rgba(0,0,0,0.1);
+}
+.schedule> .title{
+	position: absolute;
+	font-size: 16px;
+	margin-top: -35px;
+	font-weight: 600;
+	color: rgba(0,0,0,0.5);
+}
+.detail{
+	display: flex;
+    flex-direction: row;
+	justify-content: space-between;
+}
+.detail .date{
+	padding: 8px 5px;
+    display: inline-block;
+    background: #4f5393;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: inset 0 -25px 75px -25px rgba(0,0,0,0.4);
+}
+.detail .date span{
+	display: block;
+	font-size: 11px;
+	text-transform: uppercase;
+	font-weight: 400;
+	padding-top: 2px;
+}
+.detail .location{
+	position: relative;
+	font-size: 14px;
+	font-weight: 600;
+	display: inline-block;
+	padding: 0 10px;
+	top: 1px;
+	color: rgba(0,0,0,0.6);
+}
+.detail .location span{
+	display: block;
+	font-size: 12px;
+	color: rgba(0,0,0,0.3);
+}
+.detail .btn{
+	margin-top: 19px;
+}
+.map-location{
+	position: relative;
+	height: 105px;
+	display: inline-block;
+	padding: 21px 0 0px 0;
+}
+.map-location img{
+	width: 100px;
+}
+
+.distance{
+	position: absolute;
+	top: 25px;
+	margin-left: 43px;
+	font-weight: 600;
+	font-size: 11px;
+	padding: 5px 10px;
+	background: #fff;
+	color: rgba(0,0,0,0.5);
+	z-index: 99;
+	box-shadow: 0 0 3px rgba(0,0,0,0.2);
+}
+.distance:after{
+	content: "";
+	display: inline-block;
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	border-top: 7px solid #fff;
+	left: 7px;
+	margin-top: 18px;
+}
+.schedule-info{
+	font-size: 12px;
+    color: rgba(0,0,0,0.3);
+}
+.schedule-info span{
+	display: inline-block;
+}
+.rows > span{
+	width: 40%;
+	/*padding: 5px 5%;*/
+}
+.schedule-info span.info{
+	display: block;
+}
+.schedule-info span .title{
+	font-size: 11px;
+	font-weight: 600;
+	color: rgba(0,0,0,0.3);
+	padding-bottom: 5px;
+}
+.schedule-info span .name,.schedule-info span .time{
+	font-size: 14px;
+	font-weight: 600;
+	color: rgba(0,0,0,0.7);
+}
+.cover .title span {
+    display: block;
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    padding-top: 5px;
+}
+.schedule-info span .row-line{
+	font-size: 11px;
+	background: #ff5349;
+	padding: 4px 8px;
+	border-radius: 20px;
+	color: #fff;
+	font-weight: 500;
+	letter-spacing: 1px
+}
+.schedule-info span .seat-num span{
+	font-size: 11px;
+	background: #4f5393;
+	padding: 5px;
+	border-radius: 4px;
+	color: #fff;
+	font-weight: 500;
+}
+ .left-arrow, .right-arrow{
+				
+				position:absolute;
+				top: 66%;
+				
+			}
+			 .right-arrow{
+				left:auto;
+				right:130px;
+			}
+			.right-arrow:hover{
+				cursor:pointer;
+			}
+			.left-arrow:hover{
+				cursor:pointer;
+			}
+			.arrow{
+				display:inline-block;
+				border: 3px solid #e01e1e;
+				width:16px;
+				height:16px;
+				border-left:none;
+				border-bottom:none;
+				margin:auto;
+				position:absolute;
+				left:0;
+				right: 0;
+				top:0;
+				bottom:0;
+			}
+			.arrow.arrow-left{
+				transform:rotateZ(-135deg);
+			}
+			 .arrow.arrow-right{
+				transform:rotateZ(45deg);
+			}
+			.rows{
+				padding: 7px;
+				font-size: 12px;
+				color: rgba(0,0,0,0.3);
+				font-weight: 600;
+				line-height: 16px;
+			}
+        </style>
     </head>
     <body>
         <div class="schedule">
@@ -8,7 +392,7 @@
                 <span class="date go-to-event" href="event.html?eventid=1">07
                     <span>November</span>
                 </span>
-                <span class="location">Madina Store
+                <span class="location">Westlands 1
                 </span>
                 <button class="btn" style="display:none;">
                     <i class="fa fa-check"></i>
@@ -27,9 +411,72 @@
             </div>
         </div>
         <script>
+            function getAllUrlParams(url){
+                var queryString = url ? url.split("?")[1] : window.location.search.splice(1);
+                var obj = {}
+                if(queryString){
+                    queryString = queryString.split("#")[0]
+                    var arr = queryString.split("&");
+
+                    for(var i = 0; i<arr.length; i++){
+                        var a = arr[i].split("=");
+                        var paramName = a[0];
+
+                        var paramValue = typeof(a[1]) === 'undefined' ? true: a[1];
+
+                        paramName = paramName.toLowerCase();
+                        if(typeof paramValue === 'string') paramValue = paramValue.toLowerCase()
+
+                        if(paramName.match(/\[(\d+)?\]$/)){
+                            var key = paramName.replace(/\[(\d+)?\]/, '');
+                            if(! obj[key]) obj[key] = [];
+
+                            if(paramName.match(/\[\d+\]$/)){
+                                var index = /\[(\d+)\]/.exec(paramName)[1];
+
+                                obj[key][index]  = paramValue;
+                            } else {
+                                obj[key].push(paramValue);
+                            }
+                        }else {
+                            if(! obj[paramName]) {
+                                obj[paramName] = paramValue;
+                            } else if(obj[paramName] && typeof obj[paramName] == 'string'){
+                                obj[paramName] = [obj[paramName]];
+                                obj[paramName].push(paramValue);
+                            } else {
+                                obj[paramName].push(paramValue);
+                            }
+                        }
+                    }
+                }
+                return obj;
+            }
             console.log(getAllUrlParams(window.location.href));
             let urldata = getAllUrlParams(window.location.href);
             console.log(urldata);
+            var nowshowing = ;
+            if(urldata.itemtype=="westlands"){
+                nowshowing = [
+					{"filmId": "524428f621d601b","filmName": "Bad Bots 2","price":400,"imageUrl":"small_Mercedes petronas shirt.jpg", "description":"The robots are back and this time they are meaner than ever can jody stop them this time or will earth fall to the powers of the mighty Bad Bots", "date":"4/3/2020"},
+					{"filmId": "5d4428f621d601c","filmName": "Bad Boys 3","Price":400,"imageUrl":"small_Mercedes petronas shirt.jpg", "description": "Mike and Marcus are back watch them in this action packed thriller that will shurely live you anquered to yous seat", "date":"4/3/2020"},
+                    {"filmId": "524428f621d601e","filmName": "Dino","price":200,"imageUrl":"small_Mercedes petronas shirt.jpg", "description":"Ever seen a dinosour go wild no you haven't see them today", "date":"4/3/2020"},
+					{"filmId": "5d4428f621d601f","filmName": "Misfits","price":600,"imageUrl":"small_Mercedes petronas shirt.jpg", "description": "2 men and a baby go along the most breathtaking mission of their lives", "date":"4/3/2020"}
+					]
+            }else if(urldata.itemtype=="parklands"){
+                nowshowing = [
+                    {"filmId": "524428f621d601e","filmName": "Dino","price":200,"imageUrl":"small_Mercedes petronas shirt.jpg", "description":"Ever seen a dinosour go wild no you haven't see them today", "date":"4/3/2020"},
+					{"filmId": "5d4428f621d601f","filmName": "Misfits","price":600,"imageUrl":"small_Mercedes petronas shirt.jpg", "description": "2 men and a baby go along the most breathtaking mission of their lives", "date":"4/3/2020"}
+					]
+            }else if(urldata.itemtype=="kasarani"){
+                nowshowing = [
+                    {"filmId": "524428f621d601b","filmName": "Bad Bots 2","price":400,"imageUrl":"small_Mercedes petronas shirt.jpg", "description":"The robots are back and this time they are meaner than ever can jody stop them this time or will earth fall to the powers of the mighty Bad Bots","date":"4/3/2020" },
+					{"filmId": "5d4428f621d601c","filmName": "Bad Boys 3","Price":400,"imageUrl":"small_Mercedes petronas shirt.jpg", "description": "Mike and Marcus are back watch them in this action packed thriller that will shurely live you anquered to yous seat", "date":"4/3/2020"},
+                    {"filmId": "524428f621d601e","filmName": "Dino","price":200,"imageUrl":"small_Mercedes petronas shirt.jpg", "description":"Ever seen a dinosour go wild no you haven't see them today", "date":"5/3/2020"},
+					{"filmId": "5d4428f621d601f","filmName": "Misfits","price":600,"imageUrl":"small_Mercedes petronas shirt.jpg", "description": "2 men and a baby go along the most breathtaking mission of their lives", "date":"5/3/2020"},
+                    {"filmId": "5d4428f621d601f","filmName": "Broken Arrow","price":200,"imageUrl":"small_Mercedes petronas shirt.jpg", "description": "When the fate of the world falls into your arms, with warheads and missiles", "date":"10/3/2020"},
+				]
+            }
         </script>
 
     </body>
