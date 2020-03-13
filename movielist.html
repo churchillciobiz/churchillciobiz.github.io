@@ -90,7 +90,6 @@
 	border: none;
 	border-radius: 35px;
 	margin-top: 2px;
-	margin-left: 183px;
 	background: #ff5349;
 	color: #fff;
 	font-size: 14px;
@@ -229,7 +228,8 @@
     display: inline-block;
     background: #4f5393;
     color: #fff;
-    font-size: 18px;
+    font-size: 14px;
+	letter-spacing: 2px;
     font-weight: 600;
     text-align: center;
     box-shadow: inset 0 -25px 75px -25px rgba(0,0,0,0.4);
@@ -247,7 +247,7 @@
 	font-weight: 600;
 	display: inline-block;
 	padding: 0 10px;
-	top: 1px;
+	top: 20px;
 	color: rgba(0,0,0,0.6);
 }
 .detail .location span{
@@ -265,7 +265,7 @@
 	padding: 21px 0 0px 0;
 }
 .map-location img{
-	width: 100px;
+	width: 87px;
 }
 
 .distance{
@@ -384,33 +384,216 @@
 				font-weight: 600;
 				line-height: 16px;
 			}
+			.schedule {
+    position: relative;
+    width: 90%;
+    height: auto;
+    background: #fff;
+    margin: 20px auto;
+    border: 1px solid rgba(0,0,0,0.03);
+    box-shadow: 0 10px 15px -1px rgba(0,0,0,0.1);
+}
+
+#dialogoverlay{
+    display: none;
+    opacity: .8;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #717171;
+    width: 100%;
+    z-index: 9999999999;
+}
+#dialogbox{
+    display: none;
+    position: fixed;
+    border-radius: 7px;
+    z-index: 9999999999;
+    transform: translate3d(0%, -100%, 0);
+    transition: all 0.5s ease-out;
+    border-radius: 5px;
+    overflow: auto;
+}
+#dialogbox.animate{
+    transform: translate3d(0, 0, 0);
+}
+
+            #dialogbox>div{  background: #fff; margin: 8px;}
+            #dialogbox>div>#dialogboxhead{background: #92cf48;font-size:19px;padding: 10px;color: #ffffff}
+            #dialogbox>div>#dialogboxbody{background:  #5ad20f;padding: 20px; color:  #ffffff;}
+            #dialogbox>div>#dialogboxfoot{background: #92cf48;padding:10px;text-align:right;}
+
+#dialogbox div input{
+    width: 100%;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 14px;
+    color: #fff;
+    border-bottom: 1px solid #92cf48;
+    padding: 15px 30px;
+}
         </style>
     </head>
     <body>
-        <div class="schedule">
-            <div class="detail">
-                <span class="date go-to-event" href="event.html?eventid=1">07
-                    <span>November</span>
-                </span>
-                <span class="location">Westlands 1
-                </span>
-                <button class="btn" style="display:none;">
-                    <i class="fa fa-check"></i>
-                    View
-                </button>
-            </div>
-            <div class="map-location">
-                <img src="heart.jpg" alt="map">
-            </div>
-            <div class="schedule-info">
-                <div class="rows">
-                        
-                        This is a description oif event its an awesome event that crosses the conundrum of time when the game shall begin and cross us once again
-                </div>
-
-            </div>
-        </div>
+		<div id="movie-list"></div>
+		<div id="dialogoverlay"></div>
+	        <div id="dialogbox">
+	            <div>
+	                <div id="dialogboxhead"></div>
+	                <div id="dialogboxbody"></div>
+	                <div id="dialogboxfoot"></div>
+	            </div>
+	        </div>
         <script>
+			function CustomConfirm() {  
+                this.render = function(clickId,dialog,id){
+                    if(clickId=="remove-cart-item"){
+                        var continueId = id;
+                        var html = "<p>Remove this item from your cart</p>";
+                        var buttons = '<button class="popup-dialog-button dynamic-content" id='+continueId+' onclick="Confirm.yes(\''+continueId+'\')">Continue</button> <button class="popup-dialog-button" onclick="Confirm.no()">Cancel</button>';
+                    }
+                    var winWidth = window.innerWidth;
+                    var winHeight = window.innerHeight;
+                    var dOverlay = document.getElementById("dialogoverlay");
+                    var dBox = document.getElementById("dialogbox");
+                    dOverlay.style.display = "block";
+                    dOverlay.style.height = winHeight+"px";
+                    dBox.style.left = (winWidth/2)-(280 * .5)+"px";
+                    dBox.style.top = "100px";
+                    dBox.style.display = "block";
+                    dBox.classList = "animate";
+                    document.getElementById("dialogboxhead").innerHTML = dialog;
+                    document.getElementById("dialogboxbody").innerHTML = html;
+                    document.getElementById("dialogboxfoot").innerHTML = buttons;
+                }
+                this.no = function(){
+                    var dOverlay = document.getElementById("dialogoverlay");
+                    var dBox = document.getElementById("dialogbox");
+                    dOverlay.style.display = "none";
+                    dBox.style.display = "none";
+
+                }
+                this.yes = function(id){
+
+                		console.log(id);
+                		CART.remove(id)
+		                //_("items-number").innerHTML = CART.contents.length;
+                        var dOverlay = document.getElementById("dialogoverlay");
+                        var dBox = document.getElementById("dialogbox");
+                        dOverlay.style.display = "none";
+                        dBox.style.display = "none";
+                }
+        	}
+            var Confirm = new CustomConfirm();
+
+
+            function _(x) { return document.getElementById(x) };
+			function hasClass(element, className){
+				return element.className.split(" ").indexOf(className) > -1;
+			}
+			function addClass(element, className){
+				if(hasClass(element, className)){
+					return element.classList;
+				} else {
+					return element.classList.add(className);
+				}
+			}
+			function removeClass(element, className){
+				if(hasClass(element, className)){
+					return element.classList.remove(className);
+				}else{
+					return element.classList;
+				}
+			}
+            const CART = {
+	KEY: 'bjasopticajdbakhadjsk71movies',
+	contents: [],
+	init() {
+		//check localStorage and initialize the contents of CART.contentslet 
+		let _contents = localStorage.getItem(CART.KEY); 
+		if(_contents) {
+			CART.contents = JSON.parse(_contents);
+		}else {
+			CART.contents = [];
+			CART.sync();
+		}
+	},
+	async sync() {
+		let _cart = JSON.stringify(CART.contents);
+		await localStorage.setItem(CART.KEY, _cart);
+	},
+	find(id) {
+		console.log(id);
+		//find an item in the cart by its id
+		let match = CART.contents.filter(item => {
+			if(item.filmId == id) 
+				return true;
+		});
+		if(match && match[0])
+			return match[0];
+	},
+	addItem(id) {
+
+		if(CART.find(id)) {
+			return 0;//CART.increase(id, 1);
+			console.log(PAGEPRODUCTS);
+		}else{
+			let arr = PAGEPRODUCTS.filter(product=> {
+				if(product.filmId == id) {
+					return true;
+				}
+			});
+			console.log(arr);
+		if(arr && arr[0]) {
+			let obj = {
+				filmId: arr[0].filmId,
+				filmName: arr[0].filmName,
+				price: arr[0].price,
+				imageUrl: arr[0].imageUrl,
+				date: arr[0].date,
+				description: arr[0].description,
+				quantity: 1,
+				location: arr[0].location,
+			};
+			CART.contents.push(obj);
+			//update localStorage
+			
+			CART.sync();
+			console.log(CART.contents);
+		}else {
+			//product id does not exist in products data
+			console.error("invalid product");
+		}
+	}
+	},
+	filter(array, test){
+			var passed = [];
+			for(var i = 0; i< array.length; i++){
+				if(test(array[i])){
+					passed.push(array[i]);
+				}
+			}
+			return passed;
+		
+	},
+	remove(id) {
+		//remove an item entirely from CART.contents based on its id 
+		CART.contents = CART.filter(CART.contents, (items)=> {
+			return items.filmId != id;
+		})
+		_(id).innerHTML = "Add";
+		//update localStorage
+		console.log(CART.contents);
+		CART.sync();
+	},
+	empty() {
+		//empty whole cart
+		CART.contents = [];
+		//update localStorage
+		CART.sync();
+	},
+}
             function getAllUrlParams(url){
                 var queryString = url ? url.split("?")[1] : window.location.search.splice(1);
                 var obj = {}
@@ -455,28 +638,117 @@
             console.log(getAllUrlParams(window.location.href));
             let urldata = getAllUrlParams(window.location.href);
             console.log(urldata);
-            var nowshowing = ;
+            var nowshowing = '';
             if(urldata.itemtype=="westlands"){
                 nowshowing = [
-					{"filmId": "524428f621d601b","filmName": "Bad Bots 2","price":400,"imageUrl":"small_Mercedes petronas shirt.jpg", "description":"The robots are back and this time they are meaner than ever can jody stop them this time or will earth fall to the powers of the mighty Bad Bots", "date":"4/3/2020"},
-					{"filmId": "5d4428f621d601c","filmName": "Bad Boys 3","Price":400,"imageUrl":"small_Mercedes petronas shirt.jpg", "description": "Mike and Marcus are back watch them in this action packed thriller that will shurely live you anquered to yous seat", "date":"4/3/2020"},
-                    {"filmId": "524428f621d601e","filmName": "Dino","price":200,"imageUrl":"small_Mercedes petronas shirt.jpg", "description":"Ever seen a dinosour go wild no you haven't see them today", "date":"4/3/2020"},
-					{"filmId": "5d4428f621d601f","filmName": "Misfits","price":600,"imageUrl":"small_Mercedes petronas shirt.jpg", "description": "2 men and a baby go along the most breathtaking mission of their lives", "date":"4/3/2020"}
+					{"filmId": "524428f621d601bxz","filmName": "Bad Bots 2","price":400,"imageUrl":"small_Mercedes petronas shirt.jpg", "description":"The robots are back and this time they are meaner than ever can jody stop them this time or will earth fall to the powers of the mighty Bad Bots", "date":"4/3/2020", "location":"Westlands"},
+					{"filmId": "5d4428f621d601c11","filmName": "Bad Boys 3","Price":400,"imageUrl":"small_Mercedes petronas shirt.jpg", "description": "Mike and Marcus are back watch them in this action packed thriller that will shurely live you anquered to yous seat", "date":"4/3/2020", "location":"Westlands"},
+                    {"filmId": "524428f621d601e2e","filmName": "Dino","price":200,"imageUrl":"small_Mercedes petronas shirt.jpg", "description":"Ever seen a dinosour go wild no you haven't see them today", "date":"4/3/2020", "location":"Westlands"},
+					{"filmId": "5d4428f621d601fwe1","filmName": "Misfits","price":600,"imageUrl":"small_Mercedes petronas shirt.jpg", "description": "2 men and a baby go along the most breathtaking mission of their lives", "date":"4/3/2020", "location":"Westlands"}
 					]
             }else if(urldata.itemtype=="parklands"){
                 nowshowing = [
-                    {"filmId": "524428f621d601e","filmName": "Dino","price":200,"imageUrl":"small_Mercedes petronas shirt.jpg", "description":"Ever seen a dinosour go wild no you haven't see them today", "date":"4/3/2020"},
-					{"filmId": "5d4428f621d601f","filmName": "Misfits","price":600,"imageUrl":"small_Mercedes petronas shirt.jpg", "description": "2 men and a baby go along the most breathtaking mission of their lives", "date":"4/3/2020"}
+                    {"filmId": "524428f621d601e12","filmName": "Dino","price":200,"imageUrl":"small_Mercedes petronas shirt.jpg", "description":"Ever seen a dinosour go wild no you haven't see them today", "date":"4/3/2020", "location":"Parklands"},
+					{"filmId": "5d4428f621d601f6y","filmName": "Misfits","price":600,"imageUrl":"small_Mercedes petronas shirt.jpg", "description": "2 men and a baby go along the most breathtaking mission of their lives", "date":"4/3/2020", "location":"Parklands"}
 					]
             }else if(urldata.itemtype=="kasarani"){
                 nowshowing = [
-                    {"filmId": "524428f621d601b","filmName": "Bad Bots 2","price":400,"imageUrl":"small_Mercedes petronas shirt.jpg", "description":"The robots are back and this time they are meaner than ever can jody stop them this time or will earth fall to the powers of the mighty Bad Bots","date":"4/3/2020" },
-					{"filmId": "5d4428f621d601c","filmName": "Bad Boys 3","Price":400,"imageUrl":"small_Mercedes petronas shirt.jpg", "description": "Mike and Marcus are back watch them in this action packed thriller that will shurely live you anquered to yous seat", "date":"4/3/2020"},
-                    {"filmId": "524428f621d601e","filmName": "Dino","price":200,"imageUrl":"small_Mercedes petronas shirt.jpg", "description":"Ever seen a dinosour go wild no you haven't see them today", "date":"5/3/2020"},
-					{"filmId": "5d4428f621d601f","filmName": "Misfits","price":600,"imageUrl":"small_Mercedes petronas shirt.jpg", "description": "2 men and a baby go along the most breathtaking mission of their lives", "date":"5/3/2020"},
-                    {"filmId": "5d4428f621d601f","filmName": "Broken Arrow","price":200,"imageUrl":"small_Mercedes petronas shirt.jpg", "description": "When the fate of the world falls into your arms, with warheads and missiles", "date":"10/3/2020"},
+                    {"filmId": "524428f621d601b","filmName": "Bad Bots 2","price":400,"imageUrl":"small_Mercedes petronas shirt.jpg", "description":"The robots are back and this time they are meaner than ever can jody stop them this time or will earth fall to the powers of the mighty Bad Bots","date":"4/3/2020", "location":"Kasarani" },
+					{"filmId": "5d4428f621d601c","filmName": "Bad Boys 3","Price":400,"imageUrl":"small_Mercedes petronas shirt.jpg", "description": "Mike and Marcus are back watch them in this action packed thriller that will shurely live you anquered to yous seat", "date":"4/3/2020", "location":"Kasarani"},
+                    {"filmId": "524428f621d601e","filmName": "Dino","price":200,"imageUrl":"small_Mercedes petronas shirt.jpg", "description":"Ever seen a dinosour go wild no you haven't see them today", "date":"5/3/2020", "location":"Kasarani"},
+					{"filmId": "5d4428f621d601f","filmName": "Misfits","price":600,"imageUrl":"small_Mercedes petronas shirt.jpg", "description": "2 men and a baby go along the most breathtaking mission of their lives", "date":"5/3/2020", "location":"Kasarani"},
+                    {"filmId": "5d4428f621d601f","filmName": "Broken Arrow","price":200,"imageUrl":"small_Mercedes petronas shirt.jpg", "description": "When the fate of the world falls into your arms, with warheads and missiles", "date":"10/3/2020", "location":"Kasarani"},
 				]
             }
+			function getHref(){
+				document.querySelector(".view-item").addEventListener("click", function(e) {
+					if(hasClass(e.target, "view-item")){
+						e.preventDefault();
+						var href = e.currentTarget.getAttribute("href")
+						console.log(href);	
+					}
+					e.preventDefault();
+					var href = e.currentTarget.getAttribute("href")
+					console.log(e.target.getAttribute("data-id"))
+					//window.location = href+"?branchid="+urldata.branchid+"&totalprice="+CARTCHECKOUT.totalPrice();
+					//window.location = href+"?itemid="+e.target.getAttribute("data-id");
+					sendMessage(href, e.target.getAttribute("data-id"));
+				})
+			}
+			let PAGEPRODUCTS = [];
+        function showPageProducts(cart) {
+			var cartJson = JSON.parse(cart);
+			const cartLength = cartJson.length;
+			console.log(cartJson);
+			//console.log(cartLength);
+			console.log(cartLength);
+			console.log(nowshowing)
+						PAGEPRODUCTS = nowshowing;
+					   _("movie-list").innerHTML += PAGEPRODUCTS.map(function(item){
+							
+								for(var i=0; i<cartLength; i++){
+									if(item.filmId == cartJson[i].filmId) {
+										return  `
+										<div class='schedule'>
+											<div class="detail">
+												<span class="date go-to-event" >${cartJson[i].date}</span>
+												<span class="location">${cartJson[i].filmName}</span>
+												<button class='btn view-item' data-id=${cartJson[i].filmId} href="movie.html?movieid="${cartJson[i].filmId}" >View</button>
+												<button class="add-to-cart check-status btn" data-id=${cartJson[i].filmId} id=${cartJson[i].filmId}>In Cart</button>
+											</div>
+											<div class="map-location">
+                								<img src="${cartJson[i].imageUrl}" alt="map">
+            								</div>
+											<div class="schedule-info">
+                								<div class="rows">${cartJson[i].description}</div>
+            								</div>
+										</div>`;
+									}
+								}	
+								return	`
+									<div class='schedule'>
+										<div class="detail">
+											<span class="date go-to-event" >${item.date}</span>
+											<span class="location">${item.filmName}</span>
+											<button class='btn view-item' data-id=${item.filmId} href="movie.html?movieid="${item.filmId}" >View</button>
+											<button class="add-to-cart check-status btn" data-id=${item.filmId} id=${item.filmId}>Add</button>
+										</div>
+										<div class="map-location">
+                							<img src="${item.imageUrl}" alt="map">
+            							</div>
+										<div class="schedule-info">
+                							<div class="rows">${item.description}</div>
+            							</div>
+									</div>`;
+									
+								});
+		            
+		}
+		window.onload = function(){
+			var incarts = localStorage.getItem(CART.KEY);
+        	var incartsJson = JSON.parse(incarts);
+			var allButtons = document.getElementsByClassName("button");
+			window.addEventListener("click", function(e){
+		        if(hasClass(e.target, "check-status")){
+		            console.log(e.target.id)
+		            if(CART.find(e.target.id)){
+		                console.log("item in cart");
+		                Confirm.render('remove-cart-item', 'Remove from Cart',e.target.id);
+		            }else {
+		                console.log("item not in cart");
+		                _(e.target.id).innerHTML = "In Cart";
+		                CART.addItem(e.target.id, urldata.categoryid);
+		               //_("items-number").innerHTML = CART.contents.length;
+		                console.log(CART.contents.length);
+		            }   
+		        }
+		    }, false)
+		    //get the cart items from localStorage
+    		CART.init();
+
+			showPageProducts(incarts);
+			getHref();
+		}
         </script>
 
     </body>
