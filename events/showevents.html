@@ -41,7 +41,7 @@
             if(theMarker != undefined){
 				map.removeLayer(theMarker);
             }
-            theMarker = L.marker([lat, lng]).addTo(map);
+            theMarker = L.marker([data.latitude, data.longitude]).addTo(map);
         });
     </script>
 </html>
