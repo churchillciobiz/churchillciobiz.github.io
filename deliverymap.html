@@ -6,8 +6,11 @@
 	<!--[if lte IE 8]>
     	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.ie.css" />
 	<![endif]-->
+	<script src="/socket.io.js"></script>
+        <script>
+            var socket = io("https://enigmatic-hamlet-83578.herokuapp.com");
+        </script>
 	<script src="jquery.js"></script>
-	<link href='http://fonts.googleapis.com/css?family=Milonga' rel='stylesheet' type='text/css'>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	<style type="text/css">
 		body {
     		padding: 0;
@@ -15,7 +18,6 @@
 		}
 		html, body, #map {
 		    height: 100%;
-		    font-family: 'Milonga', cursive;
 		}
 		.leaflet-container .leaflet-control-zoom {
 		    margin-left: 13px;
@@ -306,10 +308,10 @@ function removeClass(element, className){
 					lat = e.latlng.lat;
 					lng = e.latlng.lng;
 					console.log(lat, lng);
+					socket.emit("new coordinates", {latitude:lat, longitude:lng});
 					if(theMarker != undefined){
 						map.removeLayer(theMarker);
 					}
-
 					theMarker = L.marker([lat, lng]).addTo(map);
 					_("popup-confirm").style.display = "none";
 					_("popup").style.display = "block";
@@ -317,6 +319,7 @@ function removeClass(element, className){
 					_("popup-confirm").style.display = "none";
 				}else if(hasClass(event.target, "done")){
 					_("popup").style.display = "none";
+
 				}
 			}, true);
 		}

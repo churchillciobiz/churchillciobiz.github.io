@@ -4,6 +4,11 @@
         <link rel="stylesheet" href="chart.css" />
         <script src="jquery.js"></script>
 	    <script src="chart.js"></script>
+		<style>
+			body{
+				font-family: 'Quicksand', sans-serif;
+			}
+		</style>
     </head>
     <body>
             <p>Update Analysis</p>
@@ -67,7 +72,7 @@ var lineChart = new Chart(speedCanvas, {
 var speedCanvas = document.getElementById("speedChart2");
 
 Chart.defaults.global.defaultFontFamily = "Lato";
-Chart.defaults.global.defaultFontSize = 4;
+Chart.defaults.global.defaultFontSize = 12;
 
 var dataFirst = {
     label: "Men",
