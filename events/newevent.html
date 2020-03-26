@@ -711,7 +711,7 @@ window.parent.postMessage(msg, '*');
                         fetch(url,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json",'Authorization': 'Bearer '+cartJson[0].token,},body:JSON.stringify({eventId:CART.contents[3],token:cartJson[0].token,description:description, eventImg: CART.contents[4]})}).then((response)=>response.json()).then((responseJsonFromServer)=>{console.log(responseJsonFromServer);
                         if(responseJsonFromServer.result=="event-img-added"){
                             CART.contents.pop();
-
+ 
                             console.log(CART.contents[3]);
                             console.log(CART.contents)
                         }else{

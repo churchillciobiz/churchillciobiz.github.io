@@ -128,18 +128,18 @@
 
 
 #popup-confirm{
-				max-width: 350px;
-				width: 100%;
-				height: auto;
-				background: #fff;
-				padding: 35px 28px;
-				position: absolute;
-				top: 48%;
-				left: 50%;
-				transform: translate(-50%,-50%);
-				border-radius: 20px;
-				z-index: 1999999999999999;
-				box-shadow: 0 5px 9px 0 rgba(0,0,0,0.2);
+	max-width: 213px;
+    width: 100%;
+    height: auto;
+    background: #fff;
+    padding: 14px 15px;
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 20px;
+    z-index: 1999999999999999;
+    box-shadow: 0 5px 9px 0 rgba(0,0,0,0.2);
 				display:none;
 			}
 			#popup-confirm #popup-top{
@@ -160,13 +160,8 @@
     			border-radius: 50%;
 			}
 			#popup-confirm #popup-body{
-				display: flex;
-				flex-direction: column;
-				justify-content: space-evenly;
 				font-size: 15px;
     			color: rgba(0,0,0,0.3);
-				margin-top: 25px;
-    			margin-bottom: 16px;
 			}
 			#total-wrapper{
 				display: flex;
@@ -227,6 +222,9 @@
   background-color:red;
   box-shadow:0px 0px 5px 2px rgba(0,0,0,0.5);
 }
+#count-down{
+	font-size: 21px;;
+}
 	</style>	
 	
 </head>
@@ -237,15 +235,11 @@
 		<div id="popup-top">
 		</div>
 		<div id="popup-body">
-			<div class="box">
-				Confirm
-			</div>
-			<div id="checkbox" style="display:flex;flex-direction:column;">
-				Deliver to this location;
+			<div id="checkbox">
+				<span id="count-down">10</span>s to Cancel Delivery to this location
 			</div>
 		
 		<div id="popup-bottom">
-			<button class="book-dynamic okay-location" id="okay">Okay</button>
 			<button class="book-dynamic cancel" id="cancel">Cancel</button>
 		</div>
 	</div>
@@ -303,7 +297,8 @@ function removeClass(element, className){
 		}).addTo(map);
 		function onMapClicked(e){
 			_("popup-confirm").style.display = "block";
-			document.addEventListener("click", function(event){
+
+			/*document.addEventListener("click", function(event){
 				if(hasClass(event.target, "okay-location")){
 					lat = e.latlng.lat;
 					lng = e.latlng.lng;
@@ -321,7 +316,13 @@ function removeClass(element, className){
 					_("popup").style.display = "none";
 
 				}
-			}, true);
+			}, true);*/
+			count = 10;
+			setTimeout(function(){
+				count--;
+				document.getElementById("count-down").innerHTML == count;
+			}, 1000);
+
 		}
 		map.on('click', onMapClicked);
 		
