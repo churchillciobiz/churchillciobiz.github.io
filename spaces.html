@@ -1036,9 +1036,8 @@ const CART = {
 		CART.sync();
 	},
 	empty() {
-		//empty whole cart
 		CART.contents = [];
-		//update localStorage
+	
 		CART.sync();
 	},
 	sort(field="title") {

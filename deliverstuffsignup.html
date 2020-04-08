@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Login Form</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+  </style>
+</head>
+<body>
+<div>
+    <p id="logo">DeliVer v1.0</p> 
+</div>
+<div class="wrapper">
+  <div class="title">
+    Sign up Here
+  </div>
+  
+  <div class="form">
+    <div class="input_field">
+        <input type="text" placeholder="Name" class="input" id="name">
+        <i class="fas fa-user"></i>
+    </div>  
+    <div class="input_field">
+      <input type="text" placeholder="Email" class="input" id="email">
+      <i class="fas fa-user"></i>
+    </div>
+    <div class="input_field">
+      <input type="password" placeholder="Password" class="input" id="vCode">
+      <i class="fas fa-lock"></i>
+    </div>
+    <div class="btn">
+      <a href="#" id="login">Sign up</a>
+    </div>
+  </div>
+  <div id="error-handler" style="text-align: center;color:red;">
+        
+  </div>
+</div>	
+	<script>
+        function _(x) { return document.getElementById(x) };
+            function hasClass(element, className){
+                return element.className.split(" ").indexOf(className) > -1;
+            }
+            function addClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList;
+                } else {
+                    return element.classList.add(className);
+                }
+            }
+            function removeClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList.remove(className);
+                }else{
+                    return element.classList;
+                }
+            }
+            //var url = "https://enigmatic-hamlet-83578.herokuapp.com/deliverydashsignup";
+    var url = "http://127.0.0.1:5000/deliverydashsignup";
+    const CART={KEY:'bjasjdbakhadjsk77',contents:[],init(){let _contents = localStorage.getItem(CART.KEY);if(_contents){CART.contents = JSON.parse(_contents);}else{CART.contents = [];CART.sync();}},async sync(){let _cart = JSON.stringify(CART.contents);await localStorage.setItem(CART.KEY, _cart);},addItem(token){let obj={token:token};CART.contents.push(obj);CART.sync();console.log(CART.contents);},empty(){CART.contents=[];CART.sync();}};
+    window.onload=function(){function _(x){return document.getElementById(x);};function processPhase1(){var name=_("name").value;var email=_("email").value;var verificationCode=_("vCode").value;console.log(name,email,verificationCode);if(verificationCode.length>0&&email.length>0&&name.length>0){fetch(url,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json",},body:JSON.stringify({password:verificationCode,email:email,name:name})}).then((response)=>response.json()).then((responseJsonFromServer)=>{console.log(responseJsonFromServer);
+        if(responseJsonFromServer.message=="success"){
+            console.log(responseJsonFromServer)
+            //add token to cart local storage
+            //CART.addItem(responseJsonFromServer.token);
+            window.location = "home.html";
+
+        }else{
+            _("error-handler").innerHTML="Could not sign you up";
+        }
+      });
+    }else{_("error-handler").innerHTML="Please fill all the fields";};}
+    _("login").addEventListener("click", function(){processPhase1()});
+            }
+    </script>
+</body>
+</html>

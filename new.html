@@ -1,0 +1,28 @@
+<html>
+    <body>
+        <div class="set-form">
+            <table id="myTable" class="table table-bordered">
+              <tr>
+                <th>Question</th>
+                <th>Answer</th>
+              </tr>
+              <tr>
+                <td>
+                  <textarea name="Question" placeholder="Question" th:field="${questionAnswerSet.question}" id="question" style="resize: none; width: 100%;"></textarea>
+                </td>
+                <td>
+                  <textarea name="Answer" placeholder="Answer" th:field="${questionAnswerSet.answer}" id="answer" style="resize: none; width: 100%;"></textarea>
+                </td>
+              </tr>
+            </table>
+            <div class="set-form">
+              <input type="button" id="more_fields" onclick="add_fields();" value="Add More" class="btn btn-info" />
+            </div>
+            <script>
+                function add_fields() {
+document.getElementById("myTable").insertRow(-1).innerHTML = '<tr><td><textarea name ="Question" placeholder="Question" th: field = "${questionAnswerSet.question}" id="question" style = "resize: none; width:100%;"></textarea></td><td><textarea name="Answer" placeholder ="Answer" th: field = "${questionAnswerSet.answer}" id="answer" style="resize:none;width: 100%;"></textarea></td ></tr>';
+}
+add_fields();
+            </script>
+    </body>
+</html>
