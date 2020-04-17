@@ -264,7 +264,7 @@
 		</div>
 		
 		<div id="popup-bottom">
-			<button class="book-dynamic done" id="okay">Okay</button>
+			<button class="book-dynamic done okay-location" id="okay-location">Okay</button>
 		</div>
 	</div>
 	</div>
@@ -298,7 +298,7 @@ function removeClass(element, className){
 		function onMapClicked(e){
 			_("popup-confirm").style.display = "block";
 
-			/*document.addEventListener("click", function(event){
+			document.addEventListener("click", function(event){
 				if(hasClass(event.target, "okay-location")){
 					lat = e.latlng.lat;
 					lng = e.latlng.lng;
@@ -316,12 +316,12 @@ function removeClass(element, className){
 					_("popup").style.display = "none";
 
 				}
-			}, true);*/
-			count = 10;
+			}, true);
+			/*count = 10;
 			setTimeout(function(){
 				count--;
 				document.getElementById("count-down").innerHTML == count;
-			}, 1000);
+			}, 1000);*/
 
 		}
 		map.on('click', onMapClicked);
