@@ -392,9 +392,16 @@
     line-height: 16px;
     margin: 0px 0px 5px 0px;
 }
+.app {
+    background: #f7f9fc;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
         </style>
     </head>
     <body>
+	<div class="app">
         <div id="top-header">
             <div >this is a</div>
         </div>
@@ -449,6 +456,7 @@
 			</div>
 		</div>
 		<button id="calculate" class="btn">Calculate</button>
+		</div>
         <script>
 			function _(x) { return document.getElementById(x) };
 	
@@ -780,5 +788,6 @@
 				
 	        }
         </script>
+		
     </body>
 </html>
