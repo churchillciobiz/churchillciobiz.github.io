@@ -1,0 +1,6 @@
+[
+    {"name":"Coca-cola", "quantities":[30,300,500,1000], "prices":[25,40,50,60], "crateSize":26},
+    {"name":"Yola", "quantities":[30,60], "prices":[30,60], "crateSize":10},
+    {"name":"Fanta", "quantities":[30,300,500,1000],"prices":[25,40,50,60], "crateSize":26},
+    {"name":"Sprite", "quantities":[30,300,500,1000],"prices":[25,40,50,60], "crateSize":26}   
+]

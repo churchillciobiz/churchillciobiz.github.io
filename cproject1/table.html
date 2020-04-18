@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+
+        <table id="auto-table" class="table"></table>
+        <script>
+            var bottlerData = [
+                {name:"Coca-cola", quantity:[30,300,500,1000], price:[25,40,50,60], crate:26},
+                {name:"Yola", quantity:[30,60], price:[30,60], crate:10},
+                {name:"Fanta", quantity:[30,300,500,1000], price:[25,40,50,60], crate:26},
+                {name:"Sprite", quantity:[30,300,500,1000], price:[25,40,50,60], crate:26},
+            ];
+
+            console.log(bottlerData);
+            function tableGenerater(data){
+                var header = [];
+                var products = [];
+                for(var i=0;i<data.length;i++){
+                    for(var j=0;j<data[i].quantity.length;j++){
+                        if(header.indexOf(data[i].quantity[j])==-1){
+                            header.push(data[i].quantity[j]);
+                        } 
+                    }
+                }
+                for(var i=0;i<data.length;i++){
+                    products.push(data[i].name);
+                }
+                console.log(products);
+                console.log(header);
+                for(var i=0;i<header.length+1;i++){
+                    for(var j=0;j<products.length;j++){
+                        document.getElementById("auto-table").innerHTML = "<thead><tr>";
+                    }
+                }
+                    
+            }
+            tableGenerater(bottlerData);
+        </script>
+    </body>
+</html>

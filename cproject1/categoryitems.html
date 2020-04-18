@@ -1,0 +1,276 @@
+<html>
+    <head>
+        <style>
+            *{
+    box-sizing: border-box;
+}
+input, textarea{
+    outline: none;
+}
+body{
+    font-family: 'Quicksand', sans-serif; 
+    background: #f4f6f9;
+}
+html,body,div{
+    margin: 0;
+    padding: 0;
+}
+.heading h1{
+    color: purple;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+.heading p{
+    color: #1b1b1b;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+.cards{
+    overflow: auto;
+   
+}
+.cards .card{
+    background: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    overflow: auto;
+    margin-bottom:20px;
+    margin-left: 15px;
+}
+.homeTable{
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-radius: 5px;
+    background: #282639;
+}
+.homeTable {
+    padding: 1.2rem;
+    text-align: center;
+}
+.homeTable span{
+    font-size: 1.2rem;
+    color: #ffffff;
+    text-align: center;
+    vertical-align: middle;
+}
+.orange{
+    background: orange;
+}
+.green{
+    background: #92cf48;
+}
+.purple{
+    background: purple;
+}
+.homeTable2{
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-radius: 5px;
+    border: 1px solid rgba(0,0,0,0.03);
+    box-shadow: 0 10px 15px -1px rgba(0,0,0,0.1);
+}
+.go-to-items{
+    display:flex;
+}
+.flexed-table{
+    display:flex;
+    flex-direction:row;
+    margin:1rem
+}
+.image-container{
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+}
+.image-container .iconText{
+    align-self:center;
+}
+img{
+    display: block;
+    margin: 0 auto;
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+            }
+            .card-item-one{
+                width:40%;
+
+            }
+            #iframe-two{
+                width: 60%;
+                border: none;
+            }
+            #flexed{
+                display: flex;
+                height: 785px;
+            }
+            button{
+               cursor: pointer;
+    padding: 10px 15px;
+    border: none;
+    margin-top: 2px;
+    color: #fff;
+    font-size: 12px;
+    outline: none;
+            }
+            .btn-orange{
+                background: #ccc;
+                box-shadow: 1px 1px 0 rgba(0,0,0,0.2), 0 16px 15px -16px purple, inset 0 0 25px rgba(0,0,0,0.05);
+            }
+            .btn-red{
+                background:#282639;
+                box-shadow: 1px 1px 0 rgba(0,0,0,0.2), 0 16px 15px -16px #d24c0f, inset 0 0 25px rgba(0,0,0,0.05)
+            }
+            .btn-red:hover{
+                background: #cc524b;
+            }
+            .btn-orange:hover{
+                background: #b7862b;
+            }
+            img {
+    width: 60px;
+    height: 55px;
+}
+.active{
+    background:#92cf48;
+}
+        </style>
+    </head>
+    <body>
+        <div class="heading">
+            <h1>Dashboard</h1>
+            <p>Inventory</p>
+        </div>
+            <div id="flexed">
+                <div class="cards card-item-one">
+                        <div class="homeTable">
+                            <span>Manufacturer</span>
+                                
+                        </div>    
+                        <div class="homeTable2" id="homeTable2"></div>  
+                </div>
+                <iframe id="iframe-two">
+                    
+                </iframe>
+            </div>    
+        <script>
+        function bindEvent(element, eventName, eventHandler) {
+if (element.addEventListener) {
+element.addEventListener(eventName, eventHandler, false);
+} else if (element.attachEvent) {
+element.attachEvent('on' + eventName, eventHandler);
+}
+}
+// Send a message to the parent
+var sendMessage = function (msg) {
+// Make sure you are sending a string, and to stringify JSON
+window.parent.postMessage(msg, '*');
+};
+var results = document.getElementById('results'),
+messageButton = _("add-item");
+// Listen to messages from parent window
+bindEvent(window, 'message', function (e) {
+results.innerHTML = e.data;
+});
+// Listen to message from child window
+bindEvent(window, 'message', function (e) {
+    console.log(e.data);
+    if(e.data=="New item created in category"){
+        var notification = "New item created in category";
+        sendMessage('' + notification);
+    }
+});
+            const CART={
+                KEY:'dashbjasjdbakhadjsk77',contents:[],init(){let _contents = localStorage.getItem(CART.KEY);if(_contents){CART.contents = JSON.parse(_contents);}else{CART.contents = [];CART.sync();}},async sync(){let _cart = JSON.stringify(CART.contents);await localStorage.setItem(CART.KEY, _cart);},addItem(categoryName,itemName,itemPrice,itemDescription,itemFolder){let obj={itemCategory:categoryName,itemName:itemName,itemPrice:itemPrice,itemDescription:itemDescription,itemFolder:itemFolder};CART.contents.push(obj);CART.sync();console.log(CART.contents);},empty(){CART.contents=[];CART.sync();},addNewBranch(branchName){let obj={newBranch:branchName};CART.contents.push(obj);CART.sync();console.log(CART.contents);},cartLength(){
+                    let length = CART.contents.length;
+                  //  console.log(length)
+                    return length;
+                },
+            } 
+            let cartContent = localStorage.getItem("bjasjdbakhadjsk77");
+            let cartJson =  JSON.parse(cartContent);
+            console.log(cartJson);
+
+            function _(x) { return document.getElementById(x) };
+            function hasClass(element, className){
+                return element.className.split(" ").indexOf(className) > -1;
+            }
+            function addClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList;
+                } else {
+                    return element.classList.add(className);
+                }
+            }
+            function removeClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList.remove(className);
+                }else{
+                    return element.classList;
+                }
+            }     
+            function fetchUserBranches(token){
+
+                fetch('https://enigmatic-hamlet-83578.herokuapp.com/getcategorieslistings/',
+                    {
+                        method: 'POST',
+                        headers: 
+                        {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(
+                        {
+                          adminId:1
+         
+                        })
+         
+                    }).then((resp) =>resp.json()).then((responseJsonFromServer) =>
+                    { 
+                        console.log(responseJsonFromServer);
+                        responseJsonFromServer.categories.map(function(category){
+                           _("homeTable2").innerHTML +=  `
+                                <div class='flexed-table'>
+                                    <div id='${category.name}' class='go-to-items'>
+                                        <div class='image-container'><img src='${category.image}' alt='${category.name}'/> <span class="iconText">${category.name}</span></div>
+                                        <div><button id=${category.productId} data-id='${category.productId}'' class='view-items dynamic btn-red'>brand products</button>  <button id=${category.productId} data-id='${category.categoryName}'  class='add-item-to-category dynamic btn-orange'>add ba product</button></div>
+                                    </div>
+                                </div>
+
+                            `;
+                            
+                        })
+                        console.log(responseJsonFromServer)
+                    }).catch((error) =>
+                    {
+                        console.error(error);
+
+                    });
+            }
+            function setIframeURL(urlLink, linkItem, categoryName){
+                document.getElementById('iframe-two').src = urlLink+linkItem+"&categoryName="+categoryName;
+            }
+            function setIframeURLTwo(urlLink, linkItem){
+                document.getElementById('iframe-two').src = urlLink+linkItem;
+            }
+            window.onload = function(){
+                fetchUserBranches(cartJson[0].token);
+                setIframeURL("");
+                document.addEventListener("click", function(e) {
+                    if(hasClass(e.target, "view-items")){
+                        e.preventDefault();
+                        console.log(e.target.id); 
+                        setIframeURLTwo("listitems.html?categoryId=", e.target.id);
+                    }else if(hasClass(e.target, "add-item-to-category")){
+                        e.preventDefault();
+                        console.log(e.target.id); 
+                        console.log(e.target.getAttribute("data-id"));
+                        setIframeURL("additems.html?categoryId=", e.target.id, e.target.getAttribute("data-id"));
+                    }
+                })
+                document.getElementById('iframe-two').src = "defaultframe.html";
+            }
+        </script>        
+    </body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+          
+          #box{
+            width:400px;
+            height:400px;
+            background:orange;
+            margin:0 auto;
+            margin-top:3%;
+            overflow:hidden;
+
+				background: #fff;
+				border-radius: 20px;
+				z-index: 1999999999999999;
+				box-shadow: 0 5px 9px 0 rgba(0,0,0,0.2);
+          }  
+        </style>
+    </head>
+    <body>
+        <div id="demo"></div>
+        <script>
+
+
+            var x = document.getElementById("demo");
+            function getLocation() {
+              if (navigator.geolocation) {
+                let giveUp = 1000 * 30; //30 seconds
+                let tooOld = 1000 * 60 * 60 //1 hr   
+                var options = {
+                    enableHighAccuracy: true,
+                    timeout: giveUp,
+                    maximumAge: tooOld
+                }  
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+                var watchId = navigator.geolocation.watchPosition(showPosition, showError, options);
+              } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+              }
+            }
+            
+            function showPosition(position) {
+              x.innerHTML = "Latitude: " + position.coords.latitude +
+              "<br>Longitude: " + position.coords.longitude;
+            }
+            function showError(error) {
+                switch(error.code) {
+                    case error.PERMISSION_DENIED:
+                    x.innerHTML = "User denied the request for Geolocation."
+                    break;
+                    case error.POSITION_UNAVAILABLE:
+                    x.innerHTML = "Location information is unavailable."
+                    break;
+                    case error.TIMEOUT:
+                    x.innerHTML = "The request to get user location timed out."
+                    break;
+                    case error.UNKNOWN_ERROR:
+                    x.innerHTML = "An unknown error occurred."
+                    break;
+                }
+            }
+            getLocation();
+                    </script>
+    </body>
+</html>

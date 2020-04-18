@@ -1,0 +1,294 @@
+<html>
+    <head>
+        <style>
+            *{
+    box-sizing: border-box;
+}
+input, textarea{
+    outline: none;
+}
+body{
+    font-family: 'Quicksand', sans-serif; 
+    background: #f4f6f9;
+}
+html,body,div{
+    margin: 0;
+    padding: 0;
+}
+.heading h1{
+    color: purple;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+.heading p{
+    color: #1b1b1b;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+.cards{
+    overflow: auto;
+    width:37%;
+}
+.cards .card{
+    background: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    overflow: auto;
+    margin-bottom:20px;
+    margin-left: 15px;
+}
+.colmd4{
+    width: 30.33%;
+    padding: 0 15px;
+    display: inline-block;
+}
+.colmd3{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0 15px;
+    display: inline-block;
+
+}
+.colmd2{
+    display: flex;
+}
+.colmd10{
+    margin-left: 10px;
+    font-size: 0.8rem;
+    margin-top: 12px;
+}
+.homeTable{
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-radius: 5px;
+    background: #282639;
+}
+.homeTable {
+    padding: 1.2rem;
+    text-align: center;
+}
+.homeTable span{
+    font-size: 1.2rem;
+    color: #ffffff;
+    text-align: center;
+    vertical-align: middle;
+}
+.orange{
+    background: orange;
+}
+.green{
+    background: #92cf48;
+}
+.purple{
+    background: purple;
+}
+.homeTable2{
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-radius: 5px;
+    border: 1px solid rgba(0,0,0,0.03);
+    box-shadow: 0 10px 15px -1px rgba(0,0,0,0.1);
+}
+.go-to-items{
+    display:flex;
+}
+.flexed-table{
+    display:flex;
+    flex-direction:row;
+    margin:1rem
+}
+.image-container{
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+}
+.image-container .iconText{
+    align-self:center;
+}
+img{
+    display: block;
+    margin: 0 auto;
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+            }
+            button{
+                cursor: pointer;
+                padding: 10px 15px;
+                border: none;
+                margin-top: 2px;
+                color: #fff;
+                font-size: 12px;
+                margin-left: 10px;
+                    min-width: 140px;
+                    outline:none;
+            }
+            .btn-orange{
+                background: #ccc;
+                box-shadow: 1px 1px 0 rgba(0,0,0,0.2), 0 16px 15px -16px purple, inset 0 0 25px rgba(0,0,0,0.05);
+            }
+            .btn-light-red{
+                background:#282639;
+                box-shadow: 1px 1px 0 rgba(0,0,0,0.2), 0 16px 15px -16px #d24c0f, inset 0 0 25px rgba(0,0,0,0.05)
+            }
+            .btn-light-red:hover{
+                background: #cc524b;
+            }
+            .btn-orange:hover{
+                background: #b7862b;
+            }
+            #iframe-two{
+                width: 73%;
+                border: none;
+            }
+            #flexed{
+                display: flex;
+                height: 785px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="heading">
+            <h1>Dashboard</h1>
+            <p>Manufacturers items</p>
+        </div>
+        <div id="flexed">
+            <div class="cards">
+                    <div class="homeTable">
+                        <span>Manufacturers</span>
+                    </div>    
+                    <div class="homeTable2" id="homeTable2">
+                    </div> 
+                </div>
+                <iframe id="iframe-two">
+
+                </iframe> 
+        </div>
+        <script>
+            let cartContent = localStorage.getItem("bjasjdbakhadjsk77");
+            let cartJson =  JSON.parse(cartContent);
+            console.log(cartJson);
+
+            function _(x) { return document.getElementById(x) };
+            function hasClass(element, className){
+                return element.className.split(" ").indexOf(className) > -1;
+            }
+            function addClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList;
+                } else {
+                    return element.classList.add(className);
+                }
+            }
+            function removeClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList.remove(className);
+                }else{
+                    return element.classList;
+                }
+            }
+            function setIframeURL(urlLink, linkItem, categoryName){
+                document.getElementById('iframe-two').src = urlLink+linkItem+"&categoryName="+categoryName;
+            }     
+            function fetchUserBranches(token){
+                
+                fetch('http://127.0.0.1:9999/getitemcategories/',
+                    {
+                        method: 'POST',
+                        headers: 
+                        {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer '+token,
+                        },
+                        body: JSON.stringify(
+                        {
+                          token: token,
+         
+                        })
+         
+                    }).then((resp) =>resp.json()).then((responseJsonFromServer) =>
+                    { 
+                        responseJsonFromServer.map(function(category, i){
+                           _("homeTable2").innerHTML += `<div class='flexed-table'>
+                                        <div class='go-to-items'>
+                                            <div class="image-container">
+                                                <img src=${category.imageUrl} alt=${category.categoryName} class="user-1"><span class="iconText">${category.categoryName}</span></div>
+                                                <div><button id=${category._id} class='edit-item dynamic btn-orange'>edit this</button>
+                                                    <button id=${category._id} class='go-to-subs dynamic btn-light-red'>sub categories</button> 
+                                                    <button id=${category._id} class='delete-item dynamic btn-light-red'>delete this </button>
+                                                </div>
+                                            </div>
+                                        </div>`;
+                        })
+                        console.log(responseJsonFromServer)
+                    }).catch((error) =>
+                    {
+                        console.error(error);
+
+                    });
+            }
+
+            function bindEvent(element, eventName, eventHandler) {
+if (element.addEventListener){
+element.addEventListener(eventName, eventHandler, false);
+} else if (element.attachEvent) {
+element.attachEvent('on' + eventName, eventHandler);
+}
+}
+bindEvent(window, 'message', function (e) {
+    console.log(e.data);
+    if(e.data=="category has been edited"){
+        //setIframeURL("categorylisting.html.html", cartJson);
+        window.location = "categorylisting.html"
+        
+    }
+});
+
+            window.onload = function(){
+                fetchUserBranches(cartJson[0].token);
+                document.addEventListener("click", function(e) {
+                    if(hasClass(e.target, "delete-item")){
+                        e.preventDefault();
+                       // var href = e.currentTarget.getAttribute("href")
+                        console.log(e.target.id); 
+                        var confirmation = confirm("Warning ... Removing Category, will remove the items in this Category as well");
+                        if(confirmation == true){
+                            fetch('http://127.0.0.1:9999/deleteitemcategory',
+                                {
+                                    method: 'POST',
+                                    headers: 
+                                    {
+                                        'Accept': 'application/json',
+                                        'Content-Type': 'application/json',
+                                        'Authorization': 'Bearer '+cartJson[0].token,
+                                    },
+                                    body: JSON.stringify(
+                                    {
+                                        token: cartJson[0].token,
+                                        categoryId: e.target.id,
+                                    })
+                     
+                                }).then((resp) =>resp.json()).then((responseJsonFromServer) =>
+                                { 
+                                    console.log(responseJsonFromServer)
+                                }).catch((error) =>
+                                {
+                                    console.error(error);
+
+                                });
+                        }else if(confirmation == false){
+                            return 0;
+                        }
+                    }else if(hasClass(e.target, "go-to-subs")){
+                        setIframeURL("subcategorycreation.html?categoryId=", e.target.id, e.target.getAttribute("data-id"));
+                        alert(e.target.id);
+                    }else if(hasClass(e.target, "edit-item")){
+                        setIframeURL("categoryedit.html?categoryId=", e.target.id, e.target.getAttribute("data-id"));
+                    }
+                })
+            }
+        </script>        
+    </body>
+</html>

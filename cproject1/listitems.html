@@ -1,0 +1,504 @@
+<html>
+    <head>
+        <style>
+            *{
+    box-sizing: border-box;
+}
+input, textarea{
+    outline: none;
+}
+body{
+    font-family: 'Quicksand', sans-serif;
+    background: #f4f6f9;
+}
+html,body,div{
+    margin: 0;
+    padding: 0;
+}
+#logoSection{
+    width: 280px;
+    background: #302d43;
+    height: 60px;
+}
+#sideMenu{
+    background: #302d43;
+    width: 280px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-top: 60px;
+    padding-top: 40px;
+    min-height: 700px;
+}
+#sideMenu nav{
+    /*margin-top: 100px;*/
+}
+#sideMenu nav a{
+    display: block;
+    color: #eaedf3;
+    text-decoration: none;
+    padding: 15px 30px;
+    transition: all 0.3s ease-in-out;
+    font-size: 12px;
+}
+#sideMenu nav a.active{
+    background: #282639;
+    border-left:5px solid #92cf48;
+    padding: 15px 30px 15px 25px;
+}
+#sideMenu nav a:hover{
+    background: #282639;
+    border-left:5px solid #92cf48;
+}
+#sideMenu nav a.fa{
+    color: #92cf48;
+    font-weight: 300;
+    font-size: 1.4rem;
+    margin-right: 0.8rem;
+    display: inline-block;
+    width: 30px;
+    position: relative;
+    top:2px;
+}
+#topMenuBar{
+    width: 100%;
+    background: #ffffff;
+    height: 60px;
+}
+.accordion{
+    transition: 0.4s;
+}
+.panel{
+    background-color: #282639;
+    overflow:hidden;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+    color: #ffffff;
+    text-align: center;
+    font-size: 12px;
+}
+.panel a{
+    cursor: pointer;
+}
+.panel #store-search{
+    width: 80%;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 14px;
+    color: #fff;
+    border-bottom: 1px solid #92cf48;
+    padding: 15px 30px;
+}
+.heading h1{
+    color: purple;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+.heading p{
+    color: #1b1b1b;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+.cards{
+    overflow: auto;
+   
+}
+.cards .card{
+    background: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    overflow: auto;
+    margin-bottom:20px;
+    margin-left: 15px;
+}
+.cards .card .mealImage{
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 270px;
+    height: 100px;
+    background: #eaedf3;
+    margin: 0 auto;
+    border-radius: 4px;
+}
+.dishDescription #dishDescription{
+    height: 50px;
+    width: 230px;
+    border: 1px solid #b1abab;
+    border-radius: 3px;
+}
+.dishPrice{
+    margin-left: 10px;
+    font-size: 0.8rem;
+    margin-top: 13px;
+}
+.dishPrice #dishPrice{
+    border: none;
+    border-bottom: 1px solid #b1abab;
+    padding-bottom: 10px;
+    margin-left: 10px;
+    font-size: 0.8rem;
+    margin-top: 12px;
+    outline: none;
+    height: 35px;
+}
+.cards .card .userName{
+    font-size: 1rem;
+    color: purple;
+    display: block;
+    text-align: center;
+    margin: 10px 0;
+}
+.cards .card .userTitle{
+    display: block;
+    font-size: 0.8rem;
+    text-align: center;
+    margin: 18px 0;
+}
+.cards .card .education{
+    font-size: 0.8rem;
+    color: #eaedf3;
+}
+.cards .card .schools{
+    font-size: 0.8rem;
+}
+.cards .card h6{
+    font-size: 0.8rem;
+    position: relative;
+    top: -32px;
+}
+.cards .card .date{
+    font-size: 1.3rem;
+    display: block;
+    border-left: 5px solid #92cf48;
+    position: relative;
+    left: -20px;
+    padding: 5px 40px;
+    margin: 19px 0;
+}
+.cards .card .jobType{
+    background: orange;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 0.6rem;
+    color: #ffffff;
+    padding: 5px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 10px;
+}
+.colmd4{
+    width: 30.33%;
+    padding: 0 15px;
+    display: inline-block;
+}
+.colmd3{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0 15px;
+    display: inline-block;
+
+}
+.colmd2{
+    display: flex;
+}
+.colmd10{
+    margin-left: 10px;
+    font-size: 0.8rem;
+    margin-top: 12px;
+}
+.homeTable{
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-radius: 5px;
+    background: #282639;
+}
+.homeTable {
+    padding: 1.2rem;
+    text-align: center;
+}
+.homeTable span{
+    font-size: 1.2rem;
+    color: #ffffff;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+.homeTable2{
+    width: 95%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-radius: 5px;
+    border: 1px solid rgba(0,0,0,0.03);
+    box-shadow: 0 10px 15px -1px rgba(0,0,0,0.1);
+}
+.homeTable2 thead th {
+    text-transform: uppercase;
+    padding: 1.2rem;
+    color: #3b3c42;
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+.homeTable2 tbody td {
+    text-transform: uppercase;
+    padding: 1.2rem;
+    background-color: #fff;
+    font-size: 0.8rem;
+    font-weight: 400;
+    //text-align: center;
+    border-bottom: 0.7px solid #9E9E9E;
+}
+.homeTable2 tbody td .icon{
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 0.6rem;
+    color: #ffffff;
+    padding: 5px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+}
+.homeTable2 tbody td .iconText{
+    margin-left: 4px;
+}
+img{
+    display: block;
+    margin: 0 auto;
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+            }
+            .card-item-one{
+                width:100%;
+
+            }
+            #flexed{
+                display: flex;
+                height: 785px;
+            }
+            button{
+                cursor: pointer;
+            }
+            #iframe-two {
+                width: 100%;
+                border: none;
+                height: 100%;
+            }
+            #subselect{
+                padding:10px;
+            }
+            .loader{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+            .loader{
+                display:none;
+                position: absolute;
+                top: 250px;
+                left: 271px;
+            }
+			.loader>span{
+				display: inline-block;
+				background-color: #282639;
+				width: 0px;
+				height: 0px;
+				border-radius: 50%;
+				margin: 0 8px;
+				animation: bounce 0.6s infinite alternate;
+				transform: translate3d(0); 
+			}
+			.loader>span:nth-child(2){
+					background-color: #ccc;
+					animation-delay: 0.2s;
+			}
+			.loader>span:nth-child(3){
+				animation-delay: 0.4s;
+			}
+			@keyframes bounce{
+				to{
+					width: 16px;
+					height: 16px;
+					transform: translate3d(0,-16px,0); 
+				}
+			}
+        </style>
+    </head>
+    <body>
+            <div id="flexed">
+                <div class="cards card-item-one">
+                        <div class="homeTable">
+                            
+                                    <span>Items</span>
+                            
+
+                        </div>  
+                        <table class="homeTable2" id="homeTable2">
+                            <div class="loader" id="loading">
+                                <span class="circle"></span>
+                                <span class="circle"></span>
+                                <span class="circle"></span>
+                            </div> 
+                    </table>  
+                </div>
+            </div>    
+         <script>
+            function _(x) { return document.getElementById(x) };
+            function hasClass(element, className){
+                return element.className.split(" ").indexOf(className) > -1;
+            }
+            function addClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList;
+                } else {
+                    return element.classList.add(className);
+                }
+            }
+            function removeClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList.remove(className);
+                }else{
+                    return element.classList;
+                }
+            }     
+            function getAllUrlParams(url){
+                var queryString = url ? url.split("?")[1] : window.location.search.splice(1);   
+                var obj = {}
+                if(queryString){
+                    queryString = queryString.split("#")[0]
+                    var arr = queryString.split("&");
+                    
+                    for(var i = 0; i<arr.length; i++){
+                        var a = arr[i].split("=");
+                        var paramName = a[0];
+                        
+                        var paramValue = typeof(a[1]) === 'undefined' ? true: a[1];
+                        
+                        paramName = paramName.toLowerCase();
+                        if(typeof paramValue === 'string') paramValue = paramValue.toLowerCase()
+                            
+                        if(paramName.match(/\[(\d+)?\]$/)){
+                            var key = paramName.replace(/\[(\d+)?\]/, '');
+                            if(! obj[key]) obj[key] = [];
+                            
+                            if(paramName.match(/\[\d+\]$/)){
+                                var index = /\[(\d+)\]/.exec(paramName)[1];
+                                
+                                obj[key][index]  = paramValue;
+                            } else {
+                                obj[key].push(paramValue);
+                            }
+                        }else {
+                            if(! obj[paramName]) {
+                                obj[paramName] = paramValue;
+                            } else if(obj[paramName] && typeof obj[paramName] == 'string'){
+                                obj[paramName] = [obj[paramName]];
+                                obj[paramName].push(paramValue);
+                            } else {
+                                obj[paramName].push(paramValue);
+                            }
+                        }
+                    }
+                }
+                return obj; 
+            }
+            console.log(getAllUrlParams(window.location.href));
+            let urldata = getAllUrlParams(window.location.href);
+        	let cartContent = localStorage.getItem("bjasjdbakhadjsk77");
+           	let cartJson =  JSON.parse(cartContent);
+        	console.log(cartJson);
+
+            function _(x) { return document.getElementById(x) };
+            function hasClass(element, className){
+                return element.className.split(" ").indexOf(className) > -1;
+            }
+            function addClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList;
+                } else {
+                    return element.classList.add(className);
+                }
+            }
+            function removeClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList.remove(className);
+                }else{
+                    return element.classList;
+                }
+            }     
+            function fetchUserBranches(token){
+                
+                fetch('https://enigmatic-hamlet-83578.herokuapp.com/getproductlist',
+                    {
+                        method: 'POST',
+                        headers: 
+                        {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(
+                        {
+                            productId: urldata.categoryid,
+                        })
+         
+                    }).then((resp) =>resp.json()).then((responseJsonFromServer) =>
+                    { 
+						console.log(responseJsonFromServer);
+                        responseJsonFromServer.products.map(function(item, i){
+                            _("homeTable2").innerHTML +=  `<div class="flexed-table">
+                                        <div class="go-to-items">
+                                            <div class="image-container" ><img src=${item.image} alt=${item.name} class="user-1"><span class="iconText">${item.name}</span></div>
+                                            <div><button id=${item._id} class='btn btn-orange edit-item' data-id='${item._id}'>Add to my brand catalogue</button><button class='btn btn-orange get-qr' id='get-qr' data-id=${item._Id}>QRCode</button><button id=${item._id} class='btn btn-light-red'>Delete</button></div>
+                                        </div>
+                                    </div>`;
+                        })
+                        console.log(responseJsonFromServer)
+                    }).catch((error) =>
+                    {
+                        console.error(error);
+
+                    });
+            }
+            var values= new Array("value1", "value2", "value3") 
+            var keys= new Array("a","b","c") 
+            function openWindowWithPost(url,name,keys,values){
+                console.log()
+                var newWindow = window.open(url, name);
+                if (!newWindow) return false;
+                /*var html = "";
+                html += "<html><head></head><body><form id='formid' method='post' action='" + url +"'>";
+                if (keys && values && (keys.length == values.length))
+                    for (var i=0; i < keys.length; i++)
+                        html += "<input type='hidden' name='" + keys[i] + "' value='" + values[i] + "'/>";
+                        
+                html += "</form><script type='text/javascript'>document.getElementById(\"formid\").submit()</sc"+"ript></body></html>";
+
+                newWindow.document.write(html);*/
+                return newWindow;
+            }
+            window.onload = function(){
+                fetchUserBranches(cartJson[0].token);
+                document.addEventListener("click", function(e) {
+                    if(hasClass(e.target, "get-qr")){
+                        e.preventDefault();
+                        console.log(e.target.getAttribute("data-id")); 
+                        var dataId = e.target.getAttribute("data-id");
+                        openWindowWithPost('generateQrCode.html?itemid='+dataId,'',keys,values)
+                    }else if(hasClass(e.target, "edit-item")){
+                        e.preventDefault();
+                        console.log(e.target.getAttribute("data-id")); 
+                        var dataId = e.target.getAttribute("data-id");
+                        openWindowWithPost('edititems.html?itemid='+dataId,'',keys,values)
+                    }
+                });
+            }
+        </script>        
+	</body>
+</html>

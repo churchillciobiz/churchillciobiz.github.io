@@ -1,0 +1,343 @@
+<html>
+	<head>
+		<style>
+			*{
+    box-sizing: border-box;
+}
+input, textarea{
+    outline: none;
+}
+body{
+    font-family: Lato, sans-serif;
+    background: #f4f6f9;
+}
+html,body,div{
+    margin: 0;
+    padding: 0;
+}
+.panel{
+    background-color: #282639;
+    overflow:hidden;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+    color: #ffffff;
+    text-align: center;
+    font-size: 12px;
+}
+.heading h1{
+    color: purple;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+.heading p{
+    color: #1b1b1b;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+.cards{
+    overflow: auto;
+}
+.cards .card{
+    background: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    overflow: auto;
+    margin-bottom:20px;
+    margin-left: 15px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+.orange{
+    background: orange;
+}
+.green{
+    background: #ccc;
+}
+.purple{
+    background: purple;
+}
+.withPointer{
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.withPointer:hover{
+    background: orange;
+}
+
+
+            img{
+                display: block;
+                margin: 0 auto;
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+            }
+            #fileslbl{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #ccc;
+                color: white;
+                height: 24vh;
+                padding: 14px;
+                transition: 0.7s;
+                animation-duration: 1s;
+                animation-fill-mode: forwards;
+                animation-iteration-count: infinite;
+                border-radius: 4px;
+
+            }
+            #filesfld{
+                display: none;
+            }
+            #progress{
+                background-color: royalblue;
+                color: white;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 24px;
+                padding: 0 7px;
+                width: 0;
+            }
+           
+            @keyframes dropbox{
+                0%{
+                    background-image: repeating-linear-gradient(30deg, #ccc 1%, #282639 3%, #282639 5%, #282639; 5%)
+                } 
+                50%{
+                    background-image: repeating-linear-gradient(30deg, #282639 1%, #282639 3%, #ccc 5%, #ccc 5%)
+                } 
+                100%{
+                    background-image: repeating-linear-gradient(30deg, #ccc 1%, #ccc 3%, #282639 5%,#282639 5%)
+                } 
+            } 
+            button {
+    cursor: pointer;
+    padding: 10px 15px;
+    border: none;
+    margin-top: 2px;
+    color: #fff;
+    font-size: 12px;
+}
+.btn-light-red {
+    background:#ccc;
+                box-shadow: 1px 1px 0 rgba(0,0,0,0.2), 0 16px 15px -16px #d24c0f, inset 0 0 25px rgba(0,0,0,0.05)
+            }
+            .btn-light-red:hover{
+                background: #cc524b;
+            }
+            .btn-orange:hover{
+                background: #b7862b;
+            }
+.btn-orange {
+    background: #282639;
+    box-shadow: 1px 1px 0 rgba(0,0,0,0.2), 0 16px 15px -16px purple, inset 0 0 25px rgba(0,0,0,0.05);
+}
+#previewImage{
+    width:330px;
+}
+	</style>
+	</head>
+	<body>
+		<div class="heading">
+            <h1>Dashboard</h1>
+            <p>Add Category image</p>
+        </div>
+            <div class="cards">
+                <div class="card colmd4" style="height: 609px;">
+                        <form id="filesfrm" action="http://127.0.0.1:9999/uploaddishimage" method="POST" onSubmit="return submitFilesForm(this);">
+                            <input type="file"  name="filesfld" id="filesfld" accept="image/" multiple onChange="submitFilesForm(this.form);"/>
+                            <label for="filesfld" 
+                                ondragenter="stopDefault(event);dragOver(this, 'Drop the images to upload them');"
+                                ondragover="stopDefault(event);dragOver(this, 'Drop the images to upload them');"
+                                ondragleave="stopDefault(event);dragLeave(this);"
+                                ondrop="stopDefault(event);dragLeave(this);addFilesAndSubmit(event);"
+                                id="fileslbl">Click to choose image or drag and drop it here</label>
+                        </form>
+                        <div id="previewImage"></div>
+                        <div style="text-align: left;"><div id="progress"></div></div>
+                    <span class="userName">Add an image for this category</span>
+                    <button class="btn-orange" id="add-item">+ Add</button>
+                    <button class="btn-light-red" id="cancel-item">Cancel</button>
+                </div>  
+                                    
+            </div>
+        <script>
+        const CART={
+                KEY:'dashbjasjdbakhadjsk77',contents:[],init(){let _contents = localStorage.getItem(CART.KEY);if(_contents){CART.contents = JSON.parse(_contents);}else{CART.contents = [];CART.sync();}},async sync(){let _cart = JSON.stringify(CART.contents);await localStorage.setItem(CART.KEY, _cart);},addItem(categoryName,itemFolder){let obj={itemCategory:categoryName,itemFolder:itemFolder};CART.contents.push(obj);CART.sync();console.log(CART.contents);},empty(){CART.contents=[];CART.sync();},addNewBranch(branchName){let obj={newBranch:branchName};CART.contents.push(obj);CART.sync();console.log(CART.contents);},cartLength(){
+                    let length = CART.contents.length;
+                  //  console.log(length)
+                    return length;
+                },
+            }    
+
+
+
+
+
+         
+        	let cartContent = localStorage.getItem("bjasjdbakhadjsk77");
+            let cartContentTwo = localStorage.getItem("dashbjasjdbakhadjsk77");
+            let cartContentTwoJson = JSON.parse(cartContentTwo);
+           	let cartJson =  JSON.parse(cartContent);
+            console.log(cartContentTwoJson[0].newItemCategory);
+            
+
+            //console.log(cartContentTwoJson); 
+        	//console.log(cartJson);
+            function _(x) { return document.getElementById(x) };
+            function hasClass(element, className){
+                return element.className.split(" ").indexOf(className) > -1;
+            }
+            function addClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList;
+                } else {
+                    return element.classList.add(className);
+                }
+            }
+            function removeClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList.remove(className);
+                }else{
+                    return element.classList;
+                }
+            }     
+
+            //upload image
+            function stopDefault(event){
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            function dragOver(label, text){
+                label.style.animationName = "dropbox";
+                label.innerText = text;
+            }
+            function dragLeave(label){
+                var len = label.style.length;
+                for(var i= 0; i< len; i++){
+                    label.style[label.style[i]] = "";
+                }
+                label.innerText = "Click to choose image or drag and drop them here"
+            }
+            function addFilesAndSubmit(event){
+                var files = event.target.files || event.dataTransfer.files;
+                document.getElementById("filesfld").files  = files;
+                submitFilesForm(document.getElementById("filesfrm"));
+            }
+            function submitFilesForm(form){
+                var label = document.getElementById("fileslbl");
+                dragOver(label, "Uploading images ....");
+                var fd = new FormData();
+                for(var i=0; i<form.filesfld.files.length; i++){
+                    var field = form.filesfld;
+                    fd.append(field.name, field.files[i], field.files[i].name)
+                }
+                var progress = document.getElementById("progress");
+                var x = new XMLHttpRequest();
+                if(x.upload){
+                    x.upload.addEventListener("progress", function(event){
+                        var percent = parseInt(event.loaded / event.total * 100);
+                        progress.innerText = progress.style.width = percent+"%";
+
+                    });
+                }
+
+                x.onreadystatechange = function(){
+                    if(x.readyState == 4){
+                        progress.innerText = progress.style.width = "";
+                        form.filesfld.value = "";
+                        dragLeave(label);
+                        if(x.status == 200){
+                            var images = JSON.parse(x.responseText);
+                            console.log(images);
+                           /* for(var i= 0; i< images.length; i++){
+                                var img = document.createElement("img");
+                                img.src = images[i];
+                                console.log(img.src);
+                                Object.assign(cartContentTwoJson[0], {"imageUrl":img.src});
+                                CART.contents.push(cartContentTwoJson);
+                                CART.sync();
+                                var body = document.getElementsByTagName("body")[0];
+                                _("previewImage").appendChild(img);
+                            }*/
+                            var img = document.createElement("img");
+                            img.src = images;
+                            Object.assign(cartContentTwoJson[0], {"imageUrl":img.src});
+                            CART.contents.push(cartContentTwoJson);
+                            CART.sync();
+                            var body = document.getElementsByTagName("body")[0];
+                            _("previewImage").appendChild(img);
+                        }
+                    }
+                };
+                x.open("post", form.action, true);
+                x.send(fd);
+                return false; 
+            }
+            function setIframeURL(urlLink){
+                document.getElementById('iframe').src = urlLink;
+            }
+
+
+
+// addEventListener support for IE8
+function bindEvent(element, eventName, eventHandler) {
+if (element.addEventListener) {
+element.addEventListener(eventName, eventHandler, false);
+} else if (element.attachEvent) {
+element.attachEvent('on' + eventName, eventHandler);
+}
+}
+// Send a message to the parent
+var sendMessage = function (msg) {
+// Make sure you are sending a string, and to stringify JSON
+window.parent.postMessage(msg, '*');
+};
+var results = document.getElementById('results'),
+messageButton = _("add-item");
+// Listen to messages from parent window
+bindEvent(window, 'message', function (e) {
+results.innerHTML = e.data;
+});
+
+
+
+
+
+
+
+            window.onload = function() {
+                _("add-item").addEventListener("click", function(){
+                    var date = new Date();
+                    CART.addItem(cartContentTwoJson[0].newItemCategory,cartContentTwoJson[0].imageUrl)
+                    Object.assign(cartContentTwoJson[0]);
+                    CART.contents.push(cartContentTwoJson);
+                   
+                    console.log(cartContentTwoJson);
+                    console.log(cartJson[0].token);
+                     CART.sync(); 
+                    var url="http://127.0.0.1:9999/insertnewitem";
+                        fetch(url,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json",'Authorization': 'Bearer '+cartJson[0].token,},body:JSON.stringify({dishCategory:cartContentTwoJson[0].newItemCategory,token:cartJson[0].token,imageUrl:cartContentTwoJson[0].imageUrl})}).then((response)=>response.json()).then((responseJsonFromServer)=>{console.log(responseJsonFromServer); 
+                        if(responseJsonFromServer.message=="a new category has been added"){
+                            console.log("in db");
+                            alert("A new Category added to your store")
+                            fetch("http://127.0.0.1:9999/insertnotes",{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json",'Authorization': 'Bearer '+cartJson[0].token,},body:JSON.stringify({noteType:"category",token:cartJson[0].token,named:responseJsonFromServer.categoryName,imgUrl:responseJsonFromServer.imgUrl})}).then((response)=>response.json()).then((responseJsonFromServer)=>{console.log(responseJsonFromServer); 
+                                if(responseJsonFromServer.message=="a new note has been added"){
+                                    var notification = "New category has been created";
+                                    sendMessage('' + notification);
+                                }else{
+                                    var notification = "could not create category";
+                                    sendMessage('' + notification);
+                                }
+                            })
+                        }else{
+                            _("error-handler").innerHTML="Passcode not recognised, try again";
+                        }
+                    });    
+                });
+            }
+        </script>        
+	</body>
+</html>

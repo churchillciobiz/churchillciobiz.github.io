@@ -1,0 +1,392 @@
+<html>
+    <head>
+        <style>
+            *{
+    box-sizing: border-box;
+}
+input, textarea{
+    outline: none;
+}
+body{
+    font-family: Lato, sans-serif;
+    background: #f4f6f9;
+}
+html,body,div{
+    margin: 0;
+    padding: 0;
+}
+.heading h1{
+    color: purple;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+.heading p{
+    color: #1b1b1b;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+.cards{
+    overflow: auto;
+   
+}
+.cards .card{
+    background: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    overflow: auto;
+    margin-bottom:20px;
+    margin-left: 15px;
+}
+.cards .card h6{
+    font-size: 0.8rem;
+    position: relative;
+    top: -32px;
+}
+.colmd4{
+    width: 30.33%;
+    padding: 0 15px;
+    display: inline-block;
+}
+.colmd3{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0 15px;
+    display: inline-block;
+
+}
+.colmd2{
+    display: flex;
+}
+.colmd10{
+    margin-left: 10px;
+    font-size: 0.8rem;
+    margin-top: 12px;
+}
+.homeTable{
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-radius: 5px;
+    background: #282639;
+}
+.homeTable {
+    padding: 1.2rem;
+    text-align: center;
+}
+.homeTable span{
+    font-size: 1.2rem;
+    color: #ffffff;
+    text-align: center;
+    vertical-align: middle;
+}
+.orange{
+    background: orange;
+}
+.green{
+    background: #92cf48;
+}
+.purple{
+    background: purple;
+}
+.homeTable2{
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-radius: 5px;
+    border: 1px solid rgba(0,0,0,0.03);
+    box-shadow: 0 10px 15px -1px rgba(0,0,0,0.1);
+}
+.go-to-items{
+    display:flex;
+}
+.flexed-table{
+    display:flex;
+    flex-direction:row;
+    margin:1rem
+}
+.image-container{
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+}
+.image-container .iconText{
+    align-self:center;
+    margin-right:15px;
+}
+img{
+    display: block;
+    margin: 0 auto;
+                width: 100px;
+                max-width: 100%;
+                height: auto;
+            }
+            .card-item-one{
+                width:100%;
+
+            }
+            #flexed{
+                display: flex;
+                height: 785px;
+            }
+            button{
+                cursor: pointer;
+            }
+            #get-tagged{
+        cursor: pointer;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    margin-top: 2px;
+    color: #fff;
+    font-size: 12px;
+    width: 100px;
+}
+.btn-orange {
+    background: orange;
+    box-shadow: 1px 1px 0 rgba(0,0,0,0.2), 0 16px 15px -16px purple, inset 0 0 25px rgba(0,0,0,0.05);
+}
+.btn-orange:hover {
+    background: rgb(117, 194, 17);
+    box-shadow: 1px 1px 0 rgba(0,0,0,0.2), 0 16px 15px -16px purple, inset 0 0 25px rgba(0,0,0,0.05);
+}
+.details{
+    display: flex;
+    flex-direction: column;
+}
+        </style>
+    </head>
+    <body>
+            <div id="flexed">
+                <div class="cards card-item-one">
+                        <div class="homeTable">
+                            <div>
+                                <div>
+                                    <span>ITEMS</span>
+                                    <div>
+                                        <button href="#" id="get-tagged" class="dynamic btn-orange">Add Items</button>
+                                    </div>
+                                    <div id="pagination-controls" style="width:500px;">
+                                        
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>    
+                        <div class="homeTable2" id="homeTable2">
+                        </div>  
+                </div>
+            </div>    
+        <script>
+            const CART={
+                KEY:'dashbjasjdbakhadjsk78',contents:[],init(){let _contents = localStorage.getItem(CART.KEY);if(_contents){CART.contents = JSON.parse(_contents);}else{CART.contents = [];CART.sync();}},async sync(){let _cart = JSON.stringify(CART.contents);await localStorage.setItem(CART.KEY, _cart);},addRows(rows){let obj={totalRows:rows};CART.contents.push(obj);CART.sync();console.log(CART.contents);},empty(){CART.contents=[];CART.sync();},addNewBranch(branchName){let obj={newBranch:branchName};CART.contents.push(obj);CART.sync();console.log(CART.contents);},cartLength(){
+                    let length = CART.contents.length;
+                    return length;
+                },
+            } 
+            function getAllUrlParams(url){
+                var queryString = url ? url.split("?")[1] : window.location.search.splice(1);   
+                var obj = {}
+                if(queryString){
+                    queryString = queryString.split("#")[0]
+                    var arr = queryString.split("&");
+                    
+                    for(var i = 0; i<arr.length; i++){
+                        var a = arr[i].split("=");
+                        var paramName = a[0];
+                        
+                        var paramValue = typeof(a[1]) === 'undefined' ? true: a[1];
+                        
+                        paramName = paramName.toLowerCase();
+                        if(typeof paramValue === 'string') paramValue = paramValue.toLowerCase()
+                            
+                        if(paramName.match(/\[(\d+)?\]$/)){
+                            var key = paramName.replace(/\[(\d+)?\]/, '');
+                            if(! obj[key]) obj[key] = [];
+                            
+                            if(paramName.match(/\[\d+\]$/)){
+                                var index = /\[(\d+)\]/.exec(paramName)[1];
+                                
+                                obj[key][index]  = paramValue;
+                            } else {
+                                obj[key].push(paramValue);
+                            }
+                        }else {
+                            if(! obj[paramName]) {
+                                obj[paramName] = paramValue;
+                            } else if(obj[paramName] && typeof obj[paramName] == 'string'){
+                                obj[paramName] = [obj[paramName]];
+                                obj[paramName].push(paramValue);
+                            } else {
+                                obj[paramName].push(paramValue);
+                            }
+                        }
+                    }
+                }
+                return obj; 
+            }
+            let cartContent = localStorage.getItem("bjasjdbakhadjsk77");
+            let cartContent2 = localStorage.getItem("dashbjasjdbakhadjsk78");
+            let cartJson =  JSON.parse(cartContent);
+            let cartJson2 =  JSON.parse(cartContent2);
+            let urldata = getAllUrlParams(window.location.href);
+            /*let rowsPerPage = 4;
+            let totalRows = cartJson2[0].totalRows;
+            let lastPage = Math.ceil(totalRows/rowsPerPage);
+            if(lastPage < 1){
+                lastPage = 1;
+            }*/
+            function _(x) { return document.getElementById(x) };
+            function hasClass(element, className){
+                return element.className.split(" ").indexOf(className) > -1;
+            }
+            function addClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList;
+                } else {
+                    return element.classList.add(className);
+                }
+            }
+            function removeClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList.remove(className);
+                }else{
+                    return element.classList;
+                }
+            }     
+            function totalRowsForpagination(item){
+                fetch('http://127.0.0.1:9999/getallitemsforpagination/',
+                    {
+                        method: 'POST',
+                        headers: 
+                        {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer '+cartJson[0].token,
+                        },
+                        body: JSON.stringify(
+                        {
+                           token: cartJson[0].token, 
+                           item: item,      
+                        })
+         
+                    }).then((resp) =>resp.json()).then((responseJsonFromServer) =>
+                    { 
+                        if(responseJsonFromServer.message != "you do not have any items") {
+                            console.log(responseJsonFromServer)
+                            CART.addRows(responseJsonFromServer)
+                        }else{
+                            console.log(responseJsonFromServer)
+                            return 0;
+                        }
+                        
+                    }).catch((error) =>
+                    {
+                        console.error(error);
+                    });
+            }
+
+            function getValue(){
+               let array = [];
+                var checks = document.getElementsByClassName('checks');
+                var str = "";
+                for(i=0;i<checks.length;i++){
+                    if(checks[i].checked === true){
+                        str+=checks[i].value+" ";
+                        array.push(checks[i].value);
+                    }
+                }
+                return array;
+            }
+
+            function requestPage(pn){
+                var paginationControls = _("pagination-controls");
+                var resultBox = _("homeTable2");
+                resultBox.innerHTML = "Loading ...";
+                fetch('http://127.0.0.1:9999/getallitems/',
+                    {
+                        method: 'POST',
+                        headers: 
+                        {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(
+                        {
+                           productId: urldata.categoryid, 
+                        })
+         
+                    }).then((resp) =>resp.json()).then((responseJsonFromServer) =>
+                    { 
+                        console.log(responseJsonFromServer)
+                        resultBox.innerHTML = "";
+                        responseJsonFromServer.map(function(item){
+                           resultBox.innerHTML +=  `
+                                <div class='flexed-table'>
+                                        <div id='${item.name}' class='go-to-items'>
+                                            <div class='image-container'><img src="${item.imageLocation}"" alt="${item.name}" /></div>
+                                            <div><div class='details'><span>Name: ${item.name}</span> <span>Category: ${item.category}</span> <span>Price: Kshs ${item.price}</span></div></div>
+                                            <div><input id=${item._id} class='checks' value=${item._id} type='checkbox'></div>
+                                        </div>
+                                    </div>
+                                    
+                            `;  
+                        })
+                    paginationCtrls = '';
+                        if(lastPage != 1){
+                            if(pn>1){
+                                paginationCtrls += '<button onclick="requestPage('+(pn-1)+')">&lt;</button>';
+                                console.log(rowsPerPage,lastPage);
+                            }
+                            paginationCtrls += '&nbsp; &nbsp; Page '+pn+' of '+lastPage+' &nbsp; &nbsp; ';
+                            if(pn != lastPage){
+                                paginationCtrls += '<button onclick="requestPage('+(pn+1)+')">&gt;</button>';
+                            }
+                        }
+
+                        paginationControls.innerHTML = paginationCtrls;   
+                    }).catch((error) =>
+                    {
+                        console.error(error);
+
+                    });
+            } 
+            window.onload = function(){
+                requestPage(1);
+                let urldata = getAllUrlParams(window.location.href);
+                console.log(urldata);
+                document.addEventListener("click", function(e) {
+                    if(hasClass(e.target, "dynamic")){
+                        e.preventDefault();
+                        console.log(e.target.id); 
+                        getValue();
+                        let arrayList = getValue();
+                        console.log(arrayList);
+                        fetch('http://127.0.0.1:9999/additemstobranch/',
+                            {
+                                method: 'POST',
+                                headers: 
+                                {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json',
+                                    'Authorization': 'Bearer '+cartJson[0].token,
+                                },
+                                body: JSON.stringify(
+                                {
+                                   token: cartJson[0].token,
+                                   branchId: urldata.branchid,
+                                   itemListIds: arrayList,       
+                                })
+                 
+                            }).then((resp) =>resp.json()).then((responseJsonFromServer) =>
+                            { 
+                                console.log(responseJsonFromServer)
+                            }).catch((error) =>
+                            {
+                                console.error(error);
+                            });
+                        }
+                    })
+                requestPage(1);
+            }
+        </script> 
+        <input id=12 class='checks' value=12 type='hidden'>       
+    </body>
+</html>

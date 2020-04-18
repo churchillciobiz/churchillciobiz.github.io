@@ -1,0 +1,425 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    background: #f4f6f9;
+    font-family: 'Quicksand', sans-serif; 
+}
+html,body,div{
+    margin: 0;
+    padding: 0;
+}
+#topMenuBar{
+    box-shadow: 0 10px 15px -1px rgba(0,0,0,0.1);
+}
+#logoSection{
+    width: 250px;
+    background: #302d43;
+    height: 60px;
+}
+#alert-notify-box{
+    position: absolute;
+    left: 535px;
+    background: #ffa500a6;
+    min-width: 100px;
+    height: 60px;
+    border-radius: 10px;
+    padding: 14px;
+    transition: all 0.5s ease-out;
+    display: none;
+}
+#notice-me{
+    line-height:2;
+    color:#fff;
+}
+#sideMenu{
+    background: #302d43;
+    width: 250px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-top: 60px;
+    padding-top: 40px;
+    min-height: 930px;
+}
+#sideMenu nav a{
+    display: block;
+    color: #eaedf3;
+    text-decoration: none;
+    padding: 15px 30px;
+    transition: all 0.3s ease-in-out;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+#sideMenu nav a p{
+    font-size: 12px;
+    color: #ffa500;
+    font-weight: 600;
+    line-height: 16px;
+}
+#sideMenu nav a.active{
+    background: #282639;
+    border-left:5px solid #92cf48;
+    padding: 15px 30px 15px 25px;
+}
+#sideMenu nav a:hover{
+    background: #282639;
+    border-left:5px solid #92cf48;
+}
+#sideMenu nav a.fa{
+    color: #92cf48;
+    font-weight: 300;
+    font-size: 1.4rem;
+    margin-right: 0.8rem;
+    display: inline-block;
+    width: 30px;
+    position: relative;
+    top:2px;
+}
+#topMenuBar{
+    width: 100%;
+    background: #ffffff;
+    height: 60px;
+    justify-content: space-between;
+    display:flex;
+}
+.accordion{
+    transition: 0.4s;
+}
+.panel{
+    background-color: #282639;
+    overflow:hidden;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+    color: #ffffff;
+    text-align: center;
+    font-size: 12px;
+}
+.panel a{
+    cursor: pointer;
+}
+.panel #store-search{
+    width: 80%;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 14px;
+    color: #fff;
+    border-bottom: 1px solid #92cf48;
+    padding: 15px 30px;
+}
+.accordion:after{
+    content: '\02795';
+    font-size: 12px;
+    float: right;
+    margin-left: 5px; 
+    margin-top: 9px;
+}
+.active::after{
+    content: '\2796';
+}
+.contentArea{
+    margin-left: 250px;
+    padding: 14px;
+    height: 900px;
+}
+.contentArea .heading h1{
+    color: purple;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+.contentArea .heading p{
+    color: #1b1b1b;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+.cards{
+    overflow: auto;
+   
+}
+.cards .card{
+    background: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    overflow: auto;
+    margin-bottom:20px;
+    margin-left: 15px;
+
+}
+.cards .card .userImage{
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100px;
+    height: 100px;
+    background: #eaedf3;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+.cards .card .userName{
+    font-size: 1rem;
+    color: purple;
+    display: block;
+    text-align: center;
+    margin: 10px 0;
+}
+.cards .card .userTitle{
+    display: block;
+    font-size: 0.8rem;
+    text-align: center;
+    margin: 10px 0;
+}
+.cards .card .education{
+    font-size: 0.8rem;
+    color: #eaedf3;
+}
+.cards .card .schools{
+    font-size: 0.8rem;
+}
+.cards .card h6{
+    font-size: 0.8rem;
+    position: relative;
+    top: -32px;
+}
+.cards .card .date{
+    font-size: 1.3rem;
+    display: block;
+    border-left: 5px solid #92cf48;
+    position: relative;
+    left: -20px;
+    padding: 5px 40px;
+    margin: 19px 0;
+}
+.cards .card .jobType{
+    background: orange;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 0.6rem;
+    color: #ffffff;
+    padding: 5px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 10px;
+}
+.colmd4{
+    width: 30.33%;
+    padding: 0 15px;
+    display: inline-block;
+}
+.colmd3{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0 15px;
+    display: inline-block;
+
+}
+.colmd2{
+    display: flex;
+}
+.colmd10{
+    margin-left: 10px;
+    font-size: 0.8rem;
+    margin-top: 12px;
+}
+.homeTable{
+    width: 95%;
+    margin-top: 2rem;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-radius: 5px;
+    background: #eaedf3;
+    margin-left: 13px;
+}
+.homeTable thead th {
+    text-transform: uppercase;
+    padding: 1.2rem;
+    color: #3b3c42;
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+.homeTable tbody td {
+    text-transform: uppercase;
+    padding: 1.2rem;
+    background-color: #fff;
+    font-size: 0.8rem;
+    font-weight: 400;
+    text-align: center;
+    border-bottom: 0.7px solid #9E9E9E;
+}
+.homeTable tbody td .icon{
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 0.6rem;
+    color: #ffffff;
+    padding: 5px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+}
+.homeTable tbody td .iconText{
+    margin-left: 4px;
+}
+.orange{
+    background: orange;
+}
+.green{
+    background: #92cf48;
+}
+.purple{
+    background: purple;
+}
+#iframe{
+    width: 100%;
+    border: none;
+    height: 100%;
+}
+
+#dialogoverlay{
+    display: none;
+    opacity: .8;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    width: 100%;
+    z-index: 10;
+}
+#dialogbox{
+    display: none;
+    position: fixed;
+    border-radius: 7px;
+    width: 550px;
+    z-index: 10;
+    transform: translate3d(0%, -100%, 0);
+    transition: all 0.5s ease-out;
+    border-radius: 5px;
+    overflow: auto;
+            }
+            #dialogbox.animate{
+                transform: translate3d(0, 0, 0);
+            }
+
+            #dialogbox>div{  background: #fff; margin: 8px;}
+            #dialogbox>div>#dialogboxhead{background: #302d43;font-size:19px;padding: 10px;color:#ccc;}
+            #dialogbox>div>#dialogboxbody{background: #282639;padding: 20px; color: #fff;}
+            #dialogbox>div>#dialogboxfoot{background: #302d43;padding:10px;text-align:right;}
+
+#dialogbox div input{
+    width: 100%;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 14px;
+    color: #fff;
+    border-bottom: 1px solid #ffa500;
+    padding: 15px 30px;
+}
+.popup-dialog-button{
+    border:none;
+    outline: none;
+    padding:5px;
+    border:1px solid #ffa500;
+    border-radius:4px;
+    color: #fff;
+    background: transparent;
+    cursor: pointer;
+    margin: 5px;
+}
+.popup-dialog-button:hover{
+    background: #ffa500;
+}
+
+button{
+                cursor: pointer;
+            }
+            .accordion img{
+                width:32px;
+                height:32px;
+                margin-right:10px;
+            }
+nav  img{
+                width:38px;
+                margin-right:10px;
+            }
+#login-image{
+    border: #f00;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    margin-right: 20px;
+    margin-top: 10px;
+            }
+            #login-image img{
+                border-radius:50%;
+                height:100%;
+            }   
+    #logoSection p{
+        margin-top: 18px;
+        margin-left: 63px;
+        font-family: inherit;
+        font-size: 25px;
+        color: #ffa500;
+    }   
+    
+    
+    .dropdown{
+        height: 10vh;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 50%;
+        margin: auto;
+        position: absolute;
+        top: 5px;
+        right: 60px;
+    
+    }
+    #login-image ul {
+        position:absolute;
+        background: #fff;
+        margin-top:10px;
+        width:200px;
+        height: 200px;
+        display:flex;
+        padding:10px;
+        flex-direction: column;
+        list-style: none;
+        border-radius: 5px;
+        box-shadow:0 5px 9px 0 rgba(0,0,0,0.2);
+        opacity: 0;
+        transition: all 0.4s ease;
+        transform: translateY(10px);
+    }
+    #login-image ul li{
+       
+        width: 100%;
+        height:50px;
+    }
+    #login-image ul li:hover{
+        background: #6CD196;
+    }
+    #login-image a{
+        color:black;
+        text-decoration: none;
+        font-size: 14px;
+    }
+    .dropdown button{
+        background:none;
+        border:none;
+        cursor: pointer;
+        outline: none;
+        font-size:20px;
+    }
+    #login-image:hover{
+        color:rgb(224, 224, 224);
+    } 
+    #login-image:focus + ul{
+        opacity: 1;
+        transform: translateY(0px);
+    }

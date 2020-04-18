@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="dashboard.css">
+    </head>
+    <body>
+        <div id="topMenuBar">
+            <div id="logoSection">
+                <p>Chuidash</p>
+            </div>
+           
+            <div id="description-wrapper" style="display:flex;margin-right: 64px;">
+                <div id="login-image">
+                    <img src="image2.jpg" alt="inventory manager" width="100%">
+                    <ul>
+                        <li><a href="#">Event participants</a></li>
+                        <li ><a id="new-event" href="#">New event</a></li>
+                        <li><a href="#">Edit event</a></li>
+                        <li><a href="#">Add event video</a></li>
+                        <li><a href="#" id="check-code">Check Code</a></li>
+                    </ul>
+                </div>
+                <div id="name-image">
+                    <p>Churchill omondi</p>
+                </div>
+                
+            </div>
+            <div id="alert-notify-box">
+                <span id="notice-me">This is anotification you must notice</span>   
+            </div>
+        </div>
+
+        <div id="sideMenu">
+            <nav>   
+                <a href="#" class="accordion"><img src="020-backpack.png" alt="inventory manager"><p>Inventory Manager</p></a>
+                    <div class="panel">
+                            <a id="view-inventory">Manufacturers</a>
+							<a id="my-stock">My Brands Catalogue</a>
+                    </div>
+                <a href="#" class="accordion"><img src="042-jeep.png" alt="inventory manager"><p>Vehicles Manager</p></a>
+                    <div class="panel">
+                            <a id="add-inventory-to-branch">Add Manifest for rider</a>
+                            <a id="vehicle-locations-active">Active Vehicles</a>
+                    </div>
+                <a href="#" class="accordion"><img src="043-tent.png" alt="inventory manager"><p>Deliveries Manager</p></a>
+                    <div class="panel">
+						<a id="new-manifest">New Manifest</a>
+                        <a id="new-branch">Pending Deliveries</a>
+                        <a id="fulfilled-delivery">Fullfilled Deliveries</a>
+                    </div>
+                <a href="#" class="accordion"><img src="044-target.png" alt="inventory manager"><p>Analytics</p></a>
+                    <div class="panel">
+                        <a id="sell-graphs">Products sales analyis</a>
+                        <a id="sell-maps">Deliveries analysis</a>
+                        <a></a>
+                    </div>
+                <a href="#" class="accordion"><img src="011-leopard.png" alt="inventory manager"><p>My Account</p></a>
+                    <div class="panel">
+                        <a>Time Spent</a>
+                        <a>Ad Campaign</a>
+                        <a>Log Out</a>
+                    </div>     
+            </nav>
+        </div>
+        <div class="contentArea">
+            <iframe id="iframe">
+                
+            </iframe>
+        </div>
+        <div id="dialogoverlay"></div>
+        <div id="dialogbox">
+            <div>
+                <div id="dialogboxhead"></div>
+                <div id="dialogboxbody"></div>
+                <div id="dialogboxfoot"></div>
+            </div>
+        </div>
+
+        <script>
+            let cartContent = localStorage.getItem("bjasjdbakhadjsk77");
+            let cartJson =  JSON.parse(cartContent);
+            function _(x) { return document.getElementById(x) };
+            function hasClass(element, className){
+                return element.className.split(" ").indexOf(className) > -1;
+            }
+            function addClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList;
+                } else {
+                    return element.classList.add(className);
+                }
+            }
+            function removeClass(element, className){
+                if(hasClass(element, className)){
+                    return element.classList.remove(className);
+                }else{
+                    return element.classList;
+                }
+            } 
+            var acc = document.getElementsByClassName("accordion");
+            var i;
+            for(i=0; i<acc.length; i++){
+                acc[i].addEventListener("click", function(){
+                    this.classList.toggle("active");
+                    var panel = this.nextElementSibling;
+                    if(panel.style.maxHeight){
+                        panel.style.maxHeight = null;
+                    }else{
+                        panel.style.maxHeight = panel.scrollHeight + "px";
+                    }
+                });
+            }
+            function setIframeURL(urlLink){
+                /*var url="http://127.0.0.1:9999/getuserdatafromverifiedsecuritytoken";fetch(url,{method:"POST",headers:{"Accept":"application/json","Authorization": "Bearer"+userToken,"Content-Type":"application/json",},body:JSON.stringify({vCode:verificationCode,phoneNumber: phoneNumber})}).then((response)=>response.json()).then((responseJsonFromServer)=>{console.log(responseJsonFromServer); 
+                    if(responseJsonFromServer.message=="user in db"){*/
+                        document.getElementById('iframe').src = urlLink;
+                    /*}else{
+                        _("error-handler").innerHTML="Passcode not recognised, try again";
+                    }
+                })*/
+                
+            }
+            const CART={
+                KEY:'dashbjasjdbakhadjsk77',contents:[],init(){let _contents = localStorage.getItem(CART.KEY);if(_contents){CART.contents = JSON.parse(_contents);}else{CART.contents = [];CART.sync();}},async sync(){let _cart = JSON.stringify(CART.contents);await localStorage.setItem(CART.KEY, _cart);},addIframeUrl(url){let obj={iframe:url};CART.contents.push(obj);CART.sync();console.log(CART.contents);},addItemCategory(categoryName){let obj={newItemCategory:categoryName};CART.contents.push(obj);CART.sync();console.log(CART.contents);},inventoryItem(categoryName){let obj={inventoryItemCategory:categoryName};CART.contents.push(obj);CART.sync();},empty(){CART.contents=[];CART.sync();},addNewBranch(branchName){let obj={newBranch:branchName};CART.contents.push(obj);CART.sync();console.log(CART.contents);},cartLength(){
+                    let length = CART.contents.length;
+                    console.log(length)
+                    return length;
+                } 
+            }
+            function CustomConfirm() {
+                
+                this.render = function(clickId,dialog,op,id){
+
+                    if(clickId=="new-category"){
+                        var continueId = "category-name";
+                        var html = "<div><input type='text' placeholder='Category name' id='dish-category'></div>";
+                        var buttons = '<button class="popup-dialog-button dynamic-content" id='+continueId+' onclick="Confirm.yes(\''+continueId+'\')">Continue</button> <button class="popup-dialog-button" onclick="Confirm.no()">Cancel</button>';
+                    }else if(clickId=="new-branch") {
+                        var continueId = "branch-name";
+                        var html = "<div><input type='text' placeholder='Branch name' id='branch-name'></div>";
+                        var buttons = '<button class="popup-dialog-button dynamic-content" id='+continueId+' onclick="Confirm.yes(\''+continueId+'\')">Continue</button> <button class="popup-dialog-button" onclick="Confirm.no()">Cancel</button>';
+                    }else if(clickId=="new-manifest") {
+                        var continueId = "manifest-name";
+                        var html = "<div><input type='text' placeholder='Manifest name' id='manifest-name'></div>";
+                        var buttons = '<button class="popup-dialog-button dynamic-content" id='+continueId+' onclick="Confirm.yes(\''+continueId+'\')">Continue</button> <button class="popup-dialog-button" onclick="Confirm.no()">Cancel</button>';
+                    }else if(clickId=='cancel-activity'){
+                        var continueId = "delete-token"
+                        var html ="<p>Continuing will cancel your previous activity ..."
+                        var buttons = '<button class="popup-dialog-button dynamic-content" id='+continueId+' onclick="Confirm.yes(\''+continueId+'\')">Continue</button> <button class="popup-dialog-button" onclick="Confirm.no()">Cancel</button>';
+                    }
+                    var winWidth = window.innerWidth;
+                    var winHeight = window.innerHeight;
+                    var dOverlay = document.getElementById("dialogoverlay");
+                    var dBox = document.getElementById("dialogbox");
+                    dOverlay.style.display = "block";
+                    dOverlay.style.height = winHeight+"px";
+                    dBox.style.left = (winWidth/2)-(550 * .5)+"px";
+                    dBox.style.top = "100px";
+                    dBox.style.display = "block";
+                    dBox.classList = "animate";
+                    document.getElementById("dialogboxhead").innerHTML = dialog;
+                    document.getElementById("dialogboxbody").innerHTML = html;
+                    document.getElementById("dialogboxfoot").innerHTML = buttons;
+                }
+                this.no = function(){
+                    var dOverlay = document.getElementById("dialogoverlay");
+                    var dBox = document.getElementById("dialogbox");
+                    removeClass(dBox, "animate");
+                    dOverlay.style.display = "none";
+                    dBox.style.display = "none";
+
+                }
+                this.yes = function(id){
+                    if(id=="category-name"){
+                        CART.addItemCategory(document.getElementById("dish-category").value);
+                        setIframeURL("lerestronewmeallisting.html")
+                        
+                        var dOverlay = document.getElementById("dialogoverlay");
+                        var dBox = document.getElementById("dialogbox");
+                        removeClass(dBox, "animate");
+                        dOverlay.style.display = "none";
+                        dBox.style.display = "none";
+                    }else if(id=="branch-name"){
+                        CART.addNewBranch(document.getElementById("branch-name").value);
+                        setIframeURL("lerestronewbranch.html")
+                        var dOverlay = document.getElementById("dialogoverlay");
+                        var dBox = document.getElementById("dialogbox");
+                        removeClass(dBox, "animate");
+                        dOverlay.style.display = "none";
+                        dBox.style.display = "none";
+                    }else if(id=="delete-token"){
+                        CART.contents = [];
+                        CART.sync();
+                        setIframeURL("latestupdates.html");
+                    }
+                    var dOverlay = document.getElementById("dialogoverlay");
+                    var dBox = document.getElementById("dialogbox");
+                    removeClass(dBox, "animate");
+                    dOverlay.style.display = "none";
+                    dBox.style.display = "none";
+                }
+        }
+            var Confirm = new CustomConfirm();
+
+
+function bindEvent(element, eventName, eventHandler) {
+if (element.addEventListener){
+element.addEventListener(eventName, eventHandler, false);
+} else if (element.attachEvent) {
+element.attachEvent('on' + eventName, eventHandler);
+}
+}
+/*var iframeSource = 'iframe.html';
+// Create the iframe
+var iframe = document.createElement('iframe');
+iframe.setAttribute('src', iframeSource);
+iframe.setAttribute('id', 'the_iframe');
+iframe.style.width = 450 + 'px';
+iframe.style.height = 200 + 'px';
+document.body.appendChild(iframe);
+// Send a message to the child iframe
+var iframeEl = document.getElementById('the_iframe'),
+messageButton = document.getElementById('message_button'),
+results = document.getElementById('results');
+// Send a message to the child iframe
+var sendMessage = function(msg) {
+// Make sure you are sending a string, and to stringify JSON
+iframeEl.contentWindow.postMessage(msg, '*');
+};
+// Send random messge data on every button click
+bindEvent(messageButton, 'click', function (e) {
+var random = Math.random();
+sendMessage('' + random);
+});*/
+// Listen to message from child window
+bindEvent(window, 'message', function (e) {
+    console.log(e.data);
+    if(e.data=="New category has been created"){
+        setIframeURL("latestupdates.html", cartJson);
+        window.scrollTo({
+            top:0,
+            behavior: 'smooth'
+        })
+        _("alert-notify-box").style.display ="block";
+
+        _("notice-me").innerHTML = "New category has been created check notes";
+        setTimeout(function(){
+           _("alert-notify-box").style.display ="none";
+           _("notice-me").innerHTML = ""; 
+        }, 15000)
+    }else if(e.data=="New item created in category"){
+       setIframeURL("latestupdates.html", cartJson); 
+        window.scrollTo({
+            top:0,
+            behavior: 'smooth'
+        })
+        _("alert-notify-box").style.display ="block";
+
+        _("notice-me").innerHTML = "New item create in a category check your notes";
+        setTimeout(function(){
+           _("alert-notify-box").style.display ="none";
+           _("notice-me").innerHTML = ""; 
+        }, 15000)
+    }else if(e.data=="New branch created"){
+       setIframeURL("latestupdates.html", cartJson); 
+        window.scrollTo({
+            top:0,
+            behavior: 'smooth'
+        })
+        _("alert-notify-box").style.display ="block";
+
+        _("notice-me").innerHTML = "New branch has been created";
+        setTimeout(function(){
+           _("alert-notify-box").style.display ="none";
+           _("notice-me").innerHTML = ""; 
+        }, 15000) 
+    }
+});
+
+
+
+            window.onload = function(){
+				document.getElementById("new-manifest").addEventListener("click", function(e){e.preventDefault(); 
+                    if(CART.cartLength()>0){
+                        Confirm.render('cancel-activity', 'Alert');
+                    }else if(CART.cartLength()==0){
+                         Confirm.render("new-manifest", "New Manifest");
+                    }
+                });
+                document.getElementById("view-inventory").addEventListener("click", function(e){e.preventDefault();setIframeURL("categoryitems.html", cartJson)});
+                document.getElementById("add-inventory-to-branch").addEventListener("click", function(e){e.preventDefault();setIframeURL("addtobranch.html", cartJson)});
+                document.getElementById("sell-graphs").addEventListener("click", function(e){e.preventDefault();setIframeURL("sellgraphs.html", cartJson)});
+                document.getElementById("sell-maps").addEventListener("click", function(e){e.preventDefault();setIframeURL("sellmaps.html", cartJson)});
+                document.getElementById("fulfilled-delivery").addEventListener("click", function(e){e.preventDefault();setIframeURL("fulfilleddelivery.html", cartJson)});
+                setIframeURL("welcome.html", cartJson);
+                
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+		body{
+			font-family: Roboto, sans-serif;
+		}
+        #top-header{
+				width: 100%;
+				background: #ffffff;
+				height: 50px;
+				justify-content: space-between;
+				display: flex;
+				box-shadow: 0 10px 15px -1px rgba(0,0,0,0.1);
+			}    
+            .menu-btn {
+    position: absolute;
+    z-index: 3;
+    right: 35px;
+    top: 15px;
+    cursor: pointer;
+    transition: all 0.5s ease-out;
+}
+.menu-btn .btn-line {
+    width: 28px;
+    height: 3px;
+    margin: 0 0 5px 0;
+    background: #fa923f;
+    transition: all 0.5s ease-out;
+}
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 35px;
+    margin-top: 15px;
+    background: #4f5393;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 1px 1px 0 rgba(0,0,0,0.2), 0 16px 15px -16px #d24c0f, inset 0 0 25px rgba(0,0,0,0.05);
+    min-width: 170px;
+}
+.gallery-container{
+				width: 100%;
+				height:120px;
+				user-select:none;
+				box-sizing: border-box;
+			}
+			.gallery-container .slide-show-container{
+				width:100%;
+				height:90%;
+				overflow:hidden;
+				background-color:gainsboro;
+				position:relative;
+			}
+			.gallery-container .slide-show-container .image-holder{
+				width:100%;
+				height:100%;
+				position:absolute;
+				opacity:0;
+			}
+			.gallery-container .slide-show-container{
+				width:100%;
+				height:90%;
+				overflow:hidden;
+				background-color:gainsboro;
+				position:relative;
+				border-radius: 4px;
+			}
+			.gallery-container .slide-show-container .image-holder{
+				width:100%;
+				height:100%;
+				position:absolute;
+				opacity:0;
+			}
+.gallery-container .slide-show-container .image-holder img{
+				width:100%;
+				height:100%;
+
+			}
+			.gallery-container .slide-show-container .image-holder .caption-text{
+				display:none;
+			}
+			.gallery-container .slide-show-container .left-arrow,.gallery-container .slide-show-container .right-arrow{
+				width:50px;
+				background:rgba(0,0,0,0.6);
+				position:absolute;
+				left:0;
+				z-index:1;
+				transition:
+				background 0.5s;
+				height:72px;
+				top:50%;
+				transform:translateY(-50%);
+				border-radius:10px;
+			}
+			.gallery-container .slide-show-container .right-arrow{
+				left:auto;
+				right:0;
+				
+			}
+			.gallery-container .slide-show-container .right-arrow:hover{
+				background:#000000a8;
+				cursor:pointer;
+			}
+			.gallery-container .slide-show-container .left-arrow:hover{
+				background:#000000a8;
+				cursor:pointer;
+			}
+			.gallery-container .slide-show-container .arrow{
+				display:inline-block;
+				border:3px solid #fff;
+				width:10px;
+				height:10px;
+				border-left:none;
+				border-bottom:none;
+				margin:auto;
+				position:absolute;
+				left:0;
+				right: 0;
+				top:0;
+				bottom:0;
+			}
+			.gallery-container .slide-show-container .arrow.arrow-left{
+				transform:rotateZ(-135deg);
+			}
+			.gallery-container .slide-show-container .arrow.arrow-right{
+				transform:rotateZ(45deg);
+			}
+			.gallery-container .slide-show-container .caption-holder>.caption-text{
+				margin:0;
+
+			}
+			.gallery-container #dots-container{
+				width:100%;
+				height:10%;
+				text-align:center;
+				padding-top:8px;
+				box-sizing: border-box;	
+			}
+			.gallery-container #dots-container .dots{
+				display:inline-block;
+				width:15px;
+				height:15px;
+				border-radius:50%;
+				margin-left:10px;
+				background-color:#bbb;
+				cursor:pointer;
+				transition:background-color 0.5s;
+			}
+			.gallery-container #dots-container .dots:hover{
+				background-color:#717171;
+			}
+			.gallery-container #dots-container .dots.active{
+				background-color:#717171;
+			}
+			.gallery-container #dots-container .dots:first-child{
+				margin-left:0;
+			}
+			.gallery-container .move-left-current-slide{
+				animation-name:move-left-current;
+				animation-duration: 0.5s;
+				animation-timing-function:linear;
+				animation-fill-mode:forwards;
+			}
+			.gallery-container .move-left-next-slide{
+				animation-name:move-left-next;
+				animation-duration: 0.5s;
+				animation-timing-function:linear;
+				animation-fill-mode:forwards;
+			} 
+			@keyframes move-left-current{
+				from{
+					margin-left:0;
+					opacity:1;
+				}to{
+					margin-left:-100%;
+					opacity:1;
+				}
+			}
+			@keyframes move-left-next{ 
+				from{
+					margin-left:100%;
+					opacity:1;
+				}to{
+					margin-left:0;
+					opacity:1;
+				}
+			}
+
+			.gallery-container .move-right-current-slide{
+				animation-name:move-right-current;
+				animation-duration: 0.5s;
+				animation-timing-function:linear;
+				animation-fill-mode:forwards;
+			}
+			.gallery-container .move-right-next-slide{
+				animation-name:move-right-next;
+				animation-duration: 0.5s;
+				animation-timing-function:linear;
+				animation-fill-mode:forwards;
+			} 
+			@keyframes move-right-current{
+				from{
+					margin-left:0;
+					opacity:1;
+				}to{
+					margin-left:100%;
+					opacity:1;
+				}
+			}
+			@keyframes move-right-next{ 
+				from{
+					margin-left:-100%;
+					opacity:1;
+				}to{
+					margin-left:0;
+					opacity:1;
+				}
+			}
+			.slide-text-from-bottom{
+				animation-name: slide-text-from-bottom;
+				animation-duration: .7s;
+				animation-timing-function: ease-out;
+			}
+			@keyframes .slide-text-from-bottom{
+				from{opacity:0;margin-top:100px;}
+				to{opacity:1;margin-top:0;}
+			}
+			.slide-text-from-top{
+				animation-name: slide-text-from-top;
+				animation-duration: .7s;
+				animation-timing-function: ease-out;
+			}
+			@keyframes .slide-text-from-top{
+				from{opacity:0;margin-top:-100px;}
+				to{opacity:1;margin-top:0;}
+			}
+
+
+			.table {
+				width: 100%;
+				margin-top: 2rem;
+				border-collapse: collapse;
+				border-spacing: 0;			
+			}
+			
+			.table thead th {
+				text-transform: uppercase;
+				padding:10px;
+			}
+
+			.table tbody tr td {
+				padding: 13px 13px;
+				text-align: center;
+			}
+		
+			.table tbody tr td:first-child {
+			}
+			
+			.table tbody tr:nth-child(odd) {
+				//background: #f7cfb0;
+			}
+			.item-number-input{
+				width:70%;
+				padding: 5px 10px;
+    border: none;
+    border-radius: 14px;
+   /* background: #bbb;*/
+    color: #000;
+    box-shadow: 1px 1px 0 rgba(0,0,0,0.2), 0 16px 15px -16px #d24c0f, inset 0 0 25px rgba(0,0,0,0.05);
+				text-align:center;
+				font-size:12px;
+			}
+			::placeholder{
+				//color:#e1e1e1
+			}
+			.quantity-value{
+				font-size: 11px;
+				color: rgba(0,0,0,0.5);
+			}
+			.brand-item{
+				font-size: 14px;
+				color: rgba(0,0,0,0.5);
+			}
+			#popup{
+				max-width: 420px;
+				width: 100%;
+				height: auto;
+				background: #fff;
+				padding: 35px 28px;
+				position: absolute;
+				top: 28%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+				border-radius: 20px;
+				z-index: 1999999999999999;
+				box-shadow: 0 5px 9px 0 rgba(0,0,0,0.2);
+				display:none;
+			}
+			#popup #popup-top{
+				display: flex;
+				justify-content: space-between;
+				margin: 0px 0 0px;
+				padding: 0 5%;
+				font-size: 14px;
+				color: #4f5393;
+				/* font-weight: 600; */
+				line-height: 16px;
+			}
+			#popup #popup-top p{
+				display:flex;
+			}
+			#popup #popup-top span{
+				max-width: 100%;
+    			border-radius: 50%;
+			}
+			#popup #popup-body{
+				display: flex;
+				flex-direction: row;
+				justify-content: space-evenly;
+				font-size: 15px;
+    			color: rgba(0,0,0,0.3);
+				margin-top: 25px;
+    			margin-bottom: 16px;
+			}
+			#total-wrapper{
+				display: flex;
+				flex-direction: row;
+				justify-content: space-evenly;
+				font-size: 20px;
+    			color: #4f5393;
+				margin-top: 20px;
+    			margin-bottom: 17px;
+			}
+			#popup-bottom{
+				display: flex;
+				flex-direction: row;
+				justify-content: space-evenly;
+				font-size: 20px;
+    			color: #4f5393;
+				margin-top: 20px;
+    			margin-bottom: 0px;
+			}
+			.book-dynamic{
+				padding: 5px;
+    			border: none;
+    			border: 1px solid #4f5393;
+    			border-radius: 5px;
+				background: #fff;
+			}
+			#calculate-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-size: 20px;
+    color: #4f5393;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+			.calculate-me{
+				padding: 5px;
+    			border: none;
+    			border: 1px solid #4f5393;
+    			border-radius: 5px;
+				background: #fff;
+			}
+			.close
+{
+  display:block;
+  box-sizing:border-box;
+  width:20px;
+  height:20px;
+  border-radius:100%;
+  background: -webkit-linear-gradient(-45deg, transparent 0%, transparent 46%, white 46%,  white 56%,transparent 56%, transparent 100%), -webkit-linear-gradient(45deg, transparent 0%, transparent 46%, white 46%,  white 56%,transparent 56%, transparent 100%);
+  background-color:red;
+  box-shadow:0px 0px 5px 2px rgba(0,0,0,0.5);
+}
+.detail-inputs{
+	width:13%;
+}
+#calculation-wrapper{
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 13px;
+}
+#calculation-wrapper div{
+	font-size: 13px;
+    color: rgba(25, 20, 20, 0.3);
+    font-weight: 600;
+    line-height: 16px;
+    margin: 0px 0px 5px 0px;
+}
+        </style>
+    </head>
+    <body>
+        <div id="top-header">
+            <div >this is a</div>
+        </div>
+        <div class="gallery-container cover">
+            <div class="slide-show-container">
+                <div class="left-arrow" onclick="plusSlides(-1)"><span class="arrow arrow-left"></span></div>
+                <div class="right-arrow" onclick="plusSlides(1)"><span class="arrow arrow-right"></span></div>
+                <div class="caption-holder"><p class="caption-text"></p></div>
+                <div class="image-holder">
+                    <img src="cokebanner.jpg">
+                </div>
+                <div class="image-holder">
+                    <img src="eyelash.jpg">
+                </div>
+                <div class="image-holder">
+                    <img src="unileverresized.jpg">
+                </div>
+            </div>
+			<div id="dots-container"></div>
+			
+			
+		</div>
+		<table class="table table-bordered table-responsive-sm">
+			<tbody id="dota-dota">
+
+			</tbody>
+		</table>
+		<div id="popup">
+			<div id="popup-top">
+				<p>Manifest</p>
+				<div class="close"></div>
+			</div>
+			<div id="popup-body">
+				<table>
+					<tbody id="dota-dota-two">
+
+					</tbody>
+				</table>
+			</div>
+			<div id="total-wrapper">
+				<span id="calculate-total" ></span>
+			</div>
+			<div id="show-calculations">
+				
+				<div id="total-wrapper">
+					<span id="total"></span>
+				</div>
+			</div>
+			
+			<div id="popup-bottom">
+				<button class="book-dynamic"  href="booked.html">Book order</button>
+			</div>
+		</div>
+		<button id="calculate" class="btn">Calculate</button>
+        <script>
+			function _(x) { return document.getElementById(x) };
+	
+	function hasClass(element, className){
+		return element.className.split(" ").indexOf(className) > -1;
+	}
+	
+	function addClass(element, className){
+		if(hasClass(element, className)){
+			return element.classList;
+		} else {
+			return element.classList.add(className);
+		}
+	}
+	
+	function removeClass(element, className){
+		if(hasClass(element, className)){
+			return element.classList.remove(className);
+		}else{
+			return element.classList;
+		}
+	}
+			var slideIndex,slides,dots,captionText;
+			function initGallery(){
+				slideIndex=0;
+				slides = document.getElementsByClassName("image-holder");
+				slides[slideIndex].style.opacity = 1;
+
+				dots = [];
+				var dotsContainer = document.getElementById("dots-container");
+
+				for(var i=0;i<slides.length;i++){
+					var dot= document.createElement("span");
+					dot.classList.add("dots");
+					dot.setAttribute("onClick", "moveSlides("+i+")");
+					dotsContainer.append(dot);
+					dots.push(dot);
+				}
+				dots[slideIndex].classList.add("active"); 
+			} 
+			function plusSlides(n){
+				moveSlides(slideIndex+n);
+			}
+			function moveSlides(n){
+				var i,current,next;
+				var moveSlideAnimClass = {
+					forCurrent:"",
+					forNext:"",
+				}
+				var sliderTextAnimClass;
+				if(n>slideIndex){
+					if(n>=slides.length){n=0}
+					moveSlideAnimClass.forCurrent = "move-left-current-slide";
+					moveSlideAnimClass.forNext = "move-left-next-slide";
+					sliderTextAnimClass = "slider-text-from-top";
+				}else if(n<slideIndex){
+					if(n<0){n=slides.length-1}
+					moveSlideAnimClass.forCurrent = "move-right-current-slide";
+					moveSlideAnimClass.forNext = "move-right-next-slide";
+					sliderTextAnimClass = "slider-text-from-bottom";
+				}
+				if(n!=slideIndex){
+					next = slides[n];
+					current = slides[slideIndex];
+					for(i=0;i<slides.length;i++){
+						slides[i].className = "image-holder";
+						slides[i].style.opacity = 0;
+						dots[i].classList.remove("active");
+					}
+					current.classList.add(moveSlideAnimClass.forCurrent);
+					next.classList.add(moveSlideAnimClass.forNext);
+					dots[n].classList.add("active");
+					slideIndex=n;
+				}
+			}
+			function getDataFromDb(productId){
+				console.log(productId)
+				fetch('http://127.0.0.1:5000/getproductlist',
+                    {
+                        method: 'POST',
+                        headers:
+                        {
+							'Accept': 'application/json',
+							'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(
+                        {
+                            productid: productId,
+                        })
+                    }).then((resp) =>resp.json()).then((responseJsonFromServer) =>
+                    {
+                        responseJsonFromServer.products
+                    }).catch((error) =>
+                    {
+                        console.error(error);
+                    });
+			}
+			var timer=null;
+			function setTimer(){
+				timer=setInterval(function(){
+					plusSlides(1);
+				},3000);
+			}
+			initGallery();
+			setTimer();
+			
+			
+			function getAllUrlParams(url){
+                var queryString = url ? url.split("?")[1] : window.location.search.splice(1);   
+                var obj = {}
+                if(queryString){
+                    queryString = queryString.split("#")[0]
+                    var arr = queryString.split("&");
+                    
+                    for(var i = 0; i<arr.length; i++){
+                        var a = arr[i].split("=");
+                        var paramName = a[0];
+                        
+                        var paramValue = typeof(a[1]) === 'undefined' ? true: a[1];
+                        
+                        paramName = paramName.toLowerCase();
+                        if(typeof paramValue === 'string') paramValue = paramValue.toLowerCase()
+                            
+                        if(paramName.match(/\[(\d+)?\]$/)){
+                            var key = paramName.replace(/\[(\d+)?\]/, '');
+                            if(! obj[key]) obj[key] = [];
+                            
+                            if(paramName.match(/\[\d+\]$/)){
+                                var index = /\[(\d+)\]/.exec(paramName)[1];
+                                
+                                obj[key][index]  = paramValue;
+                            } else {
+                                obj[key].push(paramValue);
+                            }
+                        }else {
+                            if(! obj[paramName]) {
+                                obj[paramName] = paramValue;
+                            } else if(obj[paramName] && typeof obj[paramName] == 'string'){
+                                obj[paramName] = [obj[paramName]];
+                                obj[paramName].push(paramValue);
+                            } else {
+                                obj[paramName].push(paramValue);
+                            }
+                        }
+                    }
+                }
+                return obj; 
+            }
+			
+            let urldata = getAllUrlParams(window.location.href);
+			console.log(urldata);
+			
+			let allQuantitiesTotal = [];
+			let allBrandsArray = [];
+			let allCrateSizes = [];
+			let allPrices = [];
+			let allQuantities = [];
+			let manifest = [];
+			let submenuHeader = []
+			function getNumberInArray(array){
+				return array.length;
+			}
+			fetch('https://enigmatic-hamlet-83578.herokuapp.com/getproductlist',
+                    {
+                        method: 'POST',
+                        headers: 
+                        {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(
+                        {
+                            productId: urldata.companyid,
+                        })
+         
+                    }).then((resp) =>resp.json()).then((responseJsonFromServer) =>
+                    { 
+						console.log(responseJsonFromServer.products);
+						var data = responseJsonFromServer.products;
+						let table = document.getElementById("dota-dota");
+			table.innerHTML = "";
+			
+			for(var i=0;i<data.length;i++){
+				console.log(getNumberInArray(data[i].quantities));
+				allQuantitiesTotal.push(getNumberInArray(data[i].quantities));
+			}
+			for(var i=0;i<data.length;i++){
+				allBrandsArray.push(data[i].name);
+			}
+			for(var i=0;i<data.length;i++){
+				allCrateSizes.push(data[i].crateSize)
+			}
+			for(var i=0;i<data.length;i++){
+				allPrices.push(data[i].prices);
+			}
+			for(var i=0;i<data.length;i++){
+				allQuantities.push(data[i].quantities);
+			}
+			/*console.log(allCrateSizes);
+			console.log(allBrandsArray);*/
+			console.log(allQuantitiesTotal);
+			/*console.log(allPrices);
+			console.log(allQuantities);*/
+			let count = 1;
+			let index = 0;
+			let k = 1;
+			for(let i=0;i<allQuantitiesTotal.length;i++){
+				let row = document.createElement("tr");
+				//console.log(allQuantitiesTotal[i]);
+				for(let j=0;j<allQuantitiesTotal[i]+1;j++){
+						k = j-1;
+						let cell = document.createElement("td");
+						//console.log(allPrices[i][k])
+						//console.log(allCrateSizes[index]);
+						if(j==0){
+							let cellText = document.createTextNode(allBrandsArray[index]+" "+ allCrateSizes[index]+" bottles/crate");
+							cell.setAttribute("data-crate-size", allCrateSizes[index]);
+							cell.setAttribute("colSpan", 2);
+							cell.className = "brand-item";
+							cell.appendChild(cellText);
+							index++;
+						}else{
+							var indexed = index-1;
+							cell.setAttribute("data-id", "number"+allPrices[i][k]);
+							cell.setAttribute("data-bottle-price", allPrices[i][k]);
+							cell.setAttribute("data-bottle-quantity", allQuantities[i][k]);
+							cell.setAttribute("data-total-cost-per-crate", allCrateSizes[indexed]*allPrices[i][k])
+							var input = document.createElement("input");
+							var div = document.createElement("div");
+							div.className = "quantity-value";
+							div.innerHTML =  allQuantities[i][k]+"ml, at Ksh "+allPrices[i][k]+"/bottle";
+							input.type="text";
+							//input.placeholder = "Kshs "+allPrices[i][k];
+							input.placeholder = "# Crates"; 
+							input.className = "item-number-input "+allBrandsArray[indexed];
+							cell.appendChild(div);
+							cell.appendChild(input);	
+						}
+						row.appendChild(cell);
+						count++;
+				}
+				table.appendChild(row);
+			}
+                        
+                    }).catch((error) =>
+                    {
+                        console.error(error);
+
+                    });
+            
+			
+			let totalCostsArray = [];
+			
+	        window.onload = function(){
+				getDataFromDb("123456");
+				document.addEventListener("click", function(e){
+					if(hasClass(e.target, "close")){
+					e.preventDefault();
+						_("popup").style.display = "none";
+					}
+				});
+				//console.log(data);
+				_("calculate").addEventListener("click", function(e){
+					var memory = [];
+						_("popup").style.display = "block";
+						//console.log(document.getElementsByClassName("item-number-input").length);
+						for(var i=0; i<document.getElementsByClassName("item-number-input").length; i++){
+							
+							if(document.getElementsByClassName("item-number-input")[i].value!=""){
+								//console.log(i)
+								//console.log(document.getElementsByClassName("item-number-input")[i].parentNode)
+								var parent = document.getElementsByClassName("item-number-input")[i].parentNode;
+								var child = document.getElementsByClassName("item-number-input")[i];
+								var childNode = document.getElementsByClassName("item-number-input")[i].value;
+								console.log(i)
+								memory.push(i);
+								console.log(memory)
+									manifest.push(
+										{brand:child.classList[1], id:i, bottlePrice:Number(parent.getAttribute("data-bottle-price")), numberCrates:Number(childNode), size:Number(parent.getAttribute("data-bottle-quantity")),cost:Number(parent.getAttribute("data-total-cost-per-crate"))*Number(childNode)}
+									);
+							}
+						}
+						console.log(manifest);
+						for(var i=0; i<manifest.length; i++){
+							totalCostsArray.push(manifest[i].cost);
+						}
+						var count=0;
+						for(var i=0; i<totalCostsArray.length; i++){
+							count += totalCostsArray[i];
+						}
+
+						console.log(totalCostsArray,count);
+						_("calculate-total").innerHTML += count;
+						let tableTwo = document.getElementById("dota-dota-two");
+						
+						
+						//console.log(keys.concat(values));
+						//var getTotals = (values.length * manifest.length) + keys.length;
+						function drawTable(data){
+							var keys = Object.keys(data[0]);
+							//var values = Object.values(manifest);
+							console.log(keys);
+							//console.log(values)
+							var headers = keys.map(function(name){
+								return name;
+							});
+							var body = data.map(function(row){
+								return keys.map(function(name){
+									return row[name];
+								});
+							});
+							return [headers].concat(body);
+						}
+						console.log(drawTable(manifest))
+						var tabular = drawTable(manifest);
+						for(var i=0; i<tabular.length; i++){
+							let row = document.createElement("tr");
+							for(let j=0; j<6; j++){
+								let cell = document.createElement("td");
+								let cellText = document.createTextNode(tabular[i][j]);
+								cell.appendChild(cellText);
+								row.appendChild(cell);
+							}
+							console.log(row)
+							tableTwo.appendChild(row);
+						}
+
+				});
+				
+	        }
+        </script>
+    </body>
+</html>
