@@ -401,7 +401,7 @@
 }
 .gallery-container{
 				width: 100%;
-				height:290px;
+				height:120px;
 				user-select:none;
 				box-sizing: border-box;
 			}
@@ -448,7 +448,7 @@
 				z-index:1;
 				transition:
 				background 0.5s;
-				height:72px;
+				height:50px;
 				top:50%;
 				transform:translateY(-50%);
 				border-radius:10px;
@@ -665,6 +665,30 @@
     background: #4f5393;
     transition: all 0.5s ease-out;
 }
+.table {
+				width: 100%;
+				margin-top: 2rem;
+				border-collapse: collapse;
+				border-spacing: 0;	
+			}
+			
+			.table thead th {
+				text-transform: uppercase;
+				padding:10px;
+
+			}
+
+			.table tbody tr td {
+				padding: 13px 13px;
+				text-align: center;
+			}
+		
+			.table tbody tr td:first-child {
+			}
+			
+			.table tbody tr:nth-child(odd) {
+				//background: #f7cfb0;
+			}
 		</style>
 	</head>
 	<body>
@@ -672,7 +696,7 @@
 				
 				<nav class="side-drawer">
 	                <div class="side-drawer-img">		
-	                    <img src="profile.png" alt="delicious meat" class="header-img" width="100%"/>		
+	                    <img src="coca cola.jpg" alt="delicious meat" class="header-img" width="100%"/>		
 	                </div>
 	                <ul>
 	                    <li><a href="mealslist.html?mealId=meat" >My Orders</a></li>
@@ -698,77 +722,81 @@
 						<div class="right-arrow" onclick="plusSlides(1)"><span class="arrow arrow-right"></span></div>
 						<div class="caption-holder"><p class="caption-text"></p></div>
 						<div class="image-holder">
-							<img src="cokeresized.jpg">
+							<img src="cokebanner.jpg">
 						</div>
 						<div class="image-holder">
-							<img src="pepsiresized.jpg">
+							<img src="eyelash.jpg">
 						</div>
 						<div class="image-holder">
-							<img src="eablresized.jpg">
+							<img src="unileverresized.jpg
+                            ">
 						</div>
 					</div>
 					<div id="dots-container"></div>
 				</div>
 				
-					<i class="fa fa-youtube-play"></i>
-					
-								<div class="fav">
-					<button class="btn">
-						<i class="fa fa-plus"></i>
-						Add To Home Screen
-					</button>
-				</div>
-				<div class="story">
-					<span class="title">Brands</span><div id="bottom-arrow"><span class="search-drop"></span></div>
-					<div class="story-text">
-						<div id="search-input-wrapper">
-							<input type="text" placeholder="Search company ..." id="search">
-						</div>
-						<div class="box" id="box"> 
-							
-						</div>
-					</div>
-				</div>
-				<div class="call-to-action">
-					<span class="contact-us">Get Social with Us</span>
-					<div class="icons" style="display:flex;justify-content:space-evenly;width:200px;">
-						<a href="#!">
-							<i class="fab fa-twitter fa-2x"></i>
-						</a>
-						<a href="#!">
-							<i class="fab fa-facebook fa-2x"></i>
-						</a>
-						<a href="#!">
-							<i class="fab fa-linkedin fa-2x"></i>
-						</a>
-					</div>
-				</div>	
-			</div>
+                <table class="table table-bordered table-responsive-sm">
+                    <tbody id="dota-dota">
+        
+                    </tbody>
+                </table>
+                <div id="popup">
+                    <div id="popup-top">
+                        <p>Manifest</p>
+                        <div class="close"></div>
+                    </div>
+                    <div id="popup-body">
+                        <table>
+                            <tbody id="dota-dota-two">
+        
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="total-wrapper">
+                        <span id="calculate-total" ></span>
+                    </div>
+                    <div id="show-calculations">
+                        
+                        <div id="total-wrapper">
+                            <span id="total"></span>
+                        </div>
+                    </div>
+                    
+                    <div id="popup-bottom">
+                        <button class="book-dynamic"  href="booked.html">Book order</button>
+                    </div>
+                </div>
+                <button id="calculate" class="btn">Calculate</button>
+                </div>
 
 			<script>
 			function _(x) { return document.getElementById(x) };
-            function hasClass(element, className){
-                return element.className.split(" ").indexOf(className) > -1;
-            }
-            function addClass(element, className){
-                if(hasClass(element, className)){
-                    return element.classList;
-                } else {
-                    return element.classList.add(className);
-                }
-            }
-            function removeClass(element, className){
-                if(hasClass(element, className)){
-                    return element.classList.remove(className);
-                }else{
-                    return element.classList;
-                }
-            }     
+	
+	function hasClass(element, className){
+		return element.className.split(" ").indexOf(className) > -1;
+	}
+	
+	function addClass(element, className){
+		if(hasClass(element, className)){
+			return element.classList;
+		} else {
+			return element.classList.add(className);
+		}
+	}
+	
+	function removeClass(element, className){
+		if(hasClass(element, className)){
+			return element.classList.remove(className);
+		}else{
+			return element.classList;
+		}
+	}
 			var slideIndex,slides,dots,captionText;
 			function initGallery(){
 				slideIndex=0;
 				slides = document.getElementsByClassName("image-holder");
 				slides[slideIndex].style.opacity = 1;
+
 				dots = [];
 				var dotsContainer = document.getElementById("dots-container");
 
@@ -816,6 +844,28 @@
 					slideIndex=n;
 				}
 			}
+			function getDataFromDb(productId){
+				console.log(productId)
+				fetch('http://127.0.0.1:5000/getproductlist',
+                    {
+                        method: 'POST',
+                        headers:
+                        {
+							'Accept': 'application/json',
+							'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(
+                        {
+                            productid: productId,
+                        })
+                    }).then((resp) =>resp.json()).then((responseJsonFromServer) =>
+                    {
+                        responseJsonFromServer.products
+                    }).catch((error) =>
+                    {
+                        console.error(error);
+                    });
+			}
 			var timer=null;
 			function setTimer(){
 				timer=setInterval(function(){
@@ -824,30 +874,64 @@
 			}
 			initGallery();
 			setTimer();
-
-
-			//select DOM items
-	        const menuBtn = document.querySelector(".menu-btn")
-	        const menuBtnClose = document.querySelector("#close-meal-category")
-	        const menu = document.querySelector(".side-drawer")
-	        const menuNav = document.querySelector(".menu-nav")
-	        const menuBranding = document.querySelector(".menu-branding")
-	        const navItems = document.querySelectorAll(".nav-item")
-	        const menuLeft = document.querySelector(".menu-left");
-			const bottomArrow = document.querySelector("#bottom-arrow");
-			const searchInputWrapper = document.querySelector("#search-input-wrapper");
-	        function openMenu(){
-	            menuBtn.classList.add("close");
-	            menu.classList.add("open");
-	        }
-	        function closeMenu(){
-	            menuBtn.classList.remove("close");
-	            menu.classList.remove("open");
-	        }
-	        
-			function fetchUserBranches(){
-
-                fetch('https://enigmatic-hamlet-83578.herokuapp.com/getcategorieslistings/',
+			
+			
+			function getAllUrlParams(url){
+                var queryString = url ? url.split("?")[1] : window.location.search.splice(1);   
+                var obj = {}
+                if(queryString){
+                    queryString = queryString.split("#")[0]
+                    var arr = queryString.split("&");
+                    
+                    for(var i = 0; i<arr.length; i++){
+                        var a = arr[i].split("=");
+                        var paramName = a[0];
+                        
+                        var paramValue = typeof(a[1]) === 'undefined' ? true: a[1];
+                        
+                        paramName = paramName.toLowerCase();
+                        if(typeof paramValue === 'string') paramValue = paramValue.toLowerCase()
+                            
+                        if(paramName.match(/\[(\d+)?\]$/)){
+                            var key = paramName.replace(/\[(\d+)?\]/, '');
+                            if(! obj[key]) obj[key] = [];
+                            
+                            if(paramName.match(/\[\d+\]$/)){
+                                var index = /\[(\d+)\]/.exec(paramName)[1];
+                                
+                                obj[key][index]  = paramValue;
+                            } else {
+                                obj[key].push(paramValue);
+                            }
+                        }else {
+                            if(! obj[paramName]) {
+                                obj[paramName] = paramValue;
+                            } else if(obj[paramName] && typeof obj[paramName] == 'string'){
+                                obj[paramName] = [obj[paramName]];
+                                obj[paramName].push(paramValue);
+                            } else {
+                                obj[paramName].push(paramValue);
+                            }
+                        }
+                    }
+                }
+                return obj; 
+            }
+			
+            let urldata = getAllUrlParams(window.location.href);
+			console.log(urldata);
+			
+			let allQuantitiesTotal = [];
+			let allBrandsArray = [];
+			let allCrateSizes = [];
+			let allPrices = [];
+			let allQuantities = [];
+			let manifest = [];
+			let submenuHeader = []
+			function getNumberInArray(array){
+				return array.length;
+			}
+			fetch('https://enigmatic-hamlet-83578.herokuapp.com/getproductlist',
                     {
                         method: 'POST',
                         headers: 
@@ -857,43 +941,165 @@
                         },
                         body: JSON.stringify(
                         {
-                          adminId:1
-         
+                            productId: urldata.companyid,
                         })
          
                     }).then((resp) =>resp.json()).then((responseJsonFromServer) =>
                     { 
-                        console.log(responseJsonFromServer);
-                        responseJsonFromServer.categories.map(function(category){
-                           _("box").innerHTML +=  `
-                               <div class="card-a card-subs">
-								<a href="inventory2.html?companyid=${category.productId}"><img src="${category.image}" alt="${category.name}"/></a>
-								<p>${category.name}</p>
-							</div>
-								
-                            `;
-                            
-                        })
-                        console.log(responseJsonFromServer)
+						console.log(responseJsonFromServer.products);
+						var data = responseJsonFromServer.products;
+						let table = document.getElementById("dota-dota");
+			table.innerHTML = "";
+			
+			for(var i=0;i<data.length;i++){
+				console.log(getNumberInArray(data[i].quantities));
+				allQuantitiesTotal.push(getNumberInArray(data[i].quantities));
+			}
+			for(var i=0;i<data.length;i++){
+				allBrandsArray.push(data[i].name);
+			}
+			for(var i=0;i<data.length;i++){
+				allCrateSizes.push(data[i].crateSize)
+			}
+			for(var i=0;i<data.length;i++){
+				allPrices.push(data[i].prices);
+			}
+			for(var i=0;i<data.length;i++){
+				allQuantities.push(data[i].quantities);
+			}
+			/*console.log(allCrateSizes);
+			console.log(allBrandsArray);*/
+			console.log(allQuantitiesTotal);
+			/*console.log(allPrices);
+			console.log(allQuantities);*/
+			let count = 1;
+			let index = 0;
+			let k = 1;
+			for(let i=0;i<allQuantitiesTotal.length;i++){
+				let row = document.createElement("tr");
+				//console.log(allQuantitiesTotal[i]);
+				for(let j=0;j<allQuantitiesTotal[i]+1;j++){
+						k = j-1;
+						let cell = document.createElement("td");
+						//console.log(allPrices[i][k])
+						//console.log(allCrateSizes[index]);
+						if(j==0){
+							let cellText = document.createTextNode(allBrandsArray[index]+" "+ allCrateSizes[index]+" bottles/crate");
+							cell.setAttribute("data-crate-size", allCrateSizes[index]);
+							cell.setAttribute("colSpan", 2);
+							cell.className = "brand-item";
+							cell.appendChild(cellText);
+							index++;
+						}else{
+							var indexed = index-1;
+							cell.setAttribute("data-id", "number"+allPrices[i][k]);
+							cell.setAttribute("data-bottle-price", allPrices[i][k]);
+							cell.setAttribute("data-bottle-quantity", allQuantities[i][k]);
+							cell.setAttribute("data-total-cost-per-crate", allCrateSizes[indexed]*allPrices[i][k])
+							var input = document.createElement("input");
+							var div = document.createElement("div");
+							div.className = "quantity-value";
+							div.innerHTML =  allQuantities[i][k]+"ml, at Ksh "+allPrices[i][k]+"/bottle";
+							input.type="text";
+							//input.placeholder = "Kshs "+allPrices[i][k];
+							input.placeholder = "# Crates"; 
+							input.className = "item-number-input "+allBrandsArray[indexed];
+							cell.appendChild(div);
+							cell.appendChild(input);	
+						}
+						row.appendChild(cell);
+						count++;
+				}
+				table.appendChild(row);
+			}
+                        
                     }).catch((error) =>
                     {
                         console.error(error);
 
                     });
-            }
-			window.onload = function(){
-				fetchUserBranches();
-	            menuBtn.addEventListener("click", openMenu); 
-	            menuBtnClose.addEventListener("click", closeMenu);
-				bottomArrow.addEventListener("click", function(){
-					searchInputWrapper.style.visibility = "visible";
-					searchInputWrapper.style.width = "100%";
-					searchInputWrapper.style.height = "55px";
-					searchInputWrapper.style.display = "flex";
-					searchInputWrapper.style.justifyContent = "center";
-				})
+            
+			
+			let totalCostsArray = [];
+			
+	        window.onload = function(){
+				//getDataFromDb("123456");
+				document.addEventListener("click", function(e){
+					if(hasClass(e.target, "close")){
+					e.preventDefault();
+						_("popup").style.display = "none";
+					}
+				});
+				//console.log(data);
+				_("calculate").addEventListener("click", function(e){
+					var memory = [];
+						_("popup").style.display = "block";
+						//console.log(document.getElementsByClassName("item-number-input").length);
+						for(var i=0; i<document.getElementsByClassName("item-number-input").length; i++){
+							
+							if(document.getElementsByClassName("item-number-input")[i].value!=""){
+								//console.log(i)
+								//console.log(document.getElementsByClassName("item-number-input")[i].parentNode)
+								var parent = document.getElementsByClassName("item-number-input")[i].parentNode;
+								var child = document.getElementsByClassName("item-number-input")[i];
+								var childNode = document.getElementsByClassName("item-number-input")[i].value;
+								console.log(i)
+								memory.push(i);
+								console.log(memory)
+									manifest.push(
+										{brand:child.classList[1], id:i, bottlePrice:Number(parent.getAttribute("data-bottle-price")), numberCrates:Number(childNode), size:Number(parent.getAttribute("data-bottle-quantity")),cost:Number(parent.getAttribute("data-total-cost-per-crate"))*Number(childNode)}
+									);
+							}
+						}
+						console.log(manifest);
+						for(var i=0; i<manifest.length; i++){
+							totalCostsArray.push(manifest[i].cost);
+						}
+						var count=0;
+						for(var i=0; i<totalCostsArray.length; i++){
+							count += totalCostsArray[i];
+						}
+
+						console.log(totalCostsArray,count);
+						_("calculate-total").innerHTML += count;
+						let tableTwo = document.getElementById("dota-dota-two");
+						
+						
+						//console.log(keys.concat(values));
+						//var getTotals = (values.length * manifest.length) + keys.length;
+						function drawTable(data){
+							var keys = Object.keys(data[0]);
+							//var values = Object.values(manifest);
+							console.log(keys);
+							//console.log(values)
+							var headers = keys.map(function(name){
+								return name;
+							});
+							var body = data.map(function(row){
+								return keys.map(function(name){
+									return row[name];
+								});
+							});
+							return [headers].concat(body);
+						}
+						console.log(drawTable(manifest))
+						var tabular = drawTable(manifest);
+						for(var i=0; i<tabular.length; i++){
+							let row = document.createElement("tr");
+							for(let j=0; j<6; j++){
+								let cell = document.createElement("td");
+								let cellText = document.createTextNode(tabular[i][j]);
+								cell.appendChild(cellText);
+								row.appendChild(cell);
+							}
+							console.log(row)
+							tableTwo.appendChild(row);
+						}
+
+				});
+				
 	        }
-		</script>
+        </script>
 
 	</body>
 </html>

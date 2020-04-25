@@ -2,8 +2,16 @@
 <html>
     <head>
         <style>
-		body{
-			font-family: Roboto, sans-serif;
+			*{
+		box-sizing: border-box;
+		padding: 0;
+			margin: 0;
+			outline: none;
+		}
+		div{
+			padding: 0;
+			margin: 0;
+			outline: none;
 		}
         #top-header{
 				width: 100%;
@@ -27,6 +35,74 @@
     margin: 0 0 5px 0;
     background: #fa923f;
     transition: all 0.5s ease-out;
+}
+.container{
+		display: flex;
+    	justify-content: space-evenly;
+	}
+	.app{
+	background: #f7f9fc;
+	overflow: hidden;
+	display:flex;
+	flex-direction:column;
+}
+	.cover{
+	position: relative;
+	height:  253px;
+	overflow: hidden;
+}
+	.cover img{
+	height: 100%;
+	margin-left: 0px;
+	box-shadow: -5px 60px 15px 55px rgba(2,7,33,0.4), -5px 60px 35px -55px rgba(0,0,0,0.2);
+}
+.cover:after{
+	position: absolute;
+	content: "";
+	width: 100%;
+	height: 297px;
+	display: inline-block;
+	background: transparent;
+	top: 0;
+	left: 0;
+}
+.cover .fa{
+	position: relative;
+	font-size: 38px;
+	left: 50%;
+	top: 55px;
+	color: #f7f9fc;
+	margin-left: -15px;
+	opacity: 0.9;
+}
+.cover .title{
+	position: absolute;
+	width: 100%;
+	display: inline-block;
+	text-align: center;
+	text-transform: uppercase;
+	bottom: 0;
+	color: #fff;
+	font-size: 15px;
+	font-weight: 600;
+	background: rgba(2,7,33,0.7);
+	padding: 10px 0;
+	letter-spacing: 0.5px;
+	left: 0px;
+}
+.cover .title span{
+	display: block;
+	font-size: 10px;
+	font-weight: 300;
+	letter-spacing: 1px;
+	padding-top: 5px;
+}
+.fav{
+	position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
 }
 .btn {
     padding: 10px 15px;
@@ -200,57 +276,17 @@
 				animation-timing-function:linear;
 				animation-fill-mode:forwards;
 			} 
-			@keyframes move-right-current{
-				from{
-					margin-left:0;
-					opacity:1;
-				}to{
-					margin-left:100%;
-					opacity:1;
-				}
-			}
-			@keyframes move-right-next{ 
-				from{
-					margin-left:-100%;
-					opacity:1;
-				}to{
-					margin-left:0;
-					opacity:1;
-				}
-			}
-			.slide-text-from-bottom{
-				animation-name: slide-text-from-bottom;
-				animation-duration: .7s;
-				animation-timing-function: ease-out;
-			}
-			@keyframes .slide-text-from-bottom{
-				from{opacity:0;margin-top:100px;}
-				to{opacity:1;margin-top:0;}
-			}
-			.slide-text-from-top{
-				animation-name: slide-text-from-top;
-				animation-duration: .7s;
-				animation-timing-function: ease-out;
-			}
-			@keyframes .slide-text-from-top{
-				from{opacity:0;margin-top:-100px;}
-				to{opacity:1;margin-top:0;}
-			}
-
-
 			.table {
 				width: 100%;
 				margin-top: 2rem;
 				border-collapse: collapse;
 				border-spacing: 0;	
-diplay:flex;				
-height:100%;
-min-height450px;
 			}
 			
 			.table thead th {
 				text-transform: uppercase;
 				padding:10px;
+
 			}
 
 			.table tbody tr td {
@@ -394,22 +430,6 @@ min-height450px;
     font-weight: 600;
     line-height: 16px;
     margin: 0px 0px 5px 0px;
-}
-div {
-    padding: 0;
-    margin: 0;
-    outline: none;
-}
-.app {
-    background: #f7f9fc;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-.cover {
-    position: relative;
-    height: 253px;
-    overflow: hidden;
 }
         </style>
     </head>
