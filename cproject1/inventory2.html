@@ -689,6 +689,14 @@
 			.table tbody tr:nth-child(odd) {
 				//background: #f7cfb0;
 			}
+			.box{
+				height: auto;
+    text-align: center;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+	min-height: 300px;
+}
 		</style>
 	</head>
 	<body>
@@ -710,11 +718,7 @@
 				</nav>
 				<div id="top-header">
 					<div style="margin:13px;font-size:20px;font-t:700;">Mobi</div>
-					<div class="menu-btn">
-						<div class="btn-line"></div>
-						<div class="btn-line"></div>
-						<div class="btn-line"></div>
-					</div>
+					
 				</div>
 				<div class="gallery-container cover">
 					<div class="slide-show-container">
@@ -735,11 +739,14 @@
 					<div id="dots-container"></div>
 				</div>
 				
-                <table class="table table-bordered table-responsive-sm">
-                    <tbody id="dota-dota">
-        
-                    </tbody>
-                </table>
+				<div class="box">
+					<table class="table table-bordered table-responsive-sm">
+						<tbody id="dota-dota">
+			
+						</tbody>
+					</table>
+				</div>
+                
                 <div id="popup">
                     <div id="popup-top">
                         <p>Manifest</p>
