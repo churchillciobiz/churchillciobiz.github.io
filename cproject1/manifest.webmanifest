@@ -1,0 +1,15 @@
+{
+  "background_color": "purple",
+  "description": "Order  Stuff come on ,pleeeeeeese",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "icon/fox-icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "name": "Awesome for u to Order",
+  "short_name": "Mobi",
+  "start_url": "/cproject1/index.html"
+}
