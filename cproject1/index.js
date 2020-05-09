@@ -13,17 +13,19 @@ setInterval(function() {
 
 // Register service worker to control making site work offline
 
-if('serviceWorker' in navigator) {
+/*if('serviceWorker' in navigator) {
   navigator.serviceWorker
            .register('/cproject1/sw.js')
            .then(function() { console.log('Service Worker Registered'); });
-}
+}*/
 
 // Code to handle install prompt on desktop
 
 let deferredPrompt;
-const addBtn = document.querySelector('.add-button');
-addBtn.style.display = 'block';
+var addBtn = document.getElementById('add-button');
+
+
+//addBtn.style.display = 'block';
 
 window.addEventListener('beforeinstallprompt', (e) => {
   // Prevent Chrome 67 and earlier from automatically showing the prompt
@@ -35,6 +37,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
 
   addBtn.addEventListener('click', (e) => {
     // hide our user interface that shows our A2HS button
+    console.log("add");
     addBtn.style.display = 'none';
     // Show the prompt
     deferredPrompt.prompt();
