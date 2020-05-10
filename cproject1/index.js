@@ -1,10 +1,10 @@
 // Register service worker to control making site work offline
 
-/*if('serviceWorker' in navigator) {
+if('serviceWorker' in navigator) {
   navigator.serviceWorker
            .register('/cproject1/sw.js')
            .then(function() { console.log('Service Worker Registered'); });
-}*/
+}
 
 // Code to handle install prompt on desktop
 
