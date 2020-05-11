@@ -1,18 +1,3 @@
-/*const images = ['fox1','fox2','fox3','fox4'];
-const imgElem = document.querySelector('img');
-
-function randomValueFromArray(array) {
-  let randomNo =  Math.floor(Math.random() * array.length);
-  return array[randomNo];
-}
-
-setInterval(function() {
-  let randomChoice = randomValueFromArray(images);
-  imgElem.src = 'images/' + randomChoice + '.jpg';
-}, 2000)*/
-
-// Register service worker to control making site work offline
-
 if('serviceWorker' in navigator) {
   navigator.serviceWorker
            .register('/a2hs2/sw.js')
@@ -24,6 +9,57 @@ if('serviceWorker' in navigator) {
 let deferredPrompt;
 const addBtn = document.querySelector('.add-button');
 addBtn.style.display = 'block';
+
+// Requesting permission for Notifications after clicking on the button
+var button = document.getElementById("notifications");
+button.addEventListener('click', function(e) {
+	Notification.requestPermission().then(function(result) {
+		if(result === 'granted') {
+			randomNotification();
+		}
+	});
+});
+
+// Setting up random Notification
+function randomNotification() {
+	var randomItem = Math.floor(Math.random()*orders.length);
+	var notifTitle = orders[randomItem].name;
+	var notifBody = 'Created by '+orders[randomItem].author+'.';
+	var notifImg = 'data/img/'+ordes[randomItem].slug+'.jpg';
+	var options = {
+		body: notifBody,
+		icon: notifImg
+	}
+	var notif = new Notification(notifTitle, options);
+	setTimeout(randomNotification, 30000);
+};
+
+// Progressive loading images
+var imagesToLoad = document.querySelectorAll('img[data-src]');
+var loadImages = function(image) {
+	image.setAttribute('src', image.getAttribute('data-src'));
+	image.onload = function() {
+		image.removeAttribute('data-src');
+	};
+};
+if('IntersectionObserver' in window) {
+	var observer = new IntersectionObserver(function(items, observer) {
+		items.forEach(function(item) {
+			if(item.isIntersecting) {
+				loadImages(item.target);
+				observer.unobserve(item.target);
+			}
+		});
+	});
+	imagesToLoad.forEach(function(img) {
+		observer.observe(img);
+	});
+}
+else {
+	imagesToLoad.forEach(function(img) {
+		loadImages(img);
+	});
+}
 
 window.addEventListener('beforeinstallprompt', (e) => {
   // Prevent Chrome 67 and earlier from automatically showing the prompt

@@ -1,3 +1,7 @@
+self.importScripts('data/orders.js');
+
+var cacheName = 'js13kPWA-v1';
+
 self.addEventListener('install', function(e) {
  e.waitUntil(
    caches.open('video-store').then(function(cache) {
