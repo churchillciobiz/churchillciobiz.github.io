@@ -59,7 +59,7 @@ function randomNotification() {
 	var randomItem = Math.floor(Math.random()*orders.length);
 	var notifTitle = orders[randomItem].name;
 	var notifBody = 'Created by '+orders[randomItem].author+'.';
-	var notifImg = 'data/img/'+ordes[randomItem].slug+'.jpg';
+	var notifImg = 'data/img/'+orders[randomItem].slug+'.jpg';
 	var options = {
 		body: notifBody,
 		icon: notifImg
