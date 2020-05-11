@@ -5,7 +5,7 @@ var orders = [
 		author: '2 crates',
 		amountPayable: '3400',
 		link: 'myorders.com?id=212111',
-		companyImg: ''
+		company: 'Baba Joe'
 	},
 	{
 		id: '123422',
@@ -13,7 +13,7 @@ var orders = [
 		author: '1 crates',
 		amountPayable: '800',
 		link: 'myorders.com?id=212113',
-		companyImg: ''
+		company: 'Muria Limited'
 	},
 	{
 		id: '123421',
@@ -21,7 +21,7 @@ var orders = [
 		author: '2 crates',
 		amountPayable: '3400',
 		link: 'myorders.com?id=212111',
-		companyImg: ''
+		company: 'ismatt Ditributors'
 	},
 	{
 		id: '123421',
@@ -29,7 +29,7 @@ var orders = [
 		author: '2 crates',
 		amountPayable: '3400',
 		link: 'myorders.com?id=212111',
-		companyImg: ''
+		company: 'Factory settings'
 	}
 ];
 if('serviceWorker' in navigator) {
@@ -58,7 +58,7 @@ button.addEventListener('click', function(e) {
 function randomNotification() {
 	var randomItem = Math.floor(Math.random()*orders.length);
 	var notifTitle = orders[randomItem].name;
-	var notifBody = 'Order of '+orders[randomItem].author+'.';
+	var notifBody = 'Order of '+orders[randomItem].author+' from '+orders[randomItem].company;
 	var notifImg = 'data/img/'+orders[randomItem].slug+'.jpg';
 	var options = {
 		body: notifBody,
