@@ -255,7 +255,7 @@ bindEvent(window, 'message', function (e) {
                 document.getElementById('iframe-two').src = urlLink+linkItem;
             }
             window.onload = function(){
-                fetchUserBranches(cartJson[0].token);
+                //fetchUserBranches(cartJson[0].token);
                 setIframeURL("");
                 document.addEventListener("click", function(e) {
                     if(hasClass(e.target, "view-items")){
