@@ -1,4 +1,4 @@
-var myOrders = [
+var orders = [
 	{
 		id: '123421',
 		name: 'Coca Cola',
