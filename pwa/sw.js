@@ -230,23 +230,23 @@ var games = [
 var cacheName = 'js13kPWA-v1';
 var appShellFiles = [
   '/pwa/',
-  '/pwa/index.html',
-  '/pwa/app.js',
-  '/pwa/style.css',
-  '/pwa/fonts/graduate.eot',
-  '/pwa/fonts/graduate.ttf',
-  '/pwa/fonts/graduate.woff',
-  '/pwa/favicon.ico',
-  '/pwa/img/js13kgames.png',
-  '/pwa/img/bg.png',
-  '/pwa/icons/icon-32.png',
-  '/pwa/icons/icon-64.png',
-  '/pwa/icons/icon-96.png',
-  '/pwa/icons/icon-128.png',
-  '/pwa/icons/icon-168.png',
-  '/pwa/icons/icon-192.png',
-  '/pwa/icons/icon-256.png',
-  '/pwa/icons/icon-512.png'
+  '/index.html',
+  '/app.js',
+  '/style.css',
+  '/fonts/graduate.eot',
+  '/fonts/graduate.ttf',
+  '/fonts/graduate.woff',
+  '/favicon.ico',
+  '/img/js13kgames.png',
+  '/img/bg.png',
+  '/icons/icon-32.png',
+  '/icons/icon-64.png',
+  '/icons/icon-96.png',
+  '/icons/icon-128.png',
+  '/icons/icon-168.png',
+  '/icons/icon-192.png',
+  '/icons/icon-256.png',
+  '/icons/icon-512.png'
 ];
 var gamesImages = [];
 for(var i=0; i<games.length; i++) {
