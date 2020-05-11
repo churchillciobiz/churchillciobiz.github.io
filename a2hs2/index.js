@@ -34,7 +34,7 @@ var orders = [
 ];
 if('serviceWorker' in navigator) {
   navigator.serviceWorker
-           .register('/a2hs2/sw.js')
+           .register('/sw.js')
            .then(function() { console.log('Service Worker Registered'); });
 }
 
