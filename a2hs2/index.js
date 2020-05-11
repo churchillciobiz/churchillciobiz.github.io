@@ -42,7 +42,7 @@ if('serviceWorker' in navigator) {
 
 let deferredPrompt;
 const addBtn = document.querySelector('.add-button');
-addBtn.style.display = 'none';
+addBtn.style.display = 'block';
 
 // Requesting permission for Notifications after clicking on the button
 var button = document.getElementById("notifications");
