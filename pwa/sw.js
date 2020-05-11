@@ -229,7 +229,6 @@ var games = [
 // Files to cache
 var cacheName = 'js13kPWA-v1';
 var appShellFiles = [
-  '/pwa/',
   '/index.html',
   '/app.js',
   '/style.css',
