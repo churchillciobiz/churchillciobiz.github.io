@@ -1,4 +1,4 @@
-self.importScripts('data/orders.js');
+//self.importScripts('data/orders.js');
 
 var cacheName = 'js13kPWA-v1';
 
