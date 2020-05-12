@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Events tracking</title> 
+  	<link rel="stylesheet" href="leaflet.css" />
+	<!--[if lte IE 8]>
+    	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.ie.css" />
+	<![endif]-->
+	<script src="jquery.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Milonga' rel='stylesheet' type='text/css'>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	<style type="text/css">
+		body {
+    		padding: 0;
+		    margin: 0;
+		}
+		html, body, #map {
+		    height: 100%;
+		    font-family: 'Milonga', cursive;
+		}
+		.leaflet-container .leaflet-control-zoom {
+		    margin-left: 13px;
+		    margin-top: 70px;
+		}
+		#map { z-index: 1;}
+		#title { z-index: 2; position: absolute; left: 10px; }
+        #popup-topy{
+				width: 100%;
+				height: auto;
+				background: #fff;
+				padding: 13px 12px;
+				position: absolute;
+				top: 1%;
+				border-radius: 10px;
+				z-index: 1999999999999999;
+				box-shadow: 0 5px 9px 0 rgba(0,0,0,0.2);
+        }
+		#popup{
+				max-width: 350px;
+				width: 100%;
+				height: auto;
+				background: #fff;
+				padding: 35px 28px;
+				position: absolute;
+				top: 48%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+				border-radius: 20px;
+				z-index: 1999999999999999;
+				box-shadow: 0 5px 9px 0 rgba(0,0,0,0.2);
+				display:none;
+			}
+			#popup #popup-top{
+				display: flex;
+    			justify-content: space-between;
+				margin: 5px 0 10px;
+				padding: 0 5%;
+				font-size: 14px;
+				color:#4f5393;
+				font-weight: 600;
+				line-height: 16px;
+			}
+			#popup #popup-top p{
+				display:flex;
+			}
+			#popup #popup-top span{
+				max-width: 100%;
+    			border-radius: 50%;
+			}
+			#popup #popup-body{
+				display: flex;
+				flex-direction: column;
+				justify-content: space-evenly;
+				font-size: 15px;
+    			color: rgba(0,0,0,0.3);
+				margin-top: 25px;
+    			margin-bottom: 16px;
+			}
+			#total-wrapper{
+				display: flex;
+				flex-direction: row;
+				justify-content: space-evenly;
+				font-size: 20px;
+    			color: #4f5393;
+				margin-top: 20px;
+    			margin-bottom: 17px;
+			}
+			#popup-bottom{
+				display: flex;
+				flex-direction: row;
+				justify-content: space-evenly;
+				font-size: 20px;
+    			color: #4f5393;
+				margin-top: 20px;
+    			margin-bottom: 0px;
+			}
+			.book-dynamic{
+				padding: 5px;
+    			border: none;
+    			border: 1px solid #4f5393;
+    			border-radius: 5px;
+				background: #fff;
+			}
+			#calculate-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-size: 20px;
+    color: #4f5393;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+			.calculate-me{
+				padding: 5px;
+    			border: none;
+    			border: 1px solid #4f5393;
+    			border-radius: 5px;
+				background: #fff;
+			}
+			.calculate-me-two{
+				padding: 5px;
+    			border: none;
+    			border: 1px solid #4f5393;
+    			border-radius: 5px;
+				background: #fff;
+			}
+			.close
+{
+  display:block;
+  box-sizing:border-box;
+  width:20px;
+  height:20px;
+  border-radius:100%;
+  background: -webkit-linear-gradient(-45deg, transparent 0%, transparent 46%, white 46%,  white 56%,transparent 56%, transparent 100%), -webkit-linear-gradient(45deg, transparent 0%, transparent 46%, white 46%,  white 56%,transparent 56%, transparent 100%);
+  background-color:red;
+  box-shadow:0px 0px 5px 2px rgba(0,0,0,0.5);
+}
+	</style>	
+	
+</head>
+<body>
+    <div id="popup-topy">
+        Below are delivery Points near You or <a href="specifiylocation.html">Mark your location to search for delivery services around that point</a> 
+    </div>
+	<div id="map"></div>
+	<div id="popup">
+		<div id="popup-top">
+			<p></p>
+			<div class="close"></div>
+		</div>
+		<div id="popup-body">
+			<div class="box">
+				<p></p>Accept Delivery from</p> <p id="company-name"></p>
+			</div>
+		<div id="calculate-wrapper">
+			<button class="calculate-me">Calculate Time of Delivery</button>
+		</div>
+		<div id="show-calculations">
+			
+			<div id="total-wrapper">
+				<span id="total"></span>
+			</div>
+		</div>
+		
+		<div id="popup-bottom">
+			<button class="book-dynamic done">Accept</button>
+		</div>
+	</div>
+	</div>
+	<script src="leaflet.js"></script> 
+	<script>
+		function _(x) { return document.getElementById(x) };
+function hasClass(element, className){
+	return element.className.split(" ").indexOf(className) > -1;
+}
+function addClass(element, className){
+	if(hasClass(element, className)){
+		return element.classList;
+	} else {
+		return element.classList.add(className);
+	}
+}
+function removeClass(element, className){
+	if(hasClass(element, className)){
+		return element.classList.remove(className);
+	}else{
+		return element.classList;
+	}
+}
+		var map = L.map('map').setView([-1.28639, 36.81722], 12);
+		var markerLayerGroup = L.layerGroup().addTo(map);
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			maxZoom: 18,
+			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+		}).addTo(map);
+
+		function getPins(e){			
+			bounds = map.getBounds();
+			url = "https://enigmatic-hamlet-83578.herokuapp.com/mapjsonwithin?lat1=" + bounds.getNorthEast().lat + "&lon1=" + bounds.getNorthEast().lng + "&lat2=" + bounds.getSouthWest().lat + "&lon2=" + bounds.getSouthWest().lng;
+			$.get(url, pinTheMap, "json")
+		}
+
+		function pinTheMap(data){
+			console.log(data);
+			//clear the current pins
+			map.removeLayer(markerLayerGroup);
+			
+			//add the new pins
+			var markerArray = new Array(data.length)
+			for (var i = 0; i < data.length; i++){
+				places = data[i];
+				markerArray[i] = L.marker([places.pos[1], places.pos[0]]).on('click', function(e){
+                    console.log(e.latlng)
+                    console.log(places.Name);
+					lat = e.latlng.lat;
+					lng = e.latlng.lng;
+					console.log(lat, lng);
+                    _("popup").style.display = "block";
+                    _("company-name").innerHTML = places.Name;
+				});			
+			}	
+			markerLayerGroup = L.layerGroup(markerArray).addTo(map);	
+		}
+		map.on('dragend', getPins);	
+		map.on('zoomend', getPins);
+		map.whenReady(getPins)
+		window.onload = function(e){
+            document.addEventListener("click", function(e){
+					if(hasClass(e.target, "close")){
+					e.preventDefault();
+						_("popup").style.display = "none";
+					}
+				});
+        }
+	</script>
+</body>
+</html>

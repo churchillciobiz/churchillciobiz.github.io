@@ -1,0 +1,1203 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+		<style>
+			*{
+		box-sizing: border-box;
+		padding: 0;
+			margin: 0;
+			outline: none;
+		}
+		div{
+			padding: 0;
+			margin: 0;
+			outline: none;
+		}
+		body{
+			font-family: 'Quicksand', sans-serif;;
+		}
+		.container{
+		display: flex;
+    	justify-content: space-evenly;
+	}
+	.app{
+	background: #f7f9fc;
+	overflow: hidden;
+	display:flex;
+	flex-direction:column;
+}
+	.cover{
+	position: relative;
+	height:  253px;
+	overflow: hidden;
+}
+	.cover img{
+	height: 100%;
+	margin-left: 0px;
+	box-shadow: -5px 60px 15px 55px rgba(2,7,33,0.4), -5px 60px 35px -55px rgba(0,0,0,0.2);
+}
+.cover:after{
+	position: absolute;
+	content: "";
+	width: 100%;
+	height: 297px;
+	display: inline-block;
+	background: transparent;
+	top: 0;
+	left: 0;
+}
+.cover .fa{
+	position: relative;
+	font-size: 38px;
+	left: 50%;
+	top: 55px;
+	color: #f7f9fc;
+	margin-left: -15px;
+	opacity: 0.9;
+}
+.cover .title{
+	position: absolute;
+	width: 100%;
+	display: inline-block;
+	text-align: center;
+	text-transform: uppercase;
+	bottom: 0;
+	color: #fff;
+	font-size: 15px;
+	font-weight: 600;
+	background: rgba(2,7,33,0.7);
+	padding: 10px 0;
+	letter-spacing: 0.5px;
+	left: 0px;
+}
+.cover .title span{
+	display: block;
+	font-size: 10px;
+	font-weight: 300;
+	letter-spacing: 1px;
+	padding-top: 5px;
+}
+.fav{
+	position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+.btn{
+	padding: 10px 15px;
+    border: none;
+    border-radius: 35px;
+    margin-top: 15px;
+    background: #4f5393;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 1px 1px 0 rgba(0,0,0,0.2), 0 16px 15px -16px #d24c0f, inset 0 0 25px rgba(0,0,0,0.05);
+    min-width: 170px;
+}
+.fav .fa{
+	font-size: 14px;
+	padding-right: 5px;
+}
+.fav .users{
+	position: relative;
+	margin-top: 10px;
+	margin-right: 20px;
+	float: right;
+	z-index: 99999;
+}
+.fav .users img{
+	position: relative;
+	width: 29px;
+	border: 2px solid #fa923f;
+	border-radius: 100%;
+	height: 30px;
+}
+
+.fav .users span.fav-count{
+	position: absolute;
+    width: 29px;
+    height: 29px;
+    border: 2px solid #fff;
+    background: #fa923f;
+    display: inline-block;
+    border-radius: 100%;
+    line-height: 25px;
+    text-align: center;
+    top: 0;
+    margin-left: 100px;
+    color: #fff;
+    font-size: 11px;
+}
+.user-1{
+	z-index: 99;
+}
+.user-2{
+	z-index: 98;
+}
+/*.fav:before, .fav:after{
+	content: "";
+	width: 100%;
+	height: 100%;
+	display: inline-block;
+	clear: both;
+}*/
+
+         .side-drawer{
+	height:100%;
+	background:white;
+	box-shadow: 0 10px 4px 9px rgba(0,0,0,0.1);
+	position:fixed;
+	top:0;
+	left:0;
+	width:57%;
+	max-width:400px;
+	z-index:10000;
+	transform:translateX(-102%);
+	transition: transform 0.3s ease-in;
+}
+.side-drawer.open{
+	transform: translateX(0)
+}
+.side-drawer ul{
+	height:100%;
+	list-style:none;
+	display:flex;
+	flex-direction:column;
+    justify-content:flex-start;
+    margin-left: 10%;
+	margin-right: 10%;
+}
+
+.side-drawer li{
+	margin:0.9rem 0;
+}
+.side-drawer a:hover, .side-drawer:active{
+	color:#fa923f;
+}
+
+.side-drawer a{
+	text-decoration:none;
+	padding: 0 5%;
+    color: rgba(0,0,0,0.3);
+    line-height: 16px;
+}
+
+#close-meal-category{
+    padding: 10px 15px;
+    border: none;
+    border-radius: 35px;
+    margin-top: 10px;
+    background: #4f5393;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 1px 1px 0 rgba(0,0,0,0.2), 0 16px 15px -16px #d24c0f, inset 0 0 25px rgba(0,0,0,0.05);
+    min-width: 170px;
+}
+
+
+
+
+.story{
+	width: 90%;
+    height: auto;
+    background: #fff;
+    margin: 40px auto;
+    flex-direction: column;
+    padding: 10px 0;
+    border: 1px solid rgba(0,0,0,0.03);
+    display: flex;
+    box-shadow: 0 10px 15px -1px rgba(0,0,0,0.1);
+}
+.story .title{
+	//position: absolute;
+    //margin-top: -43px;
+    //font-size: 16px;
+    //font-weight: 600;
+    color: rgba(0,0,0,0.5);
+    align-self: center;
+}
+.story div input{
+	padding: 9px 10px;
+    border: none;
+    border-radius: 35px;
+    margin-bottom: 15px;
+    background: #fa923f;
+    color: #fff;
+    box-shadow: 1px 1px 0 rgba(0,0,0,0.2), 0 16px 15px -16px #d24c0f, inset 0 0 25px rgba(0,0,0,0.05);
+    min-width: 220px;
+}
+.story .story-text{
+	width: 100%;
+    padding: 0 5%;
+    font-size: 12px;
+    color: rgba(0,0,0,0.3);
+    font-weight: 600;
+    flex-direction: column;
+    display: flex;
+    line-height: 16px;
+}
+.schedule{
+	position: relative;
+	width: 90%;
+	height: auto;
+	background: #fff;
+	margin: 50px auto;
+	border: 1px solid rgba(0,0,0,0.03);
+	box-shadow: 0 10px 15px -1px rgba(0,0,0,0.1);
+}
+.schedule> .title{
+	position: absolute;
+	font-size: 16px;
+	margin-top: -35px;
+	font-weight: 600;
+	color: rgba(0,0,0,0.5);
+}
+.detail .date{
+	padding: 8px 5px;
+	display: inline-block;
+	background: #4f5393;
+	color: #fff;
+	font-size: 18px;
+	font-weight: 600;
+	text-align: center;
+	box-shadow: inset 0 -25px 75px -25px rgba(0,0,0,0.4);
+}
+.detail .date span{
+	display: block;
+	font-size: 11px;
+	text-transform: uppercase;
+	font-weight: 400;
+	padding-top: 2px;
+}
+.detail .location{
+	position: relative;
+	font-size: 14px;
+	font-weight: 600;
+	display: inline-block;
+	padding: 0 10px;
+	top: 1px;
+	color: rgba(0,0,0,0.6);
+}
+.detail .location span{
+	display: block;
+	font-size: 12px;
+	color: rgba(0,0,0,0.3);
+}
+.detail .btn{
+	margin-top: 12px;
+	right: 10px;
+}
+.map-location{
+	position: relative;
+	height: 105px;
+	display: inline-block;
+	padding: 15px 0 5px 0;
+}
+.map-location img{
+	width: 120px;
+}
+.map-location:before{
+	content: "";
+	display: inline-block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	box-shadow: inset: 0 0 25px 9px #fff;
+}
+.map-location:after{
+	content: "";
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	background: #ff5349;
+	position: absolute;
+	top: 0;
+	border-radius: 100%;
+	margin-top: 65px;
+	margin-left: 50px;
+	border: 1px solid rgba(255,255,255,0.4);
+	box-shadow: 0 0 0 5px rgba(255,83,73,0.5), 0 0 0 10px rgba(255,83,73,0.2);
+}
+.distance{
+	position: absolute;
+	top: 42px;
+	margin-left: 43px;
+	font-weight: 600;
+	font-size: 11px;
+	padding: 5px 10px;
+	background: #fff;
+	color: rgba(0,0,0,0.5);
+	z-index: 99;
+	box-shadow: 0 0 3px rgba(0,0,0,0.2);
+}
+.distance:after{
+	content: "";
+	display: inline-block;
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	border-top: 7px solid #fff;
+	left: 7px;
+	margin-top: 18px;
+}
+.schedule-info{
+	float: right;
+	margin-top: 15px;
+	width: 62%;
+	margin-right: -7px;
+}
+.schedule-info span{
+	display: inline-block;
+}
+.rows > span{
+	width: 40%;
+	/*padding: 5px 5%;*/
+}
+.schedule-info span.info{
+	display: block;
+}
+.schedule-info span .title{
+	font-size: 11px;
+	font-weight: 600;
+	color: rgba(0,0,0,0.3);
+	padding-bottom: 5px;
+}
+.schedule-info span .name,.schedule-info span .time{
+	font-size: 14px;
+	font-weight: 600;
+	color: rgba(0,0,0,0.7);
+}
+.schedule-info span .row-line{
+	font-size: 11px;
+	background: #ff5349;
+	padding: 4px 8px;
+	border-radius: 20px;
+	color: #fff;
+	font-weight: 500;
+	letter-spacing: 1px
+}
+.schedule-info span .seat-num span{
+	font-size: 11px;
+	background: #4f5393;
+	padding: 5px;
+	border-radius: 4px;
+	color: #fff;
+	font-weight: 500;
+
+}
+.call-to-action{
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 70px;
+}
+.gallery-container{
+				width: 100%;
+				height:120px;
+				user-select:none;
+				box-sizing: border-box;
+			}
+			.gallery-container .slide-show-container{
+				width:100%;
+				height:90%;
+				overflow:hidden;
+				background-color:gainsboro;
+				position:relative;
+			}
+			.gallery-container .slide-show-container .image-holder{
+				width:100%;
+				height:100%;
+				position:absolute;
+				opacity:0;
+			}
+			.gallery-container .slide-show-container{
+				width:100%;
+				height:90%;
+				overflow:hidden;
+				background-color:gainsboro;
+				position:relative;
+				border-radius: 4px;
+			}
+			.gallery-container .slide-show-container .image-holder{
+				width:100%;
+				height:100%;
+				position:absolute;
+				opacity:0;
+			}
+.gallery-container .slide-show-container .image-holder img{
+				width:100%;
+				height:100%;
+
+			}
+			.gallery-container .slide-show-container .image-holder .caption-text{
+				display:none;
+			}
+			.gallery-container .slide-show-container .left-arrow,.gallery-container .slide-show-container .right-arrow{
+				width:50px;
+				background:rgba(0,0,0,0.6);
+				position:absolute;
+				left:0;
+				z-index:1;
+				transition:
+				background 0.5s;
+				height:50px;
+				top:50%;
+				transform:translateY(-50%);
+				border-radius:10px;
+			}
+			.gallery-container .slide-show-container .right-arrow{
+				left:auto;
+				right:0;
+				
+			}
+			.gallery-container .slide-show-container .right-arrow:hover{
+				background:#000000a8;
+				cursor:pointer;
+			}
+			.gallery-container .slide-show-container .left-arrow:hover{
+				background:#000000a8;
+				cursor:pointer;
+			}
+			.gallery-container .slide-show-container .arrow{
+				display:inline-block;
+				border:3px solid #fff;
+				width:10px;
+				height:10px;
+				border-left:none;
+				border-bottom:none;
+				margin:auto;
+				position:absolute;
+				left:0;
+				right: 0;
+				top:0;
+				bottom:0;
+			}
+			.gallery-container .slide-show-container .arrow.arrow-left{
+				transform:rotateZ(-135deg);
+			}
+			.gallery-container .slide-show-container .arrow.arrow-right{
+				transform:rotateZ(45deg);
+			}
+			.gallery-container .slide-show-container .caption-holder>.caption-text{
+				margin:0;
+
+			}
+			.gallery-container #dots-container{
+				width:100%;
+				height:10%;
+				text-align:center;
+				padding-top:8px;
+				box-sizing: border-box;	
+			}
+			.gallery-container #dots-container .dots{
+				display:inline-block;
+				width:15px;
+				height:15px;
+				border-radius:50%;
+				margin-left:10px;
+				background-color:#bbb;
+				cursor:pointer;
+				transition:background-color 0.5s;
+			}
+			.gallery-container #dots-container .dots:hover{
+				background-color:#717171;
+			}
+			.gallery-container #dots-container .dots.active{
+				background-color:#717171;
+			}
+			.gallery-container #dots-container .dots:first-child{
+				margin-left:0;
+			}
+			.gallery-container .move-left-current-slide{
+				animation-name:move-left-current;
+				animation-duration: 0.5s;
+				animation-timing-function:linear;
+				animation-fill-mode:forwards;
+			}
+			.gallery-container .move-left-next-slide{
+				animation-name:move-left-next;
+				animation-duration: 0.5s;
+				animation-timing-function:linear;
+				animation-fill-mode:forwards;
+			} 
+			@keyframes move-left-current{
+				from{
+					margin-left:0;
+					opacity:1;
+				}to{
+					margin-left:-100%;
+					opacity:1;
+				}
+			}
+			@keyframes move-left-next{ 
+				from{
+					margin-left:100%;
+					opacity:1;
+				}to{
+					margin-left:0;
+					opacity:1;
+				}
+			}
+
+			.gallery-container .move-right-current-slide{
+				animation-name:move-right-current;
+				animation-duration: 0.5s;
+				animation-timing-function:linear;
+				animation-fill-mode:forwards;
+			}
+			.gallery-container .move-right-next-slide{
+				animation-name:move-right-next;
+				animation-duration: 0.5s;
+				animation-timing-function:linear;
+				animation-fill-mode:forwards;
+			} 
+			@keyframes move-right-current{
+				from{
+					margin-left:0;
+					opacity:1;
+				}to{
+					margin-left:100%;
+					opacity:1;
+				}
+			}
+			@keyframes move-right-next{ 
+				from{
+					margin-left:-100%;
+					opacity:1;
+				}to{
+					margin-left:0;
+					opacity:1;
+				}
+			}
+			.slide-text-from-bottom{
+				animation-name: slide-text-from-bottom;
+				animation-duration: .7s;
+				animation-timing-function: ease-out;
+			}
+			@keyframes .slide-text-from-bottom{
+				from{opacity:0;margin-top:100px;}
+				to{opacity:1;margin-top:0;}
+			}
+			.slide-text-from-top{
+				animation-name: slide-text-from-top;
+				animation-duration: .7s;
+				animation-timing-function: ease-out;
+			}
+			@keyframes .slide-text-from-top{
+				from{opacity:0;margin-top:-100px;}
+				to{opacity:1;margin-top:0;}
+			}
+			#top-header{
+				width: 100%;
+				background: #ffffff;
+				height: 50px;
+				justify-content: space-between;
+				display: flex;
+				box-shadow: 0 10px 15px -1px rgba(0,0,0,0.1);
+			}
+			#bottom-arrow{
+				width:30px;
+				height:30px;
+			}
+			.search-drop {
+				display: inline-block;
+    border: 3px solid #d24c0f;
+    width: 13px;
+    height: 13px;
+    border-left: none;
+    border-bottom: none;
+    left: 0;
+    margin-left: 9px;
+    right: 0;
+    transform: rotateZ(133deg);
+}
+#search-input-wrapper{
+	visibility: hidden;
+	width:0;
+	height:0;
+	transition:0.4s ease-in;
+}
+.box{
+				height: 119px;
+				text-align: center;
+				overflow-x:scroll;
+				overflow-y: hidden;
+				white-space:nowrap;
+			}
+			.card-subs {
+    display: inline-block;
+    height: 100%;
+    width: 152px;
+	margin-left: 22px;
+}
+			.card-subs img{
+				display:inline-block;
+				height:100%;
+				width: 154px;
+			}
+			.card-subs p {
+				color: rgba(0,0,0,0.5);
+    text-align:center;
+}
+.contact-us{
+	color: rgba(0,0,0,0.5);
+}
+.menu-btn {
+    position: absolute;
+    z-index: 3;
+    right: 35px;
+    top: 15px;
+    cursor: pointer;
+    transition: all 0.5s ease-out;
+}
+.menu-btn .btn-line {
+    width: 28px;
+    height: 3px;
+    margin: 0 0 5px 0;
+    background: #4f5393;
+    transition: all 0.5s ease-out;
+}
+.table {
+				width: 100%;
+				margin-top: 2rem;
+				border-collapse: collapse;
+				border-spacing: 0;	
+			}
+			
+			.table thead th {
+				text-transform: uppercase;
+				padding:10px;
+
+			}
+
+			.table tbody tr td {
+				padding: 13px 13px;
+				text-align: center;
+			}
+		
+			.table tbody tr td:first-child {
+			}
+			
+			.table tbody tr:nth-child(odd) {
+				//background: #f7cfb0;
+			}
+			.box{
+				height: auto;
+    text-align: center;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+	min-height: 300px;
+}
+.quantity-value{
+	width:163px;
+}
+.item-number-input{
+	width:125px;
+}
+#popup{
+	max-width: 433px;
+    width: 100%;
+    height: auto;
+    background: #fff;
+    padding: 14px 15px;
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 20px;
+    z-index: 1999999999999999;
+    box-shadow: 0 5px 9px 0 rgba(0,0,0,0.2);
+				display:none;
+			}	
+
+			#popup #popup-top{
+				display: flex;
+    			justify-content: space-between;
+				margin: 5px 0 10px;
+				padding: 0 5%;
+				font-size: 14px;
+				color:#4f5393;
+				font-weight: 600;
+				line-height: 16px;
+			}
+			#popup-confirm #popup-top p{
+				display:flex;
+			}
+			#popup-confirm #popup-top span{
+				max-width: 100%;
+    			border-radius: 50%;
+			}
+			#popup-confirm #popup-body{
+				font-size: 15px;
+    			color: rgba(0,0,0,0.3);
+			}
+			#total-wrapper{
+				display: flex;
+				flex-direction: row;
+				justify-content: space-evenly;
+				font-size: 20px;
+    			color: #4f5393;
+				margin-top: 20px;
+    			margin-bottom: 17px;
+			}
+			#popup-bottom{
+				display: flex;
+    flex-direction: column;
+    /* justify-content: space-evenly; */
+    font-size: 13px;
+    color: #4f5393;
+    margin-top: 0px;
+    margin-bottom: 0px;
+			}	
+			.close
+{
+  display:block;
+  box-sizing:border-box;
+  width:20px;
+  height:20px;
+  border-radius:100%;
+  background: -webkit-linear-gradient(-45deg, transparent 0%, transparent 46%, white 46%,  white 56%,transparent 56%, transparent 100%), -webkit-linear-gradient(45deg, transparent 0%, transparent 46%, white 46%,  white 56%,transparent 56%, transparent 100%);
+  background-color:red;
+  box-shadow:0px 0px 5px 2px rgba(0,0,0,0.5);
+}
+		</style>
+	</head>
+	<body>
+		<div class="app">
+				
+				<nav class="side-drawer">
+	                <div class="side-drawer-img">		
+	                    <img src="coca cola.jpg" alt="delicious meat" class="header-img" width="100%"/>		
+	                </div>
+	                <ul>
+	                    <li><a href="mealslist.html?mealId=meat" >My Orders</a></li>
+						<li><a href="mealslist.html?mealId=veggie" >Make Payment</a></li>
+						<hr/>
+	                    <li><a href="mealslist.html?mealId=deserts" >Help</a></li>
+						<li><a href="mealslist.html?mealId=salad" >About us</a></li>
+						<li><a href="mealslist.html?mealId=salad" >Contact us</a></li>
+	                    <li><a id="close-meal-category">Close</a></li>
+	                </ul>
+				</nav>
+				<div id="top-header">
+					<div style="margin:13px;font-size:20px;font-t:700;">Mobi</div>
+					
+				</div>
+				<div class="gallery-container cover">
+					<div class="slide-show-container">
+						<div class="left-arrow" onclick="plusSlides(-1)"><span class="arrow arrow-left"></span></div>
+						<div class="right-arrow" onclick="plusSlides(1)"><span class="arrow arrow-right"></span></div>
+						<div class="caption-holder"><p class="caption-text"></p></div>
+						<div class="image-holder">
+							<img src="cokebanner.jpg">
+						</div>
+						<div class="image-holder">
+							<img src="eyelash.jpg">
+						</div>
+						<div class="image-holder">
+							<img src="unileverresized.jpg
+                            ">
+						</div>
+					</div>
+					<div id="dots-container"></div>
+				</div>
+				
+				<div class="box">
+					<table class="table table-bordered table-responsive-sm">
+						<tbody id="dota-dota">
+			
+						</tbody>
+					</table>
+				</div>
+                
+                <div id="popup">
+                    <div id="popup-top">
+                        <p>Orders Manifest</p>
+                        <div class="close"></div>
+                    </div>
+                    <div id="popup-body">
+                        <table>
+                            <tbody id="dota-dota-two">
+        
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="total-wrapper">
+                        <span id="calculate-total" ></span>
+                    </div>
+                    <div id="show-calculations">
+                        
+                        <div id="total-wrapper">
+                            <span id="total"></span>
+                        </div>
+                    </div>
+                    
+                    <div id="popup-bottom">
+						<p>Tapping on Book Order will search for Nearby shops that can fulfill your order above</p>
+                        <button class="book-dynamic btn go-to-event"  href="distributors.html" >Book order</button>
+                    </div>
+                </div>
+                <button id="calculate" class="btn">Calculate</button>
+                </div>
+
+			<script>
+			function _(x) { return document.getElementById(x) };
+	
+	function hasClass(element, className){
+		return element.className.split(" ").indexOf(className) > -1;
+	}
+	
+	function addClass(element, className){
+		if(hasClass(element, className)){
+			return element.classList;
+		} else {
+			return element.classList.add(className);
+		}
+	}
+	
+	function removeClass(element, className){
+		if(hasClass(element, className)){
+			return element.classList.remove(className);
+		}else{
+			return element.classList;
+		}
+	}
+			var slideIndex,slides,dots,captionText;
+			function initGallery(){
+				slideIndex=0;
+				slides = document.getElementsByClassName("image-holder");
+				slides[slideIndex].style.opacity = 1;
+
+				dots = [];
+				var dotsContainer = document.getElementById("dots-container");
+
+				for(var i=0;i<slides.length;i++){
+					var dot= document.createElement("span");
+					dot.classList.add("dots");
+					dot.setAttribute("onClick", "moveSlides("+i+")");
+					dotsContainer.append(dot);
+					dots.push(dot);
+				}
+				dots[slideIndex].classList.add("active"); 
+			} 
+			function plusSlides(n){
+				moveSlides(slideIndex+n);
+			}
+			function moveSlides(n){
+				var i,current,next;
+				var moveSlideAnimClass = {
+					forCurrent:"",
+					forNext:"",
+				}
+				var sliderTextAnimClass;
+				if(n>slideIndex){
+					if(n>=slides.length){n=0}
+					moveSlideAnimClass.forCurrent = "move-left-current-slide";
+					moveSlideAnimClass.forNext = "move-left-next-slide";
+					sliderTextAnimClass = "slider-text-from-top";
+				}else if(n<slideIndex){
+					if(n<0){n=slides.length-1}
+					moveSlideAnimClass.forCurrent = "move-right-current-slide";
+					moveSlideAnimClass.forNext = "move-right-next-slide";
+					sliderTextAnimClass = "slider-text-from-bottom";
+				}
+				if(n!=slideIndex){
+					next = slides[n];
+					current = slides[slideIndex];
+					for(i=0;i<slides.length;i++){
+						slides[i].className = "image-holder";
+						slides[i].style.opacity = 0;
+						dots[i].classList.remove("active");
+					}
+					current.classList.add(moveSlideAnimClass.forCurrent);
+					next.classList.add(moveSlideAnimClass.forNext);
+					dots[n].classList.add("active");
+					slideIndex=n;
+				}
+			}
+			function getDataFromDb(productId){
+				console.log(productId)
+				fetch('http://127.0.0.1:5000/getproductlist',
+                    {
+                        method: 'POST',
+                        headers:
+                        {
+							'Accept': 'application/json',
+							'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(
+                        {
+                            productid: productId,
+                        })
+                    }).then((resp) =>resp.json()).then((responseJsonFromServer) =>
+                    {
+                        responseJsonFromServer.products
+                    }).catch((error) =>
+                    {
+                        console.error(error);
+                    });
+			}
+			var timer=null;
+			function setTimer(){
+				timer=setInterval(function(){
+					plusSlides(1);
+				},3000);
+			}
+			initGallery();
+			setTimer();
+			
+			
+			function getAllUrlParams(url){
+                var queryString = url ? url.split("?")[1] : window.location.search.splice(1);   
+                var obj = {}
+                if(queryString){
+                    queryString = queryString.split("#")[0]
+                    var arr = queryString.split("&");
+                    
+                    for(var i = 0; i<arr.length; i++){
+                        var a = arr[i].split("=");
+                        var paramName = a[0];
+                        
+                        var paramValue = typeof(a[1]) === 'undefined' ? true: a[1];
+                        
+                        paramName = paramName.toLowerCase();
+                        if(typeof paramValue === 'string') paramValue = paramValue.toLowerCase()
+                            
+                        if(paramName.match(/\[(\d+)?\]$/)){
+                            var key = paramName.replace(/\[(\d+)?\]/, '');
+                            if(! obj[key]) obj[key] = [];
+                            
+                            if(paramName.match(/\[\d+\]$/)){
+                                var index = /\[(\d+)\]/.exec(paramName)[1];
+                                
+                                obj[key][index]  = paramValue;
+                            } else {
+                                obj[key].push(paramValue);
+                            }
+                        }else {
+                            if(! obj[paramName]) {
+                                obj[paramName] = paramValue;
+                            } else if(obj[paramName] && typeof obj[paramName] == 'string'){
+                                obj[paramName] = [obj[paramName]];
+                                obj[paramName].push(paramValue);
+                            } else {
+                                obj[paramName].push(paramValue);
+                            }
+                        }
+                    }
+                }
+                return obj; 
+            }
+			
+            let urldata = getAllUrlParams(window.location.href);
+			console.log(urldata);
+			
+			let allQuantitiesTotal = [];
+			let allBrandsArray = [];
+			let allCrateSizes = [];
+			let allPrices = [];
+			let allQuantities = [];
+			let manifest = [];
+			let submenuHeader = []
+			function getNumberInArray(array){
+				return array.length;
+			}
+			fetch('https://enigmatic-hamlet-83578.herokuapp.com/getproductlist',
+                    {
+                        method: 'POST',
+                        headers: 
+                        {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(
+                        {
+                            productId: urldata.companyid,
+                        })
+         
+                    }).then((resp) =>resp.json()).then((responseJsonFromServer) =>
+                    { 
+						console.log(responseJsonFromServer.products);
+						var data = responseJsonFromServer.products;
+						let table = document.getElementById("dota-dota");
+			table.innerHTML = "";
+			
+			for(var i=0;i<data.length;i++){
+				console.log(getNumberInArray(data[i].quantities));
+				allQuantitiesTotal.push(getNumberInArray(data[i].quantities));
+			}
+			for(var i=0;i<data.length;i++){
+				allBrandsArray.push(data[i].name);
+			}
+			for(var i=0;i<data.length;i++){
+				allCrateSizes.push(data[i].crateSize)
+			}
+			for(var i=0;i<data.length;i++){
+				allPrices.push(data[i].prices);
+			}
+			for(var i=0;i<data.length;i++){
+				allQuantities.push(data[i].quantities);
+			}
+			/*console.log(allCrateSizes);
+			console.log(allBrandsArray);*/
+			console.log(allQuantitiesTotal);
+			/*console.log(allPrices);
+			console.log(allQuantities);*/
+			let count = 1;
+			let index = 0;
+			let k = 1;
+			for(let i=0;i<allQuantitiesTotal.length;i++){
+				let row = document.createElement("tr");
+				//console.log(allQuantitiesTotal[i]);
+				for(let j=0;j<allQuantitiesTotal[i]+1;j++){
+						k = j-1;
+						let cell = document.createElement("td");
+						//console.log(allPrices[i][k])
+						//console.log(allCrateSizes[index]);
+						if(j==0){
+							let cellText = document.createTextNode(allBrandsArray[index]+" "+ allCrateSizes[index]+" bottles/crate");
+							cell.setAttribute("data-crate-size", allCrateSizes[index]);
+							cell.setAttribute("colSpan", 2);
+							cell.className = "brand-item";
+							cell.appendChild(cellText);
+							index++;
+						}else{
+							var indexed = index-1;
+							cell.setAttribute("data-id", "number"+allPrices[i][k]);
+							cell.setAttribute("data-bottle-price", allPrices[i][k]);
+							cell.setAttribute("data-bottle-quantity", allQuantities[i][k]);
+							cell.setAttribute("data-total-cost-per-crate", allCrateSizes[indexed]*allPrices[i][k])
+							var input = document.createElement("input");
+							var div = document.createElement("div");
+							div.className = "quantity-value";
+							div.innerHTML =  allQuantities[i][k]+"ml, at Ksh "+allPrices[i][k]+"/bottle";
+							input.type="text";
+							//input.placeholder = "Kshs "+allPrices[i][k];
+							input.placeholder = "# Crates"; 
+							input.className = "item-number-input "+allBrandsArray[indexed];
+							cell.appendChild(div);
+							cell.appendChild(input);	
+						}
+						row.appendChild(cell);
+						count++;
+				}
+				table.appendChild(row);
+			}
+                        
+                    }).catch((error) =>
+                    {
+                        console.error(error);
+
+                    });
+            
+			
+			let totalCostsArray = [];
+
+			function getHref(){
+				document.querySelector(".go-to-event").addEventListener("click", function(e) {
+				if(hasClass(e.target, "go-to-event")){
+					e.preventDefault();
+					var href = e.currentTarget.getAttribute("href")
+					console.log(href);	
+				}
+				e.preventDefault();
+				var href = e.currentTarget.getAttribute("href")
+				window.location = href;
+				});
+			}
+			
+	        window.onload = function(){
+				//getDataFromDb("123456");
+				getHref();
+				document.addEventListener("click", function(e){
+					if(hasClass(e.target, "close")){
+					e.preventDefault();
+						_("popup").style.display = "none";
+						window.location.reload(false); 
+					}
+					else{
+
+					}
+				});
+				//console.log(data);
+				_("calculate").addEventListener("click", function(e){
+					var memory = [];
+						_("popup").style.display = "block";
+						//console.log(document.getElementsByClassName("item-number-input").length);
+						for(var i=0; i<document.getElementsByClassName("item-number-input").length; i++){
+							
+							if(document.getElementsByClassName("item-number-input")[i].value!=""){
+								//console.log(i)
+								//console.log(document.getElementsByClassName("item-number-input")[i].parentNode)
+								var parent = document.getElementsByClassName("item-number-input")[i].parentNode;
+								var child = document.getElementsByClassName("item-number-input")[i];
+								var childNode = document.getElementsByClassName("item-number-input")[i].value;
+								console.log(i)
+								memory.push(i);
+								console.log(memory)
+									manifest.push(
+										{brand:child.classList[1], id:i, bottlePrice:Number(parent.getAttribute("data-bottle-price")), numberCrates:Number(childNode), size:Number(parent.getAttribute("data-bottle-quantity")),cost:Number(parent.getAttribute("data-total-cost-per-crate"))*Number(childNode)}
+									);
+							}
+						}
+						console.log(manifest);
+						for(var i=0; i<manifest.length; i++){
+							totalCostsArray.push(manifest[i].cost);
+						}
+						var count=0;
+						for(var i=0; i<totalCostsArray.length; i++){
+							count += totalCostsArray[i];
+						}
+
+						console.log(totalCostsArray,count);
+						_("calculate-total").innerHTML += count;
+						let tableTwo = document.getElementById("dota-dota-two");
+						
+						
+						//console.log(keys.concat(values));
+						//var getTotals = (values.length * manifest.length) + keys.length;
+						function drawTable(data){
+							var keys = Object.keys(data[0]);
+							//var values = Object.values(manifest);
+							console.log(keys);
+							//console.log(values)
+							var headers = keys.map(function(name){
+								return name;
+							});
+							var body = data.map(function(row){
+								return keys.map(function(name){
+									return row[name];
+								});
+							});
+							return [headers].concat(body);
+						}
+						console.log(drawTable(manifest))
+						var tabular = drawTable(manifest);
+						for(var i=0; i<tabular.length; i++){
+							let row = document.createElement("tr");
+							for(let j=0; j<6; j++){
+								let cell = document.createElement("td");
+								let cellText = document.createTextNode(tabular[i][j]);
+								cell.appendChild(cellText);
+								row.appendChild(cell);
+							}
+							console.log(row)
+							tableTwo.appendChild(row);
+						}
+
+				});
+				
+	        }
+        </script>
+
+	</body>
+</html>
