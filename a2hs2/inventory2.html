@@ -876,17 +876,7 @@
 				slides = document.getElementsByClassName("image-holder");
 				slides[slideIndex].style.opacity = 1;
 
-				dots = [];
-				var dotsContainer = document.getElementById("dots-container");
-
-				for(var i=0;i<slides.length;i++){
-					var dot= document.createElement("span");
-					dot.classList.add("dots");
-					dot.setAttribute("onClick", "moveSlides("+i+")");
-					dotsContainer.append(dot);
-					dots.push(dot);
-				}
-				dots[slideIndex].classList.add("active"); 
+				
 			} 
 			function plusSlides(n){
 				moveSlides(slideIndex+n);
