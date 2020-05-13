@@ -10,8 +10,8 @@ self.addEventListener('install', function(e) {
        'https://churchillciobiz.github.io/a2hs2/index.html',
        'https://churchillciobiz.github.io/a2hs2/index.js',
        'https://churchillciobiz.github.io/a2hs2/style.css',
-       'https://churchillciobiz.github.io/images/fox1.jpg',
-       'https://churchillciobiz.github.io/images/fox2.jpg',
+       'https://churchillciobiz.github.io/a2hs2/images/fox1.jpg',
+       'https://churchillciobiz.github.io/a2hs2/images/fox2.jpg',
        'https://churchillciobiz.github.io/a2hs2/images/fox3.jpg',
        'https://churchillciobiz.github.io/a2hs2/images/fox4.jpg'
      ]);
