@@ -769,6 +769,22 @@
   background-color:red;
   box-shadow:0px 0px 5px 2px rgba(0,0,0,0.5);
 }
+#arrowy-left{
+	width: 125px;
+    position: absolute;
+    top:190px;
+    height: auto;
+    background: #fff;
+	transform: translateX(-90%) scale(0.95);
+}
+.slide-in{
+	opacity: 0;
+	transition: all .5s;
+}
+.slide-in.active{
+	opacity:1;
+	transform:translateX(0%) scale(1);
+}
 		</style>
 	</head>
 	<body>
@@ -809,8 +825,15 @@
 						</div>
 					</div>
 				</div>
-				
+				<div id="arrowy-left">
+					<table class="table table-bordered table-responsive-sm">
+						<tbody id="dota-dota-dota-dota">
+			
+						</tbody>
+					</table>
+				</div>
 				<div class="box">
+					
 					<table class="table table-bordered table-responsive-sm">
 						<tbody id="dota-dota">
 			
@@ -1016,8 +1039,9 @@
 						console.log(responseJsonFromServer.products);
 						var data = responseJsonFromServer.products;
 						let table = document.getElementById("dota-dota");
+						let table2 = document.getElementById("dota-dota-dota-dota");
 			table.innerHTML = "";
-			
+			table2.innerHTML = "";
 			for(var i=0;i<data.length;i++){
 				console.log(getNumberInArray(data[i].quantities));
 				allQuantitiesTotal.push(getNumberInArray(data[i].quantities));
@@ -1034,22 +1058,19 @@
 			for(var i=0;i<data.length;i++){
 				allQuantities.push(data[i].quantities);
 			}
-			/*console.log(allCrateSizes);
-			console.log(allBrandsArray);*/
 			console.log(allQuantitiesTotal);
-			/*console.log(allPrices);
-			console.log(allQuantities);*/
 			let count = 1;
 			let index = 0;
 			let k = 1;
+			
+			
+			
+			
 			for(let i=0;i<allQuantitiesTotal.length;i++){
 				let row = document.createElement("tr");
-				//console.log(allQuantitiesTotal[i]);
 				for(let j=0;j<allQuantitiesTotal[i]+1;j++){
 						k = j-1;
 						let cell = document.createElement("td");
-						//console.log(allPrices[i][k])
-						//console.log(allCrateSizes[index]);
 						if(j==0){
 							let cellText = document.createTextNode(allBrandsArray[index]+" "+ allCrateSizes[index]+" bottles/crate");
 							cell.setAttribute("data-crate-size", allCrateSizes[index]);
@@ -1079,6 +1100,25 @@
 				}
 				table.appendChild(row);
 			}
+			
+			for(let i=0;i<allQuantitiesTotal.length;i++){
+				let row = document.createElement("tr");
+				for(let j=0;j<allQuantitiesTotal[i]+1;j++){
+						k = j-1;
+						let cell = document.createElement("td");
+						if(j==0){
+							let cellText = document.createTextNode(allBrandsArray[i]+" "+ allCrateSizes[i]+" bottles/crate");
+							cell.setAttribute("data-crate-size", allCrateSizes[index]);
+							cell.setAttribute("colSpan", 2);
+							cell.className = "brand-item";
+							cell.appendChild(cellText);
+							index++;
+							}
+						row.appendChild(cell);
+						count++;	
+					}
+					table2.appendChild(row);	
+				}
                         
                     }).catch((error) =>
                     {
@@ -1184,6 +1224,31 @@
 				});
 				
 	        }
+			function debounce(func, wait=20, immediate=true){
+				var timeout;
+				return function(){
+					var context = this, args=arguments;
+					var later = function(){
+						timeout=null;
+						if(!immediate) func.apply(context, args);
+						};
+						var callNow = immediate && !timeout;
+						clearTimeout(timeout);
+						timeout = setTimeout(later, wait);
+						if(callNow) func.apply(context,args);
+				};
+			};
+			
+			const box = document.querySelector(".box");
+			const arrowLeft = document.querySelector("#arrowy-left");
+			function checkSlide(e){
+				console.log(box.clientWidth);
+				console.count(e);
+				const slideInAt = (box.scrollLeft + box.clientWidth)- 60 ;
+				console.log(slideInAt);
+			}
+			box.addEventListener("scroll", debounce(checkSlide));
+			
         </script>
 
 	</body>

@@ -1,6 +1,6 @@
 {
-  "background_color": "purple",
-  "description": "Shows random fox pictures. Hey, at least it isn't cats.",
+  "background_color": "white",
+  "description": "Mobi Progressive Web app Prototype",
   "display": "fullscreen",
   "icons": [
     {
@@ -10,6 +10,6 @@
     }
   ],
   "start_url": "https://churchillciobiz.github.io/a2hs2/index.html",
-  "name": "Awesome fox pictures",
-  "short_name": "Foxes"
+  "name": "Mobi PWA",
+  "short_name": "Mobi"
 }
