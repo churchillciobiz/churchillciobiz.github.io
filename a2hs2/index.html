@@ -670,6 +670,20 @@
     background: #4f5393;
     transition: all 0.5s ease-out;
 }
+#top-right{
+	display:flex;
+
+}
+#right-img{
+	width: 23px;
+    height: 23px;
+    margin: 13px;
+    position: absolute;
+    z-index: 3;
+    right: 85px;
+    cursor: pointer;
+    transition: all 0.5s ease-out;
+}
 		</style>
 	</head>
 	<body>
@@ -691,11 +705,18 @@
 				</nav>
 				<div id="top-header">
 					<div style="margin:13px;font-size:20px;font-t:700;">Mobi</div>
-					<div class="menu-btn">
-						<div class="btn-line"></div>
-						<div class="btn-line"></div>
-						<div class="btn-line"></div>
+
+					<div id="top-right">
+						<div id="right-img">
+							<a href="camera.html"><img src="electronics.png" width="20px" height="20px" alt="camera"/></a>
+						</div>
+						<div class="menu-btn">
+							<div class="btn-line"></div>
+							<div class="btn-line"></div>
+							<div class="btn-line"></div>
+						</div>
 					</div>
+					
 				</div>
 				<div class="gallery-container cover">
 					<div class="slide-show-container">
