@@ -1,0 +1,65 @@
+package com.example.jpm;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
+
+public class AlbumTracksAdapter extends RecyclerView.Adapter<AlbumTracksAdapter.ViewHolder> {
+    Context mContext;
+    List<AlbumTracks> mData;
+    ActionAlbumListClickListener actionAlbumListClickListener;
+    private ImageView mainPopup;
+
+    public AlbumTracksAdapter(Context mContext, List<AlbumTracks> mData, ActionAlbumListClickListener actionAlbumListClickListener) {
+        this.mContext = mContext;
+        this.mData = mData;
+        this.actionAlbumListClickListener = actionAlbumListClickListener;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder{
+        private TextView track;
+        private TextView time;
+        private ImageView img;
+        public ViewHolder(@Nullable View itemView){
+            super(itemView);
+            track = itemView.findViewById(R.id.track_name);
+            time = itemView.findViewById(R.id.track_time);
+            img = itemView.findViewById(R.id.itemAlbumCoverArtSmall);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    actionAlbumListClickListener.onActionTrackClick(mData.get(getAdapterPosition()), img);
+                }
+            });
+        }
+    }
+
+    @NonNull
+    @Override
+    public AlbumTracksAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(mContext).inflate(R.layout.item_showcase_rectangle, parent, false);
+        return new AlbumTracksAdapter.ViewHolder(v);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull AlbumTracksAdapter.ViewHolder holder, int position) {
+        holder.track.setText(mData.get(position).getTitle());
+        holder.time.setText(mData.get(position).getTime());
+        holder.img.setImageResource(mData.get(position).getThumbnail());
+    }
+
+    @Override
+    public int getItemCount() {
+        return mData.size();
+    }
+}

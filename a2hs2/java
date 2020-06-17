@@ -1,0 +1,194 @@
+package com.example.jpm;
+
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.app.Service;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Binder;
+import android.os.IBinder;
+import android.util.Log;
+
+import androidx.annotation.Nullable;
+
+import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.Player;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.source.ConcatenatingMediaSource;
+import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.ui.PlayerNotificationManager;
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.util.Util;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class PlayMusicService extends Service {
+    public PlayMusicService(){};
+    private String TAG = "string";
+    private SimpleExoPlayer simpleExoPlayer;
+    private PlayerNotificationManager playerNotificationManager;
+    public static final String PLAYBACK_CHANNEL_ID = "1";
+    public static final int  PLAYBACK_NOTIFICATION_ID = 1;
+    JSONArray playTracks = new JSONArray();
+    
+    private final IBinder mBinder = new LocalBinder();
+
+    @Override
+    public void onCreate(){
+        super.onCreate();
+    }
+    public void startPlayer(){
+        super.onCreate();
+        returnArray();
+        Log.i("Main",playTracks.toString());
+        final Context context = this;
+        simpleExoPlayer = ExoPlayerFactory.newSimpleInstance(context, new DefaultTrackSelector());
+        DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(context, Util.getUserAgent(context, "MediaService"));
+        ConcatenatingMediaSource concatenatingMediaSource = new ConcatenatingMediaSource();
+        for(int i=0; i<playTracks.length(); i++){
+            JSONObject jsonObject = null;
+            try {
+                jsonObject = playTracks.getJSONObject(i);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            String track = null;
+            try {
+                track = jsonObject.getString("file");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            MediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(track));
+           concatenatingMediaSource.addMediaSource(mediaSource);
+        }
+        simpleExoPlayer.prepare(concatenatingMediaSource);
+        simpleExoPlayer.setPlayWhenReady(true);
+        playerNotificationManager = PlayerNotificationManager.createWithNotificationChannel(
+                context, PLAYBACK_CHANNEL_ID, R.string.app_name, PLAYBACK_NOTIFICATION_ID,
+                new PlayerNotificationManager.MediaDescriptionAdapter() {
+                    @Override
+                    public String getCurrentContentTitle(Player player) {
+                        return "null";
+                    }
+
+                    @Nullable
+                    @Override
+                    public PendingIntent createCurrentContentIntent(Player player) {
+                        Intent intent = new Intent(context, MainPlayerActivity.class);
+                        return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    }
+
+                    @Nullable
+                    @Override
+                    public String getCurrentContentText(Player player) {
+                        return "AUMMART";
+                    }
+
+                    @Nullable
+                    @Override
+                    public Bitmap getCurrentLargeIcon(Player player, PlayerNotificationManager.BitmapCallback callback) {
+                        return null;
+                    }
+                }
+        );
+        playerNotificationManager.setNotificationListener(
+                new PlayerNotificationManager.NotificationListener() {
+                    @Override
+                    public void onNotificationStarted(int notificationId, Notification notification) {
+                        startForeground(notificationId, notification);
+                    }
+                    @Override
+                    public void onNotificationCancelled(int notificationId){
+                        stopSelf();
+                    }
+                }
+        );
+        playerNotificationManager.setPlayer(simpleExoPlayer);
+    }
+    public JSONArray returnArray(){
+        try{
+
+            JSONObject track1 = new JSONObject();
+            JSONObject track2 = new JSONObject();
+            JSONObject track3 = new JSONObject();
+            JSONObject track4 = new JSONObject();
+            JSONObject track5 = new JSONObject();
+            track1.put("id","1");
+            track1.put("file", "/storage/emulated/0/created/thankyou.mp3");
+            track1.put("img", "/storage/emulated/0/created/logo.png");
+            track1.put("artist", "Just a Band");
+            track1.put("title", "Sorry for the delay");
+            track2.put("id","2");
+            track2.put("file", "/storage/emulated/0/created/Lookingforhome.mp3");
+            track2.put("img", "/storage/emulated/0/created/lang.png");
+            track2.put("artist", "Just a Band");
+            track2.put("title", "looking for home");
+            track3.put("id","3");
+            track3.put("file", "/storage/emulated/0/created/Dunia.mp3");
+            track3.put("img", "/storage/emulated/0/created/logo.png");
+            track3.put("artist", "Just a Band");
+            track3.put("title", "Dunia ina mambo");
+            track4.put("id","4");
+            track4.put("file", "/storage/emulated/0/created/TW.mp3");
+            track4.put("img", "/storage/emulated/0/created/logo.png");
+            track4.put("artist", "Just a Band");
+            track4.put("title", "The way u Are");
+            track5.put("id","5");
+            track5.put("file", "/storage/emulated/0/created/lovers.mp3");
+            track5.put("img", "/storage/emulated/0/created/lang.png");
+            track5.put("artist", "Just a Band");
+            track1.put("title", "My Lover");
+            playTracks.put(0, track1);
+            playTracks.put(1, track2);
+            playTracks.put(2, track3);
+            playTracks.put(3, track4);
+            playTracks.put(4, track5);
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+        Log.i("Main",playTracks.toString());
+        return playTracks;
+
+    };
+    @Override
+    public void onDestroy(){
+        if(simpleExoPlayer  != null){
+            playerNotificationManager.setPlayer(null);
+            simpleExoPlayer.release();
+            simpleExoPlayer = null;
+        }
+        super.onDestroy();
+    }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent){
+        return mBinder;
+    }
+    public SimpleExoPlayer getPlayerInstance(){
+        if(simpleExoPlayer == null){
+            startPlayer();
+        }
+        return simpleExoPlayer;
+    }
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId){
+        if(simpleExoPlayer == null){
+            startPlayer();
+        }
+
+        return START_STICKY;
+    }
+
+    public class LocalBinder extends Binder {
+        public PlayMusicService getService(){
+            return PlayMusicService.this;
+        }
+    }
+}
