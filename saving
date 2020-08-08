@@ -1,0 +1,68 @@
+<com.example.nebula.SingleViewTouchableMotionLayout 
+    android:id="@+id/videoMotionLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    app:layoutDescription="@xml/youtube_scene"
+    app:layout_collapseMode="parallax">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/videoViewContainer"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <com.example.nebula.VideoView
+        android:id="@+id/videoView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginEnd="0dp"
+        android:contentDescription="@null"
+        android:elevation="10dp"
+        android:paddingEnd="@dimen/video_view_right_padding"
+        android:scaleType="centerCrop"
+        android:src="@drawable/album_art_1"
+        app:layout_constraintBottom_toBottomOf="@+id/videoViewContainer"
+        app:layout_constraintEnd_toEndOf="@+id/videoViewContainer"
+        app:layout_constraintStart_toStartOf="@+id/videoViewContainer"
+        app:layout_constraintTop_toTopOf="@+id/videoViewContainer"
+        android:layout_marginRight="0dp"
+        android:paddingRight="@dimen/video_view_right_padding" />
+
+</com.example.nebula.SingleViewTouchableMotionLayout>
+
+
+class HomeFragment : Fragment() {
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_home, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        videoMotionLayout.setTransitionListener(object : MotionLayout.TransitionListener {
+            override fun onTransitionChange(motionLayout: MotionLayout?, startId: Int, endId: Int, progress: Float) {
+                (activity as MainActivity).also {
+                    it.mainMotionLayout.progress = abs(progress)
+                }
+            }
+
+            override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
+            }
+
+            override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
+            }
+
+            override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
+            }
+        })
+        videoMotionLayout.transitionToEnd()
+    }
+}

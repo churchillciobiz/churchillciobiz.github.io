@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.kstream.SingleViewTouchableMotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/videoMotionLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    app:layoutDescription="@xml/youtube_scene"
+    app:layout_collapseMode="parallax">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/videoViewContainer"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/parent" >
+
+            <com.example.kstream.VideoView
+                android:id="@+id/videoView"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="0dp"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                android:src="@drawable/dark_knight"
+                app:layout_constraintStart_toStartOf="@+id/parent"
+                app:layout_constraintTop_toTopOf="@+id/parent" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/androidText"
+                android:textColor="#000000"
+                android:text="a word i defined"
+                app:layout_constraintStart_toEndOf="@+id/videoView"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/androidPlay"
+                android:textColor="#000000"
+                android:text="a word i defined"
+                app:layout_constraintStart_toEndOf="@+id/videoView"
+                app:layout_constraintTop_toBottomOf="@+id/androidText" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="0dp"
+        android:clickable="true"
+        android:elevation="10dp"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/videoViewContainer">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/videoRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:nestedScrollingEnabled="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.example.kstream.SingleViewTouchableMotionLayout>

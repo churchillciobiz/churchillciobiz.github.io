@@ -1,0 +1,25 @@
+class SongListAdapter(val arrayList: ArrayList<SongModel>, val context: Context): RecyclerView.Adapter<SongListAdapter.ViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        var view = LayoutInflater.from(parent!!.context).inflate(R.layout.item_showcase_rectangle, parent, false)
+        return ViewHolder(view)
+    }
+
+    override fun getItemCount(): Int {
+        return arrayList.size
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bindItems(arrayList[position])
+    }
+
+    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+
+        fun bindItems(model: SongModel){
+           itemView.track_name.text = model.title
+           itemView.track_artist.text = model.artist
+           itemView.track_time.text = model.duration
+            itemView.item_cover_art.setImageResource(model.image)
+       }
+
+    }

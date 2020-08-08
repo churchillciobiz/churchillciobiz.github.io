@@ -1,0 +1,61 @@
+class PlayMusicService: Service() {
+    var currentPos: Int = 0
+    var musicDataList: ArrayList<String> = ArrayList()
+    var mp: MediaPlayer?=null
+
+    override fun onBind(intent: Intent?): IBinder? {
+        return null
+    }
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        currentPos = intent!!.getIntExtra(SongListAdapter.MUSICTEMPOS, 0)
+        musicDataList = intent.getStringArrayListExtra(SongListAdapter.MUSICLIST)
+
+        if(mp!=null){
+            mp!!.stop()
+            mp!!.release()
+            mp = null
+        }
+
+        mp = MediaPlayer()
+        mp!!.setDataSource(musicDataList[currentPos])
+        mp!!.prepare()
+        mp!!.setOnPreparedListener{
+            mp!!.start()
+        }
+        return super.onStartCommand(intent, flags, startId)
+    }
+}
+
+<com.example.nebula.CustomAudioView
+                    android:id="@+id/videoView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:contentDescription="@null"
+                    android:elevation="10dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/videoViewContainer"
+                    app:layout_constraintEnd_toEndOf="@+id/videoViewContainer"
+                    app:layout_constraintStart_toStartOf="@+id/videoViewContainer"
+                    app:layout_constraintTop_toTopOf="@+id/videoViewContainer"/>
+					
+					
+					<com.example.nebula.CustomAudioView
+                    android:id="@+id/videoView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:contentDescription="@null"
+                    android:elevation="10dp"
+                    android:paddingEnd="@dimen/video_view_right_padding"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/album_art_1"
+                    app:layout_constraintBottom_toBottomOf="@+id/videoViewContainer"
+                    app:layout_constraintEnd_toEndOf="@+id/videoViewContainer"
+                    app:layout_constraintStart_toStartOf="@+id/videoViewContainer"
+                    app:layout_constraintTop_toTopOf="@+id/videoViewContainer"
+                    android:layout_marginRight="0dp"
+                    android:paddingRight="@dimen/video_view_right_padding" />
+					
+					
+					
+					
